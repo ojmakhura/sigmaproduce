@@ -1,4 +1,4 @@
-package bw.co.roguesystems.sigma;
+package bw.co.sigmaproduce;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;

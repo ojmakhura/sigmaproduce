@@ -9,12 +9,12 @@
         <version>3.2.5</version>
         <relativePath/>
     </parent>
-    <groupId>bw.co.roguesystems.sigma</groupId>
+    <groupId>bw.co.sigmaproduce</groupId>
     <artifactId>sigmaproduce</artifactId>
     <packaging>pom</packaging>
     <version>0.0.1-SNAPSHOT</version>
     <name>Sigma Produce</name>
-    <description>The Sigma Produce Project.</description>
+    <description>The sum of all produce!</description> 
     <inceptionYear></inceptionYear>
     <url>http://andromda.sourceforge.net/</url>
     <issueManagement>
@@ -423,7 +423,7 @@
         </hibernate.dialect>
         <tomcat.home>${env.CATALINA_HOME}</tomcat.home>
         <application.id>sigmaproduce</application.id>
-        <application.package>bw.co.roguesystems.sigma</application.package>
+        <application.package>bw.co.sigmaproduce</application.package>
         <application.name>Sigma Produce</application.name>
         <application.version>0.0.1-SNAPSHOT</application.version>
         <dataSource.name>jdbc/${application.id}</dataSource.name>

@@ -59,14 +59,6 @@ clean_module:
 up_proxy: gen_env
 	. ./.env && docker compose up -d proxy
 
-up_service: gen_env
-ifdef service
-	. ./.env && docker compose up -d ${service}
-else
-	@echo 'no service defined. Please run again with `make  service=<name> up_service`'
-	exit 1
-endif
-
 up_stack: gen_env
 ifdef stack
 	chmod 755 .env && . ./.env && docker stack deploy -c docker-compose-${stack}.yml ${STACK_NAME}-${stack}
@@ -80,14 +72,6 @@ ifdef stack
 	docker stack rm ${STACK_NAME}-${stack}
 else
 	@echo 'no stack defined. Please run again with `make env=<LOCAL, DEV, TEST, LIVE> stack=<name> down_stack`'
-	exit 1
-endif
-
-down_service:
-ifdef service
-	docker stop ${STACK_NAME}-${service}
-else
-	@echo 'no env defined. Please run again with `make env=<LOCAL, DEV, TEST, LIVE> service=<name> down_service`'
 	exit 1
 endif
 
@@ -115,8 +99,8 @@ build_images: gen_env build_keycloak_image build_web_image build_api_image build
 ## Run the local api and web
 ###    
 run_module_local: gen_env
-	. ./.env && cd ${module} && mvn spring-boot:run
-
+	. ./.env && mvn -pl ${module} -am spring-boot:run
+	
 local_web_deps: build_web
 	cd angular/target/sigmaproduce && npm i && npm install file-saver --save && npm install @types/file-saver --save-dev
 
@@ -124,7 +108,7 @@ run_web_local: build_web
 	cd angular/target/sigmaproduce && npm start
 	
 run_api_local: gen_env
-	. ./.env && cd webservice && mvn spring-boot:run
+	. ./.env && mvn -pl webservice/ -am spring-boot:run
 
 # run_local_web: build_local_images up_local_app
 stop_app:

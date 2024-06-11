@@ -8,12 +8,12 @@
         <relativePath /> lookup parent from repository
     </parent> -->
     <parent>
-        <groupId>bw.co.roguesystems.sigma</groupId>
+        <groupId>bw.co.sigmaproduce</groupId>
         <artifactId>sigmaproduce</artifactId>
         <version>0.0.1-SNAPSHOT</version>
     </parent>
 
-    <groupId>bw.co.roguesystems.sigma</groupId>
+    <groupId>bw.co.sigmaproduce</groupId>
     <artifactId>sigmaproduce-angular</artifactId>
     <version>0.0.1-SNAPSHOT</version>
     <packaging>jar</packaging>

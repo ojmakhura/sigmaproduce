@@ -9,13 +9,12 @@ import { MatRadioChange } from '@angular/material/radio';
 import { MatCheckboxChange } from '@angular/material/checkbox';
 import { MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { CommonModule } from '@angular/common';
-import { FormGroup, FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { TranslateModule } from '@ngx-translate/core';
 import { SharedModule } from '@app/@shared';
 import { MaterialModule } from '@app/material.module';
 import { CsvModule } from '@ctrl/ngx-csv';
 import { CropVarietyEditorComponent } from '@app/components/crop/varieties/crop-variety-editor.component';
-import { CropVO } from '@app/model/bw/co/roguesystems/sigma/crop/crop-vo';
 
 @Component({
   selector: 'app-edit-variety',
@@ -34,30 +33,15 @@ import { CropVO } from '@app/model/bw/co/roguesystems/sigma/crop/crop-vo';
   ],
 })
 export class EditVarietyImplComponent extends EditVarietyComponent {
-  constructor(@Inject(MAT_DIALOG_DATA) data: any) {
-    super(data);
-  }
 
-  override beforeOnInit(form: EditVarietyVarsForm): EditVarietyVarsForm {
-    return form;
-  }
+    constructor(@Inject(MAT_DIALOG_DATA) data: any) {
+        super(data);
+    }
 
-  doNgOnDestroy(): void {}
+    override beforeOnInit(form: EditVarietyVarsForm): EditVarietyVarsForm{     
+        return form;
+    }
 
-  override afterOnInit(): void {
-    this.cropVarietyEditorForm = this.cropVarietyControl;
-    this.cropVarietyVarietyControl.addControl('crop', this.createCropVOGroup(new CropVO()));
-  }
-
-  createCropVOGroup(value: CropVO): FormGroup {
-    return this.formBuilder.group({
-      id: [value?.id],
-      createdBy: [value?.createdBy],
-      updatedBy: [value?.updatedBy],
-      createdDate: [value?.createdDate],
-      updatedDate: [value?.updatedDate],
-      code: [value?.code],
-      name: [value?.name],
-    });
-  }
+    doNgOnDestroy(): void {
+    }
 }

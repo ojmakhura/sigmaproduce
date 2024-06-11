@@ -33,4 +33,8 @@ export class SearchCropsCropsImplComponent extends SearchCropsCropsComponent {
 	override doSearchCropsEdit(form: any): any {
     return form;
 	}
+
+	override doSearchCropsDetails(form: any): any {
+    return form;
+	}
 }

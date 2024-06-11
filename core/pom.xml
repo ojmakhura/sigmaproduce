@@ -3,7 +3,7 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
     <modelVersion>4.0.0</modelVersion>
     <parent>
-        <groupId>bw.co.roguesystems.sigma</groupId>
+        <groupId>bw.co.sigmaproduce</groupId>
         <artifactId>sigmaproduce</artifactId>
         <version>0.0.1-SNAPSHOT</version>
     </parent>
@@ -16,7 +16,7 @@
             <artifactId>sigmaproduce-common</artifactId>
             <version>${project.version}</version>
         </dependency>
-        <dependency>
+        <dependency> 
             <groupId>org.andromda</groupId>
             <artifactId>andromda-core</artifactId>
             <scope>provided</scope>

@@ -26,6 +26,14 @@ export const routes: Routes = [
       path: 'crop', 
       loadChildren: () => import('@app/view/crop/crop.routes').then((m) => m.routes),
     },
+    {
+      path: 'crop/type', 
+      loadChildren: () => import('@app/view/crop/type/crop-type.routes').then((m) => m.routes),
+    },
+    {
+      path: 'farm', 
+      loadChildren: () => import('@app/view/farm/farm.routes').then((m) => m.routes),
+    },
   ]),
   // Fallback when no prior route is matched
   { 
