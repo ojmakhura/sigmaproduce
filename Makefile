@@ -6,10 +6,6 @@ ifdef domain
 else
 	mkcert -key-file deployment/certs/localhost.key -cert-file deployment/certs/localhost.crt localhost keycloak.localhost api.localhost db.localhost proxy.localhost prometheus.localhost portainer.localhost unsee.localhost grafana.localhost *.localhost
 endif
-	
-
-build_mda:
-	mvn -f mda install -DskipTests=true -o
 
 build_common:
 	mvn -f common install -DskipTests=true -o
@@ -46,9 +42,6 @@ clean_build: clean_all build_app
 
 clean_all:
 	mvn clean -o
-
-clean_mda:
-	mvn -f mda clean -o
 
 clean_module:
 	mvn -f ${service} clean -o
