@@ -1,8 +1,16 @@
 server:
-    port: 8985
-    # servlet:
-        # context-path: /sigmaproduce/api/
+  port: 8985
+  # servlet:
+  # context-path: /sigmaproduce/api/
 spring:
+    datasource:
+        url: jdbc:postgresql://localhost/sigmaproduce
+        username: rogueadmin
+        password: Cash8Aes
+    jpa:
+        database-platform: org.hibernate.dialect.PostgreSQLDialect
+        hibernate:
+            ddl-auto: update
     thymeleaf:
         cache: false
     mvc:
@@ -12,3 +20,8 @@ spring:
             time: HH:mm:ss
         pathmatch:
             matching-strategy: ANT_PATH_MATCHER
+    security:
+        oauth2:
+            resourceserver:
+                jwt:
+                    issuer-uri: ${RIMS_AUTH_URL}/realms/${REALM}
