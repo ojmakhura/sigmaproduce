@@ -1,7 +1,7 @@
 package bw.co.sigmaproduce;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
-@SpringBootApplication
+// @SpringBootApplication
 public class SigmaproduceCoreTestApplication {
     
 }
