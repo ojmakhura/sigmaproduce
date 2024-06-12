@@ -93,13 +93,7 @@ build_images: gen_env build_keycloak_image build_web_image build_api_image build
 ###    
 run_module_local: gen_env
 	. ./.env && mvn -pl ${module} -am spring-boot:run
-	
-local_web_deps: build_web
-	cd angular/target/sigmaproduce && npm i && npm install file-saver --save && npm install @types/file-saver --save-dev
-
-run_web_local: build_web
-	cd angular/target/sigmaproduce && npm start
-	
+		
 run_api_local: gen_env
 	. ./.env && mvn -pl webservice/ -am spring-boot:run
 
