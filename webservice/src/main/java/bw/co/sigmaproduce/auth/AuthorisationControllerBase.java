@@ -15,12 +15,12 @@ import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 
-public abstract class AuthorisationRestControllerBase implements AuthorisationRestController {
+public abstract class AuthorisationControllerBase implements AuthorisationController {
 
-    protected Logger logger = LoggerFactory.getLogger(AuthorisationRestController.class);
+    protected Logger logger = LoggerFactory.getLogger(AuthorisationController.class);
         protected final AuthorisationService authorisationService;
 
-    public AuthorisationRestControllerBase(
+    public AuthorisationControllerBase(
         AuthorisationService authorisationService    ) {
         this.authorisationService = authorisationService;
     }

@@ -24,9 +24,9 @@ import io.swagger.v3.oas.annotations.tags.Tag;
 @RequestMapping("/access")
 @Tag(name = "Access Point", description = "Managing the different resources available.")
 @CrossOrigin()
-public class AccessPointRestControllerImpl extends AccessPointRestControllerBase {
+public class AccessPointControllerImpl extends AccessPointControllerBase {
 
-    public AccessPointRestControllerImpl(AccessPointService accessPointService) {
+    public AccessPointControllerImpl(AccessPointService accessPointService) {
         super(accessPointService);
     }
 

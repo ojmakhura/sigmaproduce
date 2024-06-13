@@ -14,12 +14,12 @@ import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 
-public abstract class AccessPointTypeRestControllerBase implements AccessPointTypeRestController {
+public abstract class AccessPointTypeControllerBase implements AccessPointTypeController {
 
-    protected Logger logger = LoggerFactory.getLogger(AccessPointTypeRestController.class);
+    protected Logger logger = LoggerFactory.getLogger(AccessPointTypeController.class);
         protected final AccessPointTypeService accessPointTypeService;
 
-    public AccessPointTypeRestControllerBase(
+    public AccessPointTypeControllerBase(
         AccessPointTypeService accessPointTypeService    ) {
         this.accessPointTypeService = accessPointTypeService;
     }

@@ -23,9 +23,9 @@ import org.springframework.web.bind.annotation.RestController;
 @Tag(name = "Access Point Type", description = "Configuring different resource types accessible.")
 @CrossOrigin()
 @SecurityRequirement(name = "bocraportal-api")
-public class AccessPointTypeRestControllerImpl extends AccessPointTypeRestControllerBase {
+public class AccessPointTypeControllerImpl extends AccessPointTypeControllerBase {
 
-    public AccessPointTypeRestControllerImpl(AccessPointTypeService accessPointTypeService) {
+    public AccessPointTypeControllerImpl(AccessPointTypeService accessPointTypeService) {
         super(accessPointTypeService);
     }
 

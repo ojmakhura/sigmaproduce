@@ -16,7 +16,7 @@ import org.springframework.web.bind.annotation.RequestBody;
  * 
  * TODO: Model Documentation for AccessPointRestController
  */
-public interface AccessPointRestController {
+public interface AccessPointController {
 
     @GetMapping("/id/{id}")
     public ResponseEntity<?> findById(@PathVariable(name = "id", required = false) Long id);

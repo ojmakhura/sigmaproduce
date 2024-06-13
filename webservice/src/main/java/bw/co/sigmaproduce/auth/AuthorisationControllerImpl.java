@@ -23,9 +23,9 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("/authorisation")
 @Tag(name = "Authorisation", description = "Managing the access authorisations.")
 @CrossOrigin()
-public class AuthorisationRestControllerImpl extends AuthorisationRestControllerBase {
+public class AuthorisationControllerImpl extends AuthorisationControllerBase {
 
-    public AuthorisationRestControllerImpl(AuthorisationService authorisationService) {
+    public AuthorisationControllerImpl(AuthorisationService authorisationService) {
         super(authorisationService);
     }
 

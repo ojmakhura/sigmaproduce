@@ -18,7 +18,7 @@ import org.springframework.web.bind.annotation.RequestParam;
  * 
  * TODO: Model Documentation for AuthorisationRestController
  */
-public interface AuthorisationRestController {
+public interface AuthorisationController {
 
     @GetMapping("/{authorisationId}/{menuSectionId}")
     public ResponseEntity<?> assignMenuSection(@RequestBody(required = false) Long authorisationId, @RequestBody(required = false) Long menuSectionId);
