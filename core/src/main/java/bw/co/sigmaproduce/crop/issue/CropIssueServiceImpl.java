@@ -11,14 +11,9 @@ package bw.co.sigmaproduce.crop.issue;
 import java.util.Collection;
 import org.springframework.context.MessageSource;
 import org.springframework.data.domain.Page;
-import org.springframework.data.domain.PageRequest;
-import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
-
-import bw.co.sigmaproduce.SigmaproduceSpecifications;
-import io.micrometer.common.util.StringUtils;
 
 /**
  * @see bw.co.sigmaproduce.crop.issue.CropIssueService
@@ -48,10 +43,8 @@ public class CropIssueServiceImpl
     protected CropIssueVO handleFindById(String id)
         throws Exception
     {
-
-        CropIssue cropIssue = this.getCropIssueRepository().getReferenceById(id);
-
-        return this.getCropIssueDao().toCropIssueVO(cropIssue);
+        // TODO implement protected  CropIssueVO handleFindById(String id)
+        throw new UnsupportedOperationException("bw.co.sigmaproduce.crop.issue.CropIssueService.handleFindById(String id) Not implemented!");
     }
 
     /**
@@ -61,8 +54,8 @@ public class CropIssueServiceImpl
     protected Collection<CropIssueVO> handleGetAll()
         throws Exception
     {
-
-        return this.getCropIssueDao().toCropIssueVOCollection(this.getCropIssueRepository().findAll());
+        // TODO implement protected  Collection<CropIssueVO> handleGetAll()
+        throw new UnsupportedOperationException("bw.co.sigmaproduce.crop.issue.CropIssueService.handleGetAll() Not implemented!");
     }
 
     /**
@@ -72,9 +65,8 @@ public class CropIssueServiceImpl
     protected boolean handleRemove(String id)
         throws Exception
     {
-
-        this.getCropIssueRepository().deleteById(id);
-        return true;
+        // TODO implement protected  boolean handleRemove(String id)
+        throw new UnsupportedOperationException("bw.co.sigmaproduce.crop.issue.CropIssueService.handleRemove(String id) Not implemented!");
     }
 
     /**
@@ -84,12 +76,8 @@ public class CropIssueServiceImpl
     protected CropIssueVO handleSave(CropIssueVO cropIssue)
         throws Exception
     {
-            
-            CropIssue entity = this.getCropIssueDao().cropIssueVOToEntity(cropIssue);
-    
-            entity = this.getCropIssueRepository().save(entity);
-    
-            return this.getCropIssueDao().toCropIssueVO(entity);
+        // TODO implement protected  CropIssueVO handleSave(CropIssueVO cropIssue)
+        throw new UnsupportedOperationException("bw.co.sigmaproduce.crop.issue.CropIssueService.handleSave(CropIssueVO cropIssue) Not implemented!");
     }
 
     /**
@@ -99,15 +87,8 @@ public class CropIssueServiceImpl
     protected Collection<CropIssueVO> handleSearch(String criteria)
         throws Exception
     {
-
-        Specification<CropIssue> spec = null;
-
-        if(StringUtils.isNotBlank(criteria)) {
-            spec = SigmaproduceSpecifications.<CropIssue>findByAttributeContainingIgnoreCase(criteria, "name")
-                    .or(SigmaproduceSpecifications.findByAttributeContainingIgnoreCase(criteria, "description"));
-        }
-
-        return this.getCropIssueDao().toCropIssueVOCollection(this.getCropIssueRepository().findAll(spec));
+        // TODO implement protected  Collection<CropIssueVO> handleSearch(String criteria)
+        throw new UnsupportedOperationException("bw.co.sigmaproduce.crop.issue.CropIssueService.handleSearch(String criteria) Not implemented!");
     }
 
     /**
@@ -117,14 +98,8 @@ public class CropIssueServiceImpl
     protected Collection<CropIssueVO> handleSearchByType(CropIssueType type)
         throws Exception
     {
-
-        Specification<CropIssue> spec = null;
-
-        if(type != null) {
-            spec = SigmaproduceSpecifications.<CropIssue, CropIssueType>findByAttribute(type, "type");
-        }
-
-        return this.getCropIssueDao().toCropIssueVOCollection(this.getCropIssueRepository().findAll(spec));
+        // TODO implement protected  Collection<CropIssueVO> handleSearchByType(CropIssueType type)
+        throw new UnsupportedOperationException("bw.co.sigmaproduce.crop.issue.CropIssueService.handleSearchByType(CropIssueType type) Not implemented!");
     }
 
     /**
@@ -134,8 +109,8 @@ public class CropIssueServiceImpl
     protected Page<CropIssueVO> handleGetAll(Integer pageNumber, Integer pageSize)
         throws Exception
     {
-
-        return this.getCropIssueRepository().findAll(PageRequest.of(pageNumber, pageSize)).map(this.getCropIssueDao()::toCropIssueVO);
+        // TODO implement protected  Page<CropIssueVO> handleGetAll(Integer pageNumber, Integer pageSize)
+        throw new UnsupportedOperationException("bw.co.sigmaproduce.crop.issue.CropIssueService.handleGetAll(Integer pageNumber, Integer pageSize) Not implemented!");
     }
 
     /**
@@ -145,15 +120,8 @@ public class CropIssueServiceImpl
     protected Page<CropIssueVO> handleSearch(String criteria, Integer pageNumber, Integer pageSize)
         throws Exception
     {
-
-        Specification<CropIssue> spec = null;
-
-        if(StringUtils.isNotBlank(criteria)) {
-            spec = SigmaproduceSpecifications.<CropIssue>findByAttributeContainingIgnoreCase(criteria, "name")
-                    .or(SigmaproduceSpecifications.findByAttributeContainingIgnoreCase(criteria, "description"));
-        }
-
-        return this.getCropIssueRepository().findAll(spec, PageRequest.of(pageNumber, pageSize)).map(this.getCropIssueDao()::toCropIssueVO);
+        // TODO implement protected  Page<CropIssueVO> handleSearch(String criteria, Integer pageNumber, Integer pageSize)
+        throw new UnsupportedOperationException("bw.co.sigmaproduce.crop.issue.CropIssueService.handleSearch(String criteria, Integer pageNumber, Integer pageSize) Not implemented!");
     }
 
     /**
@@ -163,18 +131,8 @@ public class CropIssueServiceImpl
     protected Page<CropIssueVO> handleSearchByTypeAndCrop(CropIssueType type, String cropId, Integer pageNumber, Integer pageSize)
         throws Exception
     {
-
-        Specification<CropIssue> spec = null;
-
-        if(type != null) {
-            spec = SigmaproduceSpecifications.<CropIssue, CropIssueType>findByAttribute(type, "type");
-        }
-
-        if(StringUtils.isNotBlank(cropId)) {
-            spec = spec.and(SigmaproduceSpecifications.<CropIssue, String>findByAttribute(cropId, "crop", "id"));
-        }
-
-        return this.getCropIssueRepository().findAll(spec, PageRequest.of(pageNumber, pageSize)).map(this.getCropIssueDao()::toCropIssueVO);
+        // TODO implement protected  Page<CropIssueVO> handleSearchByTypeAndCrop(CropIssueType type, String cropId, Integer pageNumber, Integer pageSize)
+        throw new UnsupportedOperationException("bw.co.sigmaproduce.crop.issue.CropIssueService.handleSearchByTypeAndCrop(CropIssueType type, String cropId, Integer pageNumber, Integer pageSize) Not implemented!");
     }
 
     /**
@@ -184,18 +142,8 @@ public class CropIssueServiceImpl
     protected Collection<CropIssueVO> handleSearchByTypeAndCrop(CropIssueType type, String cropId)
         throws Exception
     {
-
-        Specification<CropIssue> spec = null;
-
-        if(type != null) {
-            spec = SigmaproduceSpecifications.<CropIssue, CropIssueType>findByAttribute(type, "type");
-        }
-
-        if(StringUtils.isNotBlank(cropId)) {
-            spec = spec.and(SigmaproduceSpecifications.<CropIssue, String>findByAttribute(cropId, "crop", "id"));
-        }
-
-        return this.getCropIssueDao().toCropIssueVOCollection(this.getCropIssueRepository().findAll(spec));
+        // TODO implement protected  Collection<CropIssueVO> handleSearchByTypeAndCrop(CropIssueType type, String cropId)
+        throw new UnsupportedOperationException("bw.co.sigmaproduce.crop.issue.CropIssueService.handleSearchByTypeAndCrop(CropIssueType type, String cropId) Not implemented!");
     }
 
 }

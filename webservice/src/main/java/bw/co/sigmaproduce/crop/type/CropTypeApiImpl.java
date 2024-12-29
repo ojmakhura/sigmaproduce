@@ -5,11 +5,7 @@
 //
 package bw.co.sigmaproduce.crop.type;
 
-import java.time.LocalDateTime;
-import java.util.Date;
 import java.util.Optional;
-
-import org.apache.commons.lang3.StringUtils;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -32,7 +28,7 @@ public class CropTypeApiImpl extends CropTypeApiBase {
     @Override
     public ResponseEntity<?> handleFindById(String id) {
         try {
-            Optional<?> data = Optional.of(cropTypeService.findById(id)); // TODO: Add custom code here;
+            Optional<?> data = Optional.empty(); // TODO: Add custom code here;
             ResponseEntity<?> response;
 
             if(data.isPresent()) {
@@ -51,7 +47,7 @@ public class CropTypeApiImpl extends CropTypeApiBase {
     @Override
     public ResponseEntity<?> handleGetAll() {
         try {
-            Optional<?> data = Optional.of(cropTypeService.getAll());
+            Optional<?> data = Optional.empty(); // TODO: Add custom code here;
             ResponseEntity<?> response;
 
             if(data.isPresent()) {
@@ -62,7 +58,6 @@ public class CropTypeApiImpl extends CropTypeApiBase {
 
             return response;
         } catch (Exception e) {
-            e.printStackTrace();
             logger.error(e.getMessage());
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(e.getMessage());
         }
@@ -71,7 +66,7 @@ public class CropTypeApiImpl extends CropTypeApiBase {
     @Override
     public ResponseEntity<?> handleRemove(String id) {
         try {
-            Optional<?> data = Optional.of(cropTypeService.remove(id));
+            Optional<?> data = Optional.empty(); // TODO: Add custom code here;
             ResponseEntity<?> response;
 
             if(data.isPresent()) {
@@ -90,16 +85,7 @@ public class CropTypeApiImpl extends CropTypeApiBase {
     @Override
     public ResponseEntity<?> handleSave(CropTypeVO cropType) {
         try {
-
-            if(StringUtils.isBlank(cropType.getId())) {
-                cropType.setCreatedBy("SYSTEM");
-                cropType.setCreatedDate(LocalDateTime.now());
-            } else {
-                cropType.setUpdatedBy("SYSTEM");
-                cropType.setUpdatedDate(LocalDateTime.now());
-            }
-
-            Optional<?> data = Optional.of(cropTypeService.save(cropType));
+            Optional<?> data = Optional.empty(); // TODO: Add custom code here;
             ResponseEntity<?> response;
 
             if(data.isPresent()) {
@@ -118,7 +104,7 @@ public class CropTypeApiImpl extends CropTypeApiBase {
     @Override
     public ResponseEntity<?> handleSearch(String criteria) {
         try {
-            Optional<?> data = Optional.of(cropTypeService.search(criteria));
+            Optional<?> data = Optional.empty(); // TODO: Add custom code here;
             ResponseEntity<?> response;
 
             if(data.isPresent()) {

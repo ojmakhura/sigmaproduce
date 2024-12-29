@@ -8,13 +8,8 @@
  */
 package bw.co.sigmaproduce.district;
 
-import bw.co.sigmaproduce.SigmaproduceSpecifications;
-import bw.co.sigmaproduce.crop.CropListVO;
 import java.util.Collection;
-
-import org.apache.commons.lang3.StringUtils;
 import org.springframework.context.MessageSource;
-import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
@@ -47,10 +42,8 @@ public class DistrictServiceImpl
     protected DistrictVO handleFindById(Long id)
         throws Exception
     {
-
-        District district = this.getDistrictRepository().getReferenceById(id);
-
-        return this.getDistrictDao().toDistrictVO(district);
+        // TODO implement protected  DistrictVO handleFindById(Long id)
+        throw new UnsupportedOperationException("bw.co.sigmaproduce.district.DistrictService.handleFindById(Long id) Not implemented!");
     }
 
     /**
@@ -60,8 +53,8 @@ public class DistrictServiceImpl
     protected Collection<DistrictVO> handleGetAll()
         throws Exception
     {
-
-        return this.getDistrictDao().toDistrictVOCollection(this.getDistrictRepository().findAll());
+        // TODO implement protected  Collection<DistrictVO> handleGetAll()
+        throw new UnsupportedOperationException("bw.co.sigmaproduce.district.DistrictService.handleGetAll() Not implemented!");
     }
 
     /**
@@ -71,12 +64,8 @@ public class DistrictServiceImpl
     protected DistrictVO handleSave(DistrictVO district)
         throws Exception
     {
-
-        District entity = this.getDistrictDao().districtVOToEntity(district);
-
-        entity = this.getDistrictRepository().save(entity);
-
-        return this.getDistrictDao().toDistrictVO(entity);
+        // TODO implement protected  DistrictVO handleSave(DistrictVO district)
+        throw new UnsupportedOperationException("bw.co.sigmaproduce.district.DistrictService.handleSave(DistrictVO district) Not implemented!");
     }
 
     /**
@@ -86,8 +75,8 @@ public class DistrictServiceImpl
     protected boolean handleRemove(Long id)
         throws Exception
     {
-        this.getDistrictRepository().deleteById(id);
-        return true;
+        // TODO implement protected  boolean handleRemove(Long id)
+        throw new UnsupportedOperationException("bw.co.sigmaproduce.district.DistrictService.handleRemove(Long id) Not implemented!");
     }
 
     /**
@@ -97,13 +86,8 @@ public class DistrictServiceImpl
     protected Collection<DistrictVO> handleSearch(String criteria)
         throws Exception
     {
-        Specification<District> spec = null;
-
-        if(StringUtils.isNotBlank(criteria)) {
-            spec = SigmaproduceSpecifications.findByAttributeLikeIgnoreCase(criteria, "name");
-        }
-
-        return this.getDistrictDao().toDistrictVOCollection(this.getDistrictRepository().findAll(spec));
+        // TODO implement protected  Collection<DistrictVO> handleSearch(String criteria)
+        throw new UnsupportedOperationException("bw.co.sigmaproduce.district.DistrictService.handleSearch(String criteria) Not implemented!");
     }
 
 }

@@ -9,19 +9,12 @@
 package bw.co.sigmaproduce.crop;
 
 import bw.co.sigmaproduce.crop.issue.CropIssueType;
-import bw.co.sigmaproduce.crop.variety.CropVariety;
 import bw.co.sigmaproduce.crop.variety.CropVarietyDao;
 import bw.co.sigmaproduce.crop.variety.CropVarietyRepository;
-import io.micrometer.common.util.StringUtils;
-
-import java.time.LocalDateTime;
 import java.util.Collection;
 import java.util.Set;
-
-import org.apache.commons.collections4.CollectionUtils;
 import org.springframework.context.MessageSource;
 import org.springframework.data.domain.Page;
-import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
@@ -30,7 +23,7 @@ import org.springframework.transaction.annotation.Transactional;
  * @see bw.co.sigmaproduce.crop.CropService
  */
 @Service("cropService")
-@Transactional()
+@Transactional(propagation = Propagation.REQUIRED, readOnly=false)
 public class CropServiceImpl
     extends CropServiceBase
 {
@@ -58,11 +51,8 @@ public class CropServiceImpl
     protected CropVO handleFindById(String id)
         throws Exception
     {
-
-        Crop crop = this.cropRepository.findById(id).orElse(null);
-
-        return crop != null ? cropDao.toCropVO(crop) : null;
-
+        // TODO implement protected  CropVO handleFindById(String id)
+        throw new UnsupportedOperationException("bw.co.sigmaproduce.crop.CropService.handleFindById(String id) Not implemented!");
     }
 
     /**
@@ -72,9 +62,8 @@ public class CropServiceImpl
     protected Collection<CropListVO> handleGetAll()
         throws Exception
     {
-
-        return cropDao.toCropListVOCollection(this.cropRepository.findAll());
-        
+        // TODO implement protected  Collection<CropListVO> handleGetAll()
+        throw new UnsupportedOperationException("bw.co.sigmaproduce.crop.CropService.handleGetAll() Not implemented!");
     }
 
     /**
@@ -84,10 +73,8 @@ public class CropServiceImpl
     protected Page<CropListVO> handleGetAll(Integer pageNumber, Integer pageSize)
         throws Exception
     {
-
-        Page<Crop> crops = this.cropRepository.findAll(PageRequest.of(pageNumber, pageSize));
-
-        return crops.map(crop -> cropDao.toCropListVO(crop));
+        // TODO implement protected  Page<CropListVO> handleGetAll(Integer pageNumber, Integer pageSize)
+        throw new UnsupportedOperationException("bw.co.sigmaproduce.crop.CropService.handleGetAll(Integer pageNumber, Integer pageSize) Not implemented!");
     }
 
     /**
@@ -97,10 +84,8 @@ public class CropServiceImpl
     protected boolean handleRemove(String id)
         throws Exception
     {
-
-        this.cropRepository.deleteById(id);
-
-        return true;
+        // TODO implement protected  boolean handleRemove(String id)
+        throw new UnsupportedOperationException("bw.co.sigmaproduce.crop.CropService.handleRemove(String id) Not implemented!");
     }
 
     /**
@@ -110,41 +95,19 @@ public class CropServiceImpl
     protected CropVO handleSave(CropVO crop)
         throws Exception
     {
-        if(StringUtils.isBlank(crop.getId())) {
-            crop.setCreatedBy("SYSTEM");
-            crop.setCreatedDate(LocalDateTime.now());
-        }
-
-        Crop entity = cropDao.cropVOToEntity(crop);
-
-        if(CollectionUtils.isNotEmpty(entity.getCropVarieties())) {
-
-            for(CropVariety variety : entity.getCropVarieties()) {
-                if(StringUtils.isBlank(variety.getId())) {
-
-                    variety.setCreatedBy("SYSTEM");
-                    variety.setCreatedDate(LocalDateTime.now());
-
-                    variety.setCrop(entity);
-                }
-            }
-        }
-        
-        entity = this.cropRepository.save(entity);
-
-        return cropDao.toCropVO(entity);
+        // TODO implement protected  CropVO handleSave(CropVO crop)
+        throw new UnsupportedOperationException("bw.co.sigmaproduce.crop.CropService.handleSave(CropVO crop) Not implemented!");
     }
 
     /**
      * @see bw.co.sigmaproduce.crop.CropService#search(String)
      */
     @Override
-    @Transactional
     protected Collection<CropListVO> handleSearch(String criteria)
         throws Exception
     {
-        Collection<Crop> crop = this.cropDao.findByCriteria(criteria);
-        return cropDao.toCropListVOCollection(crop);
+        // TODO implement protected  Collection<CropListVO> handleSearch(String criteria)
+        throw new UnsupportedOperationException("bw.co.sigmaproduce.crop.CropService.handleSearch(String criteria) Not implemented!");
     }
 
     /**
@@ -154,29 +117,41 @@ public class CropServiceImpl
     protected Page<CropListVO> handleSearch(Integer pageNumber, Integer pageSize, String criteria)
         throws Exception
     {
-
-        Page<Crop> crops = this.cropDao.findByCriteriaPaged(criteria, pageSize, pageNumber);
-
-        return crops.map(crop -> cropDao.toCropListVO(crop));
+        // TODO implement protected  Page<CropListVO> handleSearch(Integer pageNumber, Integer pageSize, String criteria)
+        throw new UnsupportedOperationException("bw.co.sigmaproduce.crop.CropService.handleSearch(Integer pageNumber, Integer pageSize, String criteria) Not implemented!");
     }
 
+    /**
+     * @see bw.co.sigmaproduce.crop.CropService#findByCropTypes(Set<String>)
+     */
     @Override
-    protected Collection<CropListVO> handleFindByCropTypes(Set<String> cropTypeIds) throws Exception {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'handleFindByCropTypes'");
+    protected Collection<CropListVO> handleFindByCropTypes(Set<String> cropTypeIds)
+        throws Exception
+    {
+        // TODO implement protected  Collection<CropListVO> handleFindByCropTypes(Set<String> cropTypeIds)
+        throw new UnsupportedOperationException("bw.co.sigmaproduce.crop.CropService.handleFindByCropTypes(Set<String> cropTypeIds) Not implemented!");
     }
 
+    /**
+     * @see bw.co.sigmaproduce.crop.CropService#findByIssueType(CropIssueType)
+     */
     @Override
-    protected Collection<CropListVO> handleFindByIssueType(CropIssueType issueType) throws Exception {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'handleFindByIssueType'");
+    protected Collection<CropListVO> handleFindByIssueType(CropIssueType issueType)
+        throws Exception
+    {
+        // TODO implement protected  Collection<CropListVO> handleFindByIssueType(CropIssueType issueType)
+        throw new UnsupportedOperationException("bw.co.sigmaproduce.crop.CropService.handleFindByIssueType(CropIssueType issueType) Not implemented!");
     }
 
+    /**
+     * @see bw.co.sigmaproduce.crop.CropService#findByCropTypes(Set<String>, Integer, Integer)
+     */
     @Override
-    protected Collection<Page<CropListVO>> handleFindByCropTypes(Set<String> cropTypeIds, Integer pageNumber,
-            Integer pageSize) throws Exception {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'handleFindByCropTypes'");
+    protected Collection<Page<CropListVO>> handleFindByCropTypes(Set<String> cropTypeIds, Integer pageNumber, Integer pageSize)
+        throws Exception
+    {
+        // TODO implement protected  Collection<Page<CropListVO>> handleFindByCropTypes(Set<String> cropTypeIds, Integer pageNumber, Integer pageSize)
+        throw new UnsupportedOperationException("bw.co.sigmaproduce.crop.CropService.handleFindByCropTypes(Set<String> cropTypeIds, Integer pageNumber, Integer pageSize) Not implemented!");
     }
 
 }

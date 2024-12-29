@@ -5,17 +5,15 @@
 //
 package bw.co.sigmaproduce.crop;
 
+import bw.co.sigmaproduce.crop.issue.CropIssueType;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import java.util.Optional;
 import java.util.Set;
-
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-
-import bw.co.sigmaproduce.crop.issue.CropIssueType;
 
 @RestController
 @RequestMapping("/crop")
@@ -32,9 +30,47 @@ public class CropApiImpl extends CropApiBase {
 
 
     @Override
+    public ResponseEntity<?> handleFindByCropTypes(Set<String> cropTypeIds) {
+        try {
+            Optional<?> data = Optional.empty(); // TODO: Add custom code here;
+            ResponseEntity<?> response;
+
+            if(data.isPresent()) {
+                response = ResponseEntity.status(HttpStatus.OK).body(data.get());
+            } else {
+                response = ResponseEntity.status(HttpStatus.NOT_FOUND).build();
+            }
+
+            return response;
+        } catch (Exception e) {
+            logger.error(e.getMessage());
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(e.getMessage());
+        }
+    }
+
+    @Override
     public ResponseEntity<?> handleFindById(String id) {
         try {
-            Optional<?> data = Optional.of(cropService.findById(id)); 
+            Optional<?> data = Optional.empty(); // TODO: Add custom code here;
+            ResponseEntity<?> response;
+
+            if(data.isPresent()) {
+                response = ResponseEntity.status(HttpStatus.OK).body(data.get());
+            } else {
+                response = ResponseEntity.status(HttpStatus.NOT_FOUND).build();
+            }
+
+            return response;
+        } catch (Exception e) {
+            logger.error(e.getMessage());
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(e.getMessage());
+        }
+    }
+
+    @Override
+    public ResponseEntity<?> handleFindByIssueType(CropIssueType issueType) {
+        try {
+            Optional<?> data = Optional.empty(); // TODO: Add custom code here;
             ResponseEntity<?> response;
 
             if(data.isPresent()) {
@@ -53,7 +89,7 @@ public class CropApiImpl extends CropApiBase {
     @Override
     public ResponseEntity<?> handleGetAll() {
         try {
-            Optional<?> data = Optional.of(this.cropService.getAll()); 
+            Optional<?> data = Optional.empty(); // TODO: Add custom code here;
             ResponseEntity<?> response;
 
             if(data.isPresent()) {
@@ -72,7 +108,7 @@ public class CropApiImpl extends CropApiBase {
     @Override
     public ResponseEntity<?> handleGetAllPaged(Integer pageNumber, Integer pageSize) {
         try {
-            Optional<?> data = Optional.of(cropService.getAll(pageNumber, pageSize));
+            Optional<?> data = Optional.empty(); // TODO: Add custom code here;
             ResponseEntity<?> response;
 
             if(data.isPresent()) {
@@ -91,7 +127,7 @@ public class CropApiImpl extends CropApiBase {
     @Override
     public ResponseEntity<?> handlePagedSearch(Integer pageNumber, Integer pageSize, String criteria) {
         try {
-            Optional<?> data = Optional.of(cropService.search(pageNumber, pageSize, criteria)); 
+            Optional<?> data = Optional.empty(); // TODO: Add custom code here;
             ResponseEntity<?> response;
 
             if(data.isPresent()) {
@@ -110,7 +146,7 @@ public class CropApiImpl extends CropApiBase {
     @Override
     public ResponseEntity<?> handleRemove(String id) {
         try {
-            Optional<?> data = Optional.of(cropService.remove(id)); 
+            Optional<?> data = Optional.empty(); // TODO: Add custom code here;
             ResponseEntity<?> response;
 
             if(data.isPresent()) {
@@ -129,9 +165,7 @@ public class CropApiImpl extends CropApiBase {
     @Override
     public ResponseEntity<?> handleSave(CropVO crop) {
         try {
-
-            Optional<?> data = Optional.of(cropService.save(crop));
-            
+            Optional<?> data = Optional.empty(); // TODO: Add custom code here;
             ResponseEntity<?> response;
 
             if(data.isPresent()) {
@@ -142,7 +176,6 @@ public class CropApiImpl extends CropApiBase {
 
             return response;
         } catch (Exception e) {
-            e.printStackTrace();
             logger.error(e.getMessage());
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(e.getMessage());
         }
@@ -151,7 +184,7 @@ public class CropApiImpl extends CropApiBase {
     @Override
     public ResponseEntity<?> handleSearch(String criteria) {
         try {
-            Optional<?> data = Optional.of(cropService.search(criteria)); // TODO: Add custom code here;
+            Optional<?> data = Optional.empty(); // TODO: Add custom code here;
             ResponseEntity<?> response;
 
             if(data.isPresent()) {
@@ -165,19 +198,5 @@ public class CropApiImpl extends CropApiBase {
             logger.error(e.getMessage());
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(e.getMessage());
         }
-    }
-
-
-    @Override
-    public ResponseEntity<?> handleFindByCropTypes(Set<String> cropTypeIds) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'handleFindByCropTypes'");
-    }
-
-
-    @Override
-    public ResponseEntity<?> handleFindByIssueType(CropIssueType issueType) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'handleFindByIssueType'");
     }
 }

@@ -9,15 +9,10 @@
 package bw.co.sigmaproduce.village;
 
 import java.util.Collection;
-
-import org.apache.commons.lang3.StringUtils;
 import org.springframework.context.MessageSource;
-import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
-
-import bw.co.sigmaproduce.SigmaproduceSpecifications;
 
 /**
  * @see bw.co.sigmaproduce.village.VillageService
@@ -47,10 +42,8 @@ public class VillageServiceImpl
     protected VillageVO handleFindById(Long id)
         throws Exception
     {
-
-        Village village = this.getVillageRepository().getReferenceById(id);
-
-        return this.getVillageDao().toVillageVO(village);
+        // TODO implement protected  VillageVO handleFindById(Long id)
+        throw new UnsupportedOperationException("bw.co.sigmaproduce.village.VillageService.handleFindById(Long id) Not implemented!");
     }
 
     /**
@@ -60,10 +53,8 @@ public class VillageServiceImpl
     protected Collection<VillageVO> handleGetAll()
         throws Exception
     {
-
-        Collection<Village> all = this.getVillageRepository().findAll();
-
-        return this.getVillageDao().toVillageVOCollection(all);
+        // TODO implement protected  Collection<VillageVO> handleGetAll()
+        throw new UnsupportedOperationException("bw.co.sigmaproduce.village.VillageService.handleGetAll() Not implemented!");
     }
 
     /**
@@ -73,11 +64,8 @@ public class VillageServiceImpl
     protected VillageVO handleSave(VillageVO village)
         throws Exception
     {
-
-        Village entity = this.getVillageDao().villageVOToEntity(village);
-        entity = this.getVillageRepository().save(entity);
-
-        return this.getVillageDao().toVillageVO(entity);
+        // TODO implement protected  VillageVO handleSave(VillageVO village)
+        throw new UnsupportedOperationException("bw.co.sigmaproduce.village.VillageService.handleSave(VillageVO village) Not implemented!");
     }
 
     /**
@@ -87,10 +75,8 @@ public class VillageServiceImpl
     protected boolean handleRemove(Long id)
         throws Exception
     {
-            
-            this.villageRepository.deleteById(id);
-    
-            return true;
+        // TODO implement protected  boolean handleRemove(Long id)
+        throw new UnsupportedOperationException("bw.co.sigmaproduce.village.VillageService.handleRemove(Long id) Not implemented!");
     }
 
     /**
@@ -100,22 +86,19 @@ public class VillageServiceImpl
     protected Collection<VillageVO> handleSearch(String criteria)
         throws Exception
     {
-        Specification<Village> spec = null;
-
-        if(StringUtils.isNotBlank(criteria)) {
-            spec = SigmaproduceSpecifications.<Village>findByAttributeLikeIgnoreCase(criteria, "name")
-                    .or(SigmaproduceSpecifications.findByAttributeLikeIgnoreCase(criteria, "district", "name"));
-        }
-
-        Collection<Village> all = this.getVillageRepository().findAll(spec);
-
-        return this.getVillageDao().toVillageVOCollection(all);
+        // TODO implement protected  Collection<VillageVO> handleSearch(String criteria)
+        throw new UnsupportedOperationException("bw.co.sigmaproduce.village.VillageService.handleSearch(String criteria) Not implemented!");
     }
 
+    /**
+     * @see bw.co.sigmaproduce.village.VillageService#getDistrictVillages(String)
+     */
     @Override
-    protected VillageVO handleGetDistrictVillages(String districtId) throws Exception {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'handleGetDistrictVillages'");
+    protected VillageVO handleGetDistrictVillages(String districtId)
+        throws Exception
+    {
+        // TODO implement protected  VillageVO handleGetDistrictVillages(String districtId)
+        throw new UnsupportedOperationException("bw.co.sigmaproduce.village.VillageService.handleGetDistrictVillages(String districtId) Not implemented!");
     }
 
 }

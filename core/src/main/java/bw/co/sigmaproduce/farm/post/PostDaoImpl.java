@@ -6,14 +6,9 @@
  */
 package bw.co.sigmaproduce.farm.post;
 
-import bw.co.sigmaproduce.SigmaproduceSpecifications;
 import bw.co.sigmaproduce.farm.FarmRepository;
 import java.util.Collection;
 import org.springframework.data.domain.Page;
-import org.springframework.data.domain.PageRequest;
-import org.springframework.data.domain.Sort;
-import org.springframework.data.domain.Sort.Direction;
-import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Repository;
 
 /**
@@ -41,20 +36,18 @@ public class PostDaoImpl
     @Override
     protected Collection<Post> handleFindFarmPosts(String farmId)
     {
-        Specification<Post> spec = SigmaproduceSpecifications.findByAttribute(farmId, "farm", "id");
-       
-        return this.postRepository.findAll(spec, Sort.by(Direction.DESC, "createdDate"));
+        // TODO implement public Collection<Post> handleFindFarmPosts(String farmId)
+        return null;
     }
 
     /**
      * {@inheritDoc}
-     */ 
+     */
     @Override
     protected Page<Post> handleFindFarmPosts(String farmId, Integer pageSize, Integer pageNumber)
     {
-        Specification<Post> spec = SigmaproduceSpecifications.findByAttribute(farmId, "farm", "id");
-
-        return this.postRepository.findAll(spec, PageRequest.of(pageNumber, pageSize, Sort.by(Direction.DESC, "createdDate")));
+        // TODO implement public Page<Post> handleFindFarmPosts(String farmId, Integer pageSize, Integer pageNumber)
+        return null;
     }
 
     /**
@@ -67,6 +60,8 @@ public class PostDaoImpl
     {
         // TODO verify behavior of toPostVO
         super.toPostVO(source, target);
+        // WARNING! No conversion for target.createdDate (can't convert source.getCreatedDate():java.util.Date to java.util.Date
+        // WARNING! No conversion for target.updatedDate (can't convert source.getUpdatedDate():java.util.Date to java.util.Date
     }
 
     /**
@@ -86,6 +81,10 @@ public class PostDaoImpl
      */
     private Post loadPostFromPostVO(PostVO postVO)
     {
+        // TODO implement loadPostFromPostVO
+        throw new UnsupportedOperationException("bw.co.sigmaproduce.farm.post.loadPostFromPostVO(PostVO) not yet implemented.");
+
+        /* A typical implementation looks like this:
         if (postVO.getId() == null)
         {
             return  Post.Factory.newInstance();
@@ -94,6 +93,7 @@ public class PostDaoImpl
         {
             return this.load(postVO.getId());
         }
+        */
     }
 
     /**
@@ -118,5 +118,7 @@ public class PostDaoImpl
     {
         // TODO verify behavior of postVOToEntity
         super.postVOToEntity(source, target, copyIfNull);
+        // No conversion for target.updatedDate (can't convert source.getUpdatedDate():java.util.Date to java.util.Date
+        // No conversion for target.createdDate (can't convert source.getCreatedDate():java.util.Date to java.util.Date
     }
 }

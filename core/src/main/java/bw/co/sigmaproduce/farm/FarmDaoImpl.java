@@ -9,11 +9,6 @@ package bw.co.sigmaproduce.farm;
 import bw.co.sigmaproduce.farm.cultivation.CultivationRepository;
 import bw.co.sigmaproduce.farm.post.PostRepository;
 import bw.co.sigmaproduce.village.VillageRepository;
-import bw.co.sigmaproduce.village.VillageVO;
-
-import java.util.ArrayList;
-import java.util.List;
-
 import org.springframework.stereotype.Repository;
 
 /**
@@ -49,31 +44,12 @@ public class FarmDaoImpl
     {
         // TODO verify behavior of toFarmVO
         super.toFarmVO(source, target);
+        // WARNING! No conversion for target.createdDate (can't convert source.getCreatedDate():java.util.Date to java.util.Date
+        // WARNING! No conversion for target.updatedDate (can't convert source.getUpdatedDate():java.util.Date to java.util.Date
         // WARNING! No conversion for target.nearestVillage (can't convert source.getNearestVillage():bw.co.sigmaproduce.village.Village to bw.co.sigmaproduce.village.VillageVO
-
-        if(source.getNearestVillage() != null)
-        {
-            VillageVO nearestVillage = new VillageVO();
-            this.getVillageDao().toVillageVO(source.getNearestVillage(), nearestVillage);
-
-            target.setNearestVillage(nearestVillage);
-        }
         // WARNING! No conversion for target.alliedFarms (can't convert source.getAlliedFarms():Farm to FarmListVO
-
-        if(source.getAlliedFarms() != null)
-        {
-            List<FarmListVO> alliedFarms = new ArrayList<>();
-
-            for(Farm alliedFarm : source.getAlliedFarms())
-            {
-                FarmListVO farmListVO = new FarmListVO();
-                farmListVO.setId(alliedFarm.getId());
-                farmListVO.setName(alliedFarm.getName());
-                alliedFarms.add(farmListVO);
-            }
-
-            target.setAlliedFarms(alliedFarms);
-        }
+        // WARNING! No conversion for target.cultivations (can't convert source.getCultivations():bw.co.sigmaproduce.farm.cultivation.Cultivation to bw.co.sigmaproduce.farm.cultivation.CultivationListVO
+        // WARNING! No conversion for target.posts (can't convert source.getPosts():bw.co.sigmaproduce.farm.post.Post to bw.co.sigmaproduce.farm.post.PostVO
     }
 
     /**
@@ -93,6 +69,10 @@ public class FarmDaoImpl
      */
     private Farm loadFarmFromFarmVO(FarmVO farmVO)
     {
+        // TODO implement loadFarmFromFarmVO
+        throw new UnsupportedOperationException("bw.co.sigmaproduce.farm.loadFarmFromFarmVO(FarmVO) not yet implemented.");
+
+        /* A typical implementation looks like this:
         if (farmVO.getId() == null)
         {
             return  Farm.Factory.newInstance();
@@ -101,6 +81,7 @@ public class FarmDaoImpl
         {
             return this.load(farmVO.getId());
         }
+        */
     }
 
     /**
@@ -125,6 +106,8 @@ public class FarmDaoImpl
     {
         // TODO verify behavior of farmVOToEntity
         super.farmVOToEntity(source, target, copyIfNull);
+        // No conversion for target.updatedDate (can't convert source.getUpdatedDate():java.util.Date to java.util.Date
+        // No conversion for target.createdDate (can't convert source.getCreatedDate():java.util.Date to java.util.Date
     }
     /**
      * {@inheritDoc}
@@ -137,11 +120,6 @@ public class FarmDaoImpl
         // TODO verify behavior of toFarmListVO
         super.toFarmListVO(source, target);
         // WARNING! No conversion for target.nearestVillage (can't convert source.getNearestVillage():bw.co.sigmaproduce.village.Village to java.lang.String
-
-        if(source.getNearestVillage() != null)
-        {
-            target.setNearestVillage(source.getNearestVillage().getName());
-        }
     }
 
     /**
@@ -161,6 +139,10 @@ public class FarmDaoImpl
      */
     private Farm loadFarmFromFarmListVO(FarmListVO farmListVO)
     {
+        // TODO implement loadFarmFromFarmListVO
+        throw new UnsupportedOperationException("bw.co.sigmaproduce.farm.loadFarmFromFarmListVO(FarmListVO) not yet implemented.");
+
+        /* A typical implementation looks like this:
         if (farmListVO.getId() == null)
         {
             return  Farm.Factory.newInstance();
@@ -169,6 +151,7 @@ public class FarmDaoImpl
         {
             return this.load(farmListVO.getId());
         }
+        */
     }
 
     /**

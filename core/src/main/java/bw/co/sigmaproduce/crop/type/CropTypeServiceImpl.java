@@ -10,7 +10,6 @@ package bw.co.sigmaproduce.crop.type;
 
 import bw.co.sigmaproduce.crop.CropDao;
 import bw.co.sigmaproduce.crop.CropRepository;
-import bw.co.sigmaproduce.crop.issue.CropIssueVO;
 import java.util.Collection;
 import org.springframework.context.MessageSource;
 import org.springframework.stereotype.Service;
@@ -46,14 +45,11 @@ public class CropTypeServiceImpl
      * @see bw.co.sigmaproduce.crop.type.CropTypeService#findById(String)
      */
     @Override
-    @Transactional
     protected CropTypeVO handleFindById(String id)
         throws Exception
     {
-        
-        CropType cropType = this.cropTypeRepository.findById(id).orElse(null);
-        
-        return this.getCropTypeDao().toCropTypeVO(cropType);
+        // TODO implement protected  CropTypeVO handleFindById(String id)
+        throw new UnsupportedOperationException("bw.co.sigmaproduce.crop.type.CropTypeService.handleFindById(String id) Not implemented!");
     }
 
     /**
@@ -63,8 +59,8 @@ public class CropTypeServiceImpl
     protected Collection<CropTypeVO> handleGetAll()
         throws Exception
     {
-
-        return this.getCropTypeDao().toCropTypeVOCollection(this.getCropTypeRepository().findAll());
+        // TODO implement protected  Collection<CropTypeVO> handleGetAll()
+        throw new UnsupportedOperationException("bw.co.sigmaproduce.crop.type.CropTypeService.handleGetAll() Not implemented!");
     }
 
     /**
@@ -74,24 +70,19 @@ public class CropTypeServiceImpl
     protected boolean handleRemove(String id)
         throws Exception
     {
-
-        this.getCropTypeRepository().deleteById(id);
-        
-        return true;
+        // TODO implement protected  boolean handleRemove(String id)
+        throw new UnsupportedOperationException("bw.co.sigmaproduce.crop.type.CropTypeService.handleRemove(String id) Not implemented!");
     }
 
     /**
-     * @see bw.co.sigmaproduce.crop.type.CropTypeService#save(CropIssueVO)
+     * @see bw.co.sigmaproduce.crop.type.CropTypeService#save(CropTypeVO)
      */
     @Override
     protected CropTypeVO handleSave(CropTypeVO cropType)
         throws Exception
     {
-
-        CropType entity = this.getCropTypeDao().cropTypeVOToEntity(cropType);
-        entity = this.getCropTypeRepository().save(entity);
-        
-        return this.getCropTypeDao().toCropTypeVO(entity);
+        // TODO implement protected  CropTypeVO handleSave(CropTypeVO cropType)
+        throw new UnsupportedOperationException("bw.co.sigmaproduce.crop.type.CropTypeService.handleSave(CropTypeVO cropType) Not implemented!");
     }
 
     /**
@@ -101,8 +92,8 @@ public class CropTypeServiceImpl
     protected Collection<CropTypeVO> handleSearch(String criteria)
         throws Exception
     {
-
-        return this.getCropTypeDao().toCropTypeVOCollection(this.getCropTypeDao().findByCriteria(criteria));
+        // TODO implement protected  Collection<CropTypeVO> handleSearch(String criteria)
+        throw new UnsupportedOperationException("bw.co.sigmaproduce.crop.type.CropTypeService.handleSearch(String criteria) Not implemented!");
     }
 
 }

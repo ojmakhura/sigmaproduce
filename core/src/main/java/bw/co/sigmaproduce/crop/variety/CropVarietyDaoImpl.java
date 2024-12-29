@@ -10,8 +10,6 @@ import bw.co.sigmaproduce.crop.CropRepository;
 import bw.co.sigmaproduce.farm.cultivation.CultivationRepository;
 import java.util.Collection;
 import org.springframework.data.domain.Page;
-import org.springframework.data.domain.PageRequest;
-import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Repository;
 
 /**
@@ -35,30 +33,14 @@ public class CropVarietyDaoImpl
         );
     }
 
-    private Specification<CropVariety> buildSpecification(final String criteria)
-    {
-
-        Specification<CropVariety> specification = null;
-
-        if(criteria != null && !criteria.isEmpty())
-        {
-            specification = (root, query, cb) -> cb.or(
-                cb.like(cb.lower(root.get("code")), "%" + criteria.toLowerCase() + "%"),
-                cb.like(cb.lower(root.get("name")), "%" + criteria.toLowerCase() + "%"),
-                cb.like(cb.lower(root.get("description")), "%" + criteria.toLowerCase() + "%")
-            );
-        }
-
-        return specification;
-    }
-
     /**
      * {@inheritDoc}
      */
     @Override
     protected Collection<CropVariety> handleFindByCriteria(String criteria)
     {
-        return this.cropVarietyRepository.findAll(buildSpecification(criteria));
+        // TODO implement public Collection<CropVariety> handleFindByCriteria(String criteria)
+        return null;
     }
 
     /**
@@ -67,7 +49,8 @@ public class CropVarietyDaoImpl
     @Override
     protected Page<CropVariety> handleFindByCriteriaPaged(String criteria, Integer pageSize, Integer pageNumber)
     {
-        return this.cropVarietyRepository.findAll(buildSpecification(criteria), PageRequest.of(pageSize, pageNumber));
+        // TODO implement public Page<CropVariety> handleFindByCriteriaPaged(String criteria, Integer pageSize, Integer pageNumber)
+        return null;
     }
 
     /**
@@ -80,10 +63,9 @@ public class CropVarietyDaoImpl
     {
         // TODO verify behavior of toCropVarietyVO
         super.toCropVarietyVO(source, target);
-        // WARNING! No conversion for target.crop (can't convert source.getCrop():bw.co.sigmaproduce.crop.Crop to bw.co.sigmaproduce.crop.CropVO
-        if(source.getCrop() != null)
-        {
-        }
+        // WARNING! No conversion for target.createdDate (can't convert source.getCreatedDate():java.util.Date to java.util.Date
+        // WARNING! No conversion for target.updatedDate (can't convert source.getUpdatedDate():java.util.Date to java.util.Date
+        // WARNING! No conversion for target.crop (can't convert source.getCrop():bw.co.sigmaproduce.crop.Crop to bw.co.sigmaproduce.crop.CropListVO
     }
 
     /**
@@ -103,6 +85,10 @@ public class CropVarietyDaoImpl
      */
     private CropVariety loadCropVarietyFromCropVarietyVO(CropVarietyVO cropVarietyVO)
     {
+        // TODO implement loadCropVarietyFromCropVarietyVO
+        throw new UnsupportedOperationException("bw.co.sigmaproduce.crop.variety.loadCropVarietyFromCropVarietyVO(CropVarietyVO) not yet implemented.");
+
+        /* A typical implementation looks like this:
         if (cropVarietyVO.getId() == null)
         {
             return  CropVariety.Factory.newInstance();
@@ -111,6 +97,7 @@ public class CropVarietyDaoImpl
         {
             return this.load(cropVarietyVO.getId());
         }
+        */
     }
 
     /**
@@ -135,6 +122,8 @@ public class CropVarietyDaoImpl
     {
         // TODO verify behavior of cropVarietyVOToEntity
         super.cropVarietyVOToEntity(source, target, copyIfNull);
+        // No conversion for target.updatedDate (can't convert source.getUpdatedDate():java.util.Date to java.util.Date
+        // No conversion for target.createdDate (can't convert source.getCreatedDate():java.util.Date to java.util.Date
     }
     /**
      * {@inheritDoc}
@@ -166,6 +155,10 @@ public class CropVarietyDaoImpl
      */
     private CropVariety loadCropVarietyFromCropVarietyList(CropVarietyList cropVarietyList)
     {
+        // TODO implement loadCropVarietyFromCropVarietyList
+        throw new UnsupportedOperationException("bw.co.sigmaproduce.crop.variety.loadCropVarietyFromCropVarietyList(CropVarietyList) not yet implemented.");
+
+        /* A typical implementation looks like this:
         if (cropVarietyList.getId() == null)
         {
             return  CropVariety.Factory.newInstance();
@@ -174,6 +167,7 @@ public class CropVarietyDaoImpl
         {
             return this.load(cropVarietyList.getId());
         }
+        */
     }
 
     /**

@@ -7,28 +7,16 @@
 package bw.co.sigmaproduce.crop;
 
 import bw.co.sigmaproduce.crop.issue.CropIssueRepository;
-import bw.co.sigmaproduce.crop.type.CropType;
-import bw.co.sigmaproduce.crop.type.CropTypeListVO;
 import bw.co.sigmaproduce.crop.type.CropTypeRepository;
 import bw.co.sigmaproduce.crop.variety.CropVarietyRepository;
-import bw.co.sigmaproduce.crop.variety.CropVarietyVO;
-
-import java.util.ArrayList;
 import java.util.Collection;
-
-import org.apache.commons.collections4.CollectionUtils;
-import org.apache.commons.lang3.StringUtils;
 import org.springframework.data.domain.Page;
-import org.springframework.data.domain.PageRequest;
-import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Repository;
-import org.springframework.transaction.annotation.Transactional;
 
 /**
  * @see Crop
  */
 @Repository("cropDao")
-@Transactional
 public class CropDaoImpl
     extends CropDaoBase
 {
@@ -54,17 +42,8 @@ public class CropDaoImpl
     @Override
     protected Collection<Crop> handleFindByCriteria(String criteria)
     {
-        Specification<Crop> spec = null;
-
-        if (StringUtils.isNotBlank(criteria)) {
-
-            spec = (root, query, cb) -> cb.or(
-                    cb.like(cb.lower(root.get("code")), "%" + criteria.toLowerCase() + "%"),
-                    cb.like(cb.lower(root.get("name")), "%" + criteria.toLowerCase() + "%"));
-
-        }
-
-        return this.cropRepository.findAll(spec);
+        // TODO implement public Collection<Crop> handleFindByCriteria(String criteria)
+        return null;
     }
 
     /**
@@ -73,17 +52,8 @@ public class CropDaoImpl
     @Override
     protected Page<Crop> handleFindByCriteriaPaged(String criteria, Integer pageSize, Integer pageNumber)
     {
-        Specification<Crop> spec = null;
-
-        if (StringUtils.isNotBlank(criteria)) {
-
-            spec = (root, query, cb) -> cb.or(
-                    cb.like(cb.lower(root.get("code")), "%" + criteria.toLowerCase() + "%"),
-                    cb.like(cb.lower(root.get("name")), "%" + criteria.toLowerCase() + "%"));
-
-        }
-
-        return this.cropRepository.findAll(spec, PageRequest.of(pageNumber, pageSize));
+        // TODO implement public Page<Crop> handleFindByCriteriaPaged(String criteria, Integer pageSize, Integer pageNumber)
+        return null;
     }
 
     /**
@@ -96,27 +66,10 @@ public class CropDaoImpl
     {
         // TODO verify behavior of toCropVO
         super.toCropVO(source, target);
-        // WARNING! No conversion for target.type (can't conver
-        
-        if(source.getType() != null) {
-
-            CropTypeListVO type = new CropTypeListVO();
-            type.setId(source.getType().getId());
-            type.setName(source.getType().getName());
-            target.setType(type);
-
-        }
-
-        if (CollectionUtils.isNotEmpty(source.getCropVarieties())) {
-
-            Collection<CropVarietyVO> varieties = new ArrayList<>();
-
-            for (bw.co.sigmaproduce.crop.variety.CropVariety item : source.getCropVarieties()) {
-                varieties.add(this.cropVarietyDao.toCropVarietyVO(item));
-            }
-
-            target.setVarieties(varieties);
-        }
+        // WARNING! No conversion for target.createdDate (can't convert source.getCreatedDate():java.util.Date to java.util.Date
+        // WARNING! No conversion for target.updatedDate (can't convert source.getUpdatedDate():java.util.Date to java.util.Date
+        // WARNING! No conversion for target.maturesIn (can't convert source.getMaturesIn():bw.co.sigmaproduce.TimePeriod to Integer
+        // WARNING! No conversion for target.type (can't convert source.getType():bw.co.sigmaproduce.crop.type.CropType to bw.co.sigmaproduce.crop.type.CropTypeListVO
     }
 
     /**
@@ -136,7 +89,10 @@ public class CropDaoImpl
      */
     private Crop loadCropFromCropVO(CropVO cropVO)
     {
+        // TODO implement loadCropFromCropVO
+        throw new UnsupportedOperationException("bw.co.sigmaproduce.crop.loadCropFromCropVO(CropVO) not yet implemented.");
 
+        /* A typical implementation looks like this:
         if (cropVO.getId() == null)
         {
             return  Crop.Factory.newInstance();
@@ -145,6 +101,7 @@ public class CropDaoImpl
         {
             return this.load(cropVO.getId());
         }
+        */
     }
 
     /**
@@ -154,16 +111,7 @@ public class CropDaoImpl
     {
         // TODO verify behavior of cropVOToEntity
         Crop entity = this.loadCropFromCropVO(cropVO);
-        entity.getType();
         this.cropVOToEntity(cropVO, entity, true);
-
-        if(cropVO.getType() != null && StringUtils.isNotBlank(cropVO.getType().getId())) {
-
-            CropType type = this.cropTypeRepository.findById(cropVO.getType().getId()).orElse(null);
-            entity.setType(type);
-
-        }
-
         return entity;
     }
 
@@ -178,29 +126,23 @@ public class CropDaoImpl
     {
         // TODO verify behavior of cropVOToEntity
         super.cropVOToEntity(source, target, copyIfNull);
+        // No conversion for target.updatedDate (can't convert source.getUpdatedDate():java.util.Date to java.util.Date
+        // No conversion for target.createdDate (can't convert source.getCreatedDate():java.util.Date to java.util.Date
+        // No conversion for target.maturesIn (can't convert source.getMaturesIn():Integer to bw.co.sigmaproduce.TimePeriod
     }
     /**
      * {@inheritDoc}
      */
     @Override
-    @Transactional
     public void toCropListVO(
         Crop source,
         CropListVO target)
     {
         // TODO verify behavior of toCropListVO
         super.toCropListVO(source, target);
+        // WARNING! No conversion for target.createdDate (can't convert source.getCreatedDate():java.util.Date to java.util.Date
+        // WARNING! No conversion for target.updatedDate (can't convert source.getUpdatedDate():java.util.Date to java.util.Date
         // WARNING! No conversion for target.type (can't convert source.getType():bw.co.sigmaproduce.crop.type.CropType to String
-        if(source.getType() != null)
-        {
-            // source.getType().getName();
-            CropType type = cropTypeRepository.findById(source.getType().getId()).orElse(null);
-            target.setTypeId(type.getId());
-            // type.getName();
-            System.out.println(type.getName());
-
-            target.setType(type.getName());
-        }
     }
 
     /**
@@ -220,6 +162,10 @@ public class CropDaoImpl
      */
     private Crop loadCropFromCropListVO(CropListVO cropListVO)
     {
+        // TODO implement loadCropFromCropListVO
+        throw new UnsupportedOperationException("bw.co.sigmaproduce.crop.loadCropFromCropListVO(CropListVO) not yet implemented.");
+
+        /* A typical implementation looks like this:
         if (cropListVO.getId() == null)
         {
             return  Crop.Factory.newInstance();
@@ -228,6 +174,7 @@ public class CropDaoImpl
         {
             return this.load(cropListVO.getId());
         }
+        */
     }
 
     /**
@@ -252,11 +199,7 @@ public class CropDaoImpl
     {
         // TODO verify behavior of cropListVOToEntity
         super.cropListVOToEntity(source, target, copyIfNull);
-
-        if(StringUtils.isNotBlank(source.getTypeId()))
-        {
-            CropType type = this.cropTypeRepository.findById(source.getTypeId()).orElse(null);
-            target.setType(type);
-        }
+        // No conversion for target.updatedDate (can't convert source.getUpdatedDate():java.util.Date to java.util.Date
+        // No conversion for target.createdDate (can't convert source.getCreatedDate():java.util.Date to java.util.Date
     }
 }

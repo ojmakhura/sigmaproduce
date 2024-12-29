@@ -41,8 +41,11 @@ public class CultivationProblemDaoImpl
     {
         // TODO verify behavior of toCultivationProblemVO
         super.toCultivationProblemVO(source, target);
+        // WARNING! No conversion for target.createdDate (can't convert source.getCreatedDate():java.util.Date to java.util.Date
+        // WARNING! No conversion for target.updatedDate (can't convert source.getUpdatedDate():java.util.Date to java.util.Date
         // WARNING! No conversion for target.cropIssue (can't convert source.getCropIssue():bw.co.sigmaproduce.crop.issue.CropIssue to bw.co.sigmaproduce.crop.issue.CropIssueVO
         // WARNING! No conversion for target.cultivation (can't convert source.getCultivation():bw.co.sigmaproduce.farm.cultivation.Cultivation to bw.co.sigmaproduce.farm.cultivation.CultivationListVO
+        // WARNING! No conversion for target.dateNoticed (can't convert source.getDateNoticed():java.util.Date to java.util.Date
     }
 
     /**
@@ -99,6 +102,9 @@ public class CultivationProblemDaoImpl
     {
         // TODO verify behavior of cultivationProblemVOToEntity
         super.cultivationProblemVOToEntity(source, target, copyIfNull);
+        // No conversion for target.updatedDate (can't convert source.getUpdatedDate():java.util.Date to java.util.Date
+        // No conversion for target.createdDate (can't convert source.getCreatedDate():java.util.Date to java.util.Date
+        // No conversion for target.dateNoticed (can't convert source.getDateNoticed():java.util.Date to java.util.Date
     }
     /**
      * {@inheritDoc}
@@ -110,6 +116,7 @@ public class CultivationProblemDaoImpl
     {
         // TODO verify behavior of toCultivationProblemListVO
         super.toCultivationProblemListVO(source, target);
+        // WARNING! No conversion for target.dateNoticed (can't convert source.getDateNoticed():java.util.Date to java.util.Date
     }
 
     /**
@@ -166,5 +173,6 @@ public class CultivationProblemDaoImpl
     {
         // TODO verify behavior of cultivationProblemListVOToEntity
         super.cultivationProblemListVOToEntity(source, target, copyIfNull);
+        // No conversion for target.dateNoticed (can't convert source.getDateNoticed():java.util.Date to java.util.Date
     }
 }

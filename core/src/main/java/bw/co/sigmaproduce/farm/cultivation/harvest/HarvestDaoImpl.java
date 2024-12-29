@@ -38,6 +38,7 @@ public class HarvestDaoImpl
     {
         // TODO verify behavior of toHarvestVO
         super.toHarvestVO(source, target);
+        // WARNING! No conversion for target.harvestDate (can't convert source.getHarvestDate():java.util.Date to java.util.Date
         // WARNING! No conversion for target.cultivation (can't convert source.getCultivation():bw.co.sigmaproduce.farm.cultivation.Cultivation to bw.co.sigmaproduce.farm.cultivation.CultivationVO
     }
 
@@ -95,6 +96,7 @@ public class HarvestDaoImpl
     {
         // TODO verify behavior of harvestVOToEntity
         super.harvestVOToEntity(source, target, copyIfNull);
+        // No conversion for target.harvestDate (can't convert source.getHarvestDate():java.util.Date to java.util.Date
     }
     /**
      * {@inheritDoc}
@@ -106,6 +108,7 @@ public class HarvestDaoImpl
     {
         // TODO verify behavior of toHarvestList
         super.toHarvestList(source, target);
+        // WARNING! No conversion for target.harvestDate (can't convert source.getHarvestDate():java.util.Date to java.util.Date
     }
 
     /**
@@ -162,5 +165,6 @@ public class HarvestDaoImpl
     {
         // TODO verify behavior of harvestListToEntity
         super.harvestListToEntity(source, target, copyIfNull);
+        // No conversion for target.harvestDate (can't convert source.getHarvestDate():java.util.Date to java.util.Date
     }
 }

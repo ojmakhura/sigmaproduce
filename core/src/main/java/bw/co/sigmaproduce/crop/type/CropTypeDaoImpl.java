@@ -9,9 +9,6 @@ package bw.co.sigmaproduce.crop.type;
 import bw.co.sigmaproduce.crop.CropRepository;
 import bw.co.sigmaproduce.crop.issue.CropIssueRepository;
 import java.util.Collection;
-
-import org.apache.commons.lang3.StringUtils;
-import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Repository;
 
 /**
@@ -41,15 +38,8 @@ public class CropTypeDaoImpl
     @Override
     protected Collection<CropType> handleFindByCriteria(String criteria)
     {
-        Specification<CropType> spec = null;
-
-        if(StringUtils.isNotBlank(criteria)) {
-            spec = (root, query, cb) -> cb.or(
-                    cb.like(cb.lower(root.get("code")), "%" + criteria.toLowerCase() + "%"),
-                    cb.like(cb.lower(root.get("name")), "%" + criteria.toLowerCase() + "%"));
-        }
-
-        return this.cropTypeRepository.findAll(spec);
+        // TODO implement public Collection<CropType> handleFindByCriteria(String criteria)
+        return null;
     }
 
     /**
@@ -62,6 +52,8 @@ public class CropTypeDaoImpl
     {
         // TODO verify behavior of toCropTypeVO
         super.toCropTypeVO(source, target);
+        // WARNING! No conversion for target.createdDate (can't convert source.getCreatedDate():java.util.Date to java.util.Date
+        // WARNING! No conversion for target.updatedDate (can't convert source.getUpdatedDate():java.util.Date to java.util.Date
     }
 
     /**
@@ -81,6 +73,10 @@ public class CropTypeDaoImpl
      */
     private CropType loadCropTypeFromCropTypeVO(CropTypeVO cropTypeVO)
     {
+        // TODO implement loadCropTypeFromCropTypeVO
+        throw new UnsupportedOperationException("bw.co.sigmaproduce.crop.type.loadCropTypeFromCropTypeVO(CropTypeVO) not yet implemented.");
+
+        /* A typical implementation looks like this:
         if (cropTypeVO.getId() == null)
         {
             return  CropType.Factory.newInstance();
@@ -89,6 +85,7 @@ public class CropTypeDaoImpl
         {
             return this.load(cropTypeVO.getId());
         }
+        */
     }
 
     /**
@@ -113,6 +110,8 @@ public class CropTypeDaoImpl
     {
         // TODO verify behavior of cropTypeVOToEntity
         super.cropTypeVOToEntity(source, target, copyIfNull);
+        // No conversion for target.updatedDate (can't convert source.getUpdatedDate():java.util.Date to java.util.Date
+        // No conversion for target.createdDate (can't convert source.getCreatedDate():java.util.Date to java.util.Date
     }
     /**
      * {@inheritDoc}
@@ -143,6 +142,10 @@ public class CropTypeDaoImpl
      */
     private CropType loadCropTypeFromCropTypeListVO(CropTypeListVO cropTypeListVO)
     {
+        // TODO implement loadCropTypeFromCropTypeListVO
+        throw new UnsupportedOperationException("bw.co.sigmaproduce.crop.type.loadCropTypeFromCropTypeListVO(CropTypeListVO) not yet implemented.");
+
+        /* A typical implementation looks like this:
         if (cropTypeListVO.getId() == null)
         {
             return  CropType.Factory.newInstance();
@@ -151,6 +154,7 @@ public class CropTypeDaoImpl
         {
             return this.load(cropTypeListVO.getId());
         }
+        */
     }
 
     /**
