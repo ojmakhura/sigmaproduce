@@ -9,6 +9,7 @@ package bw.co.sigmaproduce.crop.issue;
 import bw.co.sigmaproduce.crop.CropRepository;
 import bw.co.sigmaproduce.crop.type.CropTypeRepository;
 import bw.co.sigmaproduce.farm.cultivation.problem.CultivationProblemRepository;
+
 import org.springframework.stereotype.Repository;
 
 /**
@@ -26,12 +27,7 @@ public class CropIssueDaoImpl
         CropIssueRepository cropIssueRepository
     ) {
 
-        super(
-            cropTypeRepository,
-            cropRepository,
-            cultivationProblemRepository,
-            cropIssueRepository
-        );
+        super(cropTypeRepository, cropRepository, cultivationProblemRepository, cropIssueRepository);
     }
 
     /**
@@ -44,8 +40,7 @@ public class CropIssueDaoImpl
     {
         // TODO verify behavior of toCropIssueVO
         super.toCropIssueVO(source, target);
-        // WARNING! No conversion for target.createdDate (can't convert source.getCreatedDate():java.util.Date to java.util.Date
-        // WARNING! No conversion for target.updatedDate (can't convert source.getUpdatedDate():java.util.Date to java.util.Date
+        // WARNING! No conversion for target.images (can't convert source.getImages():byte[] to Image
     }
 
     /**
@@ -65,10 +60,6 @@ public class CropIssueDaoImpl
      */
     private CropIssue loadCropIssueFromCropIssueVO(CropIssueVO cropIssueVO)
     {
-        // TODO implement loadCropIssueFromCropIssueVO
-        throw new UnsupportedOperationException("bw.co.sigmaproduce.crop.issue.loadCropIssueFromCropIssueVO(CropIssueVO) not yet implemented.");
-
-        /* A typical implementation looks like this:
         if (cropIssueVO.getId() == null)
         {
             return  CropIssue.Factory.newInstance();
@@ -77,7 +68,6 @@ public class CropIssueDaoImpl
         {
             return this.load(cropIssueVO.getId());
         }
-        */
     }
 
     /**
@@ -102,7 +92,6 @@ public class CropIssueDaoImpl
     {
         // TODO verify behavior of cropIssueVOToEntity
         super.cropIssueVOToEntity(source, target, copyIfNull);
-        // No conversion for target.updatedDate (can't convert source.getUpdatedDate():java.util.Date to java.util.Date
-        // No conversion for target.createdDate (can't convert source.getCreatedDate():java.util.Date to java.util.Date
+        // No conversion for target.images (can't convert source.getImages():Image to byte[]
     }
 }

@@ -9,8 +9,11 @@
 package bw.co.sigmaproduce.crop.variety;
 
 import java.util.Collection;
+
+import org.apache.commons.collections4.CollectionUtils;
 import org.springframework.context.MessageSource;
 import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
@@ -43,8 +46,12 @@ public class CropVarietyServiceImpl
     protected CropVarietyVO handleFindById(String id)
         throws Exception
     {
-        // TODO implement protected  CropVarietyVO handleFindById(String id)
-        throw new UnsupportedOperationException("bw.co.sigmaproduce.crop.variety.CropVarietyService.handleFindById(String id) Not implemented!");
+        CropVariety cropVariety = this.cropVarietyRepository.findById(id).orElse(null);
+        if(cropVariety == null) {
+            return null;
+        }
+
+        return this.getCropVarietyDao().toCropVarietyVO(cropVariety);
     }
 
     /**
@@ -54,8 +61,13 @@ public class CropVarietyServiceImpl
     protected Collection<CropVarietyList> handleGetAll()
         throws Exception
     {
-        // TODO implement protected  Collection<CropVarietyList> handleGetAll()
-        throw new UnsupportedOperationException("bw.co.sigmaproduce.crop.variety.CropVarietyService.handleGetAll() Not implemented!");
+
+        Collection<CropVariety> cropVarieties = this.cropVarietyRepository.findAll();
+        if(CollectionUtils.isEmpty(cropVarieties)) {
+            return null;
+        }
+
+        return this.getCropVarietyDao().toCropVarietyListCollection(cropVarieties);
     }
 
     /**
@@ -65,8 +77,10 @@ public class CropVarietyServiceImpl
     protected Page<CropVarietyList> handleGetAll(Integer pageNumber, Integer pageSize)
         throws Exception
     {
-        // TODO implement protected  Page<CropVarietyList> handleGetAll(Integer pageNumber, Integer pageSize)
-        throw new UnsupportedOperationException("bw.co.sigmaproduce.crop.variety.CropVarietyService.handleGetAll(Integer pageNumber, Integer pageSize) Not implemented!");
+
+        Page<CropVariety> cropVarieties = this.cropVarietyRepository.findAll(PageRequest.of(pageNumber, pageSize));
+        
+        return cropVarieties.map(cropVariety -> this.getCropVarietyDao().toCropVarietyList(cropVariety));
     }
 
     /**
@@ -76,8 +90,9 @@ public class CropVarietyServiceImpl
     protected boolean handleRemove(String id)
         throws Exception
     {
-        // TODO implement protected  boolean handleRemove(String id)
-        throw new UnsupportedOperationException("bw.co.sigmaproduce.crop.variety.CropVarietyService.handleRemove(String id) Not implemented!");
+
+        this.cropVarietyRepository.deleteById(id);
+        return true;
     }
 
     /**
@@ -87,8 +102,11 @@ public class CropVarietyServiceImpl
     protected CropVarietyVO handleSave(CropVarietyVO cropVariety)
         throws Exception
     {
-        // TODO implement protected  CropVarietyVO handleSave(CropVarietyVO cropVariety)
-        throw new UnsupportedOperationException("bw.co.sigmaproduce.crop.variety.CropVarietyService.handleSave(CropVarietyVO cropVariety) Not implemented!");
+
+        CropVariety entity = this.getCropVarietyDao().cropVarietyVOToEntity(cropVariety);
+        entity = this.cropVarietyRepository.save(entity);
+
+        return this.getCropVarietyDao().toCropVarietyVO(entity);
     }
 
     /**
@@ -98,8 +116,13 @@ public class CropVarietyServiceImpl
     protected Collection<CropVarietyList> handleSearch(String criteria)
         throws Exception
     {
-        // TODO implement protected  Collection<CropVarietyList> handleSearch(String criteria)
-        throw new UnsupportedOperationException("bw.co.sigmaproduce.crop.variety.CropVarietyService.handleSearch(String criteria) Not implemented!");
+
+        Collection<CropVariety> cropVarieties = this.cropVarietyDao.findByCriteria(criteria);
+        if(CollectionUtils.isEmpty(cropVarieties)) {
+            return null;
+        }
+
+        return this.getCropVarietyDao().toCropVarietyListCollection(cropVarieties);
     }
 
     /**
@@ -109,8 +132,10 @@ public class CropVarietyServiceImpl
     protected Page<CropVarietyList> handleSearch(Integer pageNumber, Integer pageSize, String criteria)
         throws Exception
     {
-        // TODO implement protected  Page<CropVarietyList> handleSearch(Integer pageNumber, Integer pageSize, String criteria)
-        throw new UnsupportedOperationException("bw.co.sigmaproduce.crop.variety.CropVarietyService.handleSearch(Integer pageNumber, Integer pageSize, String criteria) Not implemented!");
+
+        Page<CropVariety> cropVarieties = this.cropVarietyDao.findByCriteriaPaged(criteria, pageSize, pageNumber);
+
+        return cropVarieties.map(cropVariety -> this.getCropVarietyDao().toCropVarietyList(cropVariety));
     }
 
 }

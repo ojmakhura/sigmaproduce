@@ -2,17 +2,19 @@
 import { Component, Inject } from '@angular/core';
 import { EditVarietyComponent } from '@app/view/crop/edit-variety.component';
 import { EditVarietyVarsForm } from '@app/view/crop/edit-variety.component';
+import { CropState } from '@app/store/crop/crop.state';
+import * as CropSelectors from '@app/store/crop/crop.selectors';
+import * as CropActions from '@app/store/crop/crop.actions';
 import { MatRadioChange } from '@angular/material/radio';
 import { MatCheckboxChange } from '@angular/material/checkbox';
 import { MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { CommonModule } from '@angular/common';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { TranslateModule } from '@ngx-translate/core';
+import { SharedModule } from '@app/@shared';
 import { MaterialModule } from '@app/material.module';
 import { CsvModule } from '@ctrl/ngx-csv';
-import { TableComponent } from '@app/components/table/table.component';
-import { LoaderComponent } from "@shared/loader/loader.component";
-import { CropVarietyEditorImplComponent } from '@app/components/crop/varieties/crop-variety-editor-impl.component';
+import { CropVarietyEditorComponent } from '@app/components/crop/varieties/crop-variety-editor.component';
 
 @Component({
   selector: 'app-edit-variety',
@@ -24,11 +26,10 @@ import { CropVarietyEditorImplComponent } from '@app/components/crop/varieties/c
     FormsModule,
     ReactiveFormsModule,
     TranslateModule,
+    SharedModule,
     MaterialModule,
     CsvModule,
-    TableComponent,
-    LoaderComponent,
-    CropVarietyEditorImplComponent,
+    CropVarietyEditorComponent,
   ],
 })
 export class EditVarietyImplComponent extends EditVarietyComponent {

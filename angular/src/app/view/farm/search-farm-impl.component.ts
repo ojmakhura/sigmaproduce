@@ -2,16 +2,19 @@
 import { Component } from '@angular/core';
 import { SearchFarmComponent } from '@app/view/farm/search-farm.component';
 import { SearchFarmVarsForm } from '@app/view/farm/search-farm.component';
+import { FarmState } from '@app/store/farm/farm.state';
+import * as FarmSelectors from '@app/store/farm/farm.selectors';
+import * as FarmActions from '@app/store/farm/farm.actions';
 import { MatRadioChange } from '@angular/material/radio';
 import { MatCheckboxChange } from '@angular/material/checkbox';
 import { CommonModule } from '@angular/common';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { TranslateModule } from '@ngx-translate/core';
+import { SharedModule } from '@app/@shared';
 import { MaterialModule } from '@app/material.module';
 import { CsvModule } from '@ctrl/ngx-csv';
-import { TableComponent } from '@app/components/table/table.component';
-import { LoaderComponent } from "@shared/loader/loader.component";
-import { FarmSearchImplComponent } from '@app/components/farm/farm-search-impl.component';
+import { SearchFarmFarmsImplComponent } from '@app/view/farm/search-farm-farms-impl.component';
+import { FarmSearchComponent } from '@app/components/farm/farm-search.component';
 
 @Component({
   selector: 'app-search-farm',
@@ -23,11 +26,11 @@ import { FarmSearchImplComponent } from '@app/components/farm/farm-search-impl.c
     FormsModule,
     ReactiveFormsModule,
     TranslateModule,
+    SharedModule,
     MaterialModule,
     CsvModule,
-    TableComponent,
-    LoaderComponent,
-    FarmSearchImplComponent,
+    SearchFarmFarmsImplComponent,
+    FarmSearchComponent,
   ],
 })
 export class SearchFarmImplComponent extends SearchFarmComponent {

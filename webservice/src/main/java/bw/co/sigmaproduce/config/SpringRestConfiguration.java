@@ -42,7 +42,7 @@ public class SpringRestConfiguration {
         
         return new ObjectMapper()
                     .registerModule(new ParameterNamesModule())
-                    .registerModule(new Jdk8Module())
+                    // .registerModule(new Jdk8Module())
                     .registerModule(new JavaTimeModule())
                     .setSerializationInclusion(JsonInclude.Include.NON_NULL)
                     .setSerializationInclusion(JsonInclude.Include.NON_EMPTY)

@@ -28,7 +28,7 @@ public class VillageApiImpl extends VillageApiBase {
     @Override
     public ResponseEntity<?> handleFindById(Long id) {
         try {
-            Optional<?> data = Optional.empty(); // TODO: Add custom code here;
+            Optional<?> data = Optional.of(villageService.findById(id)); // TODO: Add custom code here;
             ResponseEntity<?> response;
 
             if(data.isPresent()) {
@@ -47,7 +47,7 @@ public class VillageApiImpl extends VillageApiBase {
     @Override
     public ResponseEntity<?> handleGetAll() {
         try {
-            Optional<?> data = Optional.empty(); // TODO: Add custom code here;
+            Optional<?> data = Optional.of(villageService.getAll()); // TODO: Add custom code here;
             ResponseEntity<?> response;
 
             if(data.isPresent()) {
@@ -66,7 +66,7 @@ public class VillageApiImpl extends VillageApiBase {
     @Override
     public ResponseEntity<?> handleGetDistrictVillages(String districtId) {
         try {
-            Optional<?> data = Optional.empty(); // TODO: Add custom code here;
+            Optional<?> data = Optional.of(villageService.getDistrictVillages(districtId)); // TODO: Add custom code here;
             ResponseEntity<?> response;
 
             if(data.isPresent()) {
@@ -85,7 +85,7 @@ public class VillageApiImpl extends VillageApiBase {
     @Override
     public ResponseEntity<?> handleRemove(Long id) {
         try {
-            Optional<?> data = Optional.empty(); // TODO: Add custom code here;
+            Optional<?> data = Optional.of(villageService.remove(id)); // TODO: Add custom code here;
             ResponseEntity<?> response;
 
             if(data.isPresent()) {
@@ -104,7 +104,7 @@ public class VillageApiImpl extends VillageApiBase {
     @Override
     public ResponseEntity<?> handleSave(VillageVO village) {
         try {
-            Optional<?> data = Optional.empty(); // TODO: Add custom code here;
+            Optional<?> data = Optional.of(villageService.save(village)); // TODO: Add custom code here;
             ResponseEntity<?> response;
 
             if(data.isPresent()) {
@@ -123,7 +123,7 @@ public class VillageApiImpl extends VillageApiBase {
     @Override
     public ResponseEntity<?> handleSearch(String criteria) {
         try {
-            Optional<?> data = Optional.empty(); // TODO: Add custom code here;
+            Optional<?> data = Optional.of(villageService.search(criteria)); // TODO: Add custom code here;
             ResponseEntity<?> response;
 
             if(data.isPresent()) {

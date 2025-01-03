@@ -7,9 +7,12 @@
 package bw.co.sigmaproduce.farm.cultivation;
 
 import bw.co.sigmaproduce.crop.variety.CropVarietyRepository;
+import bw.co.sigmaproduce.farm.Farm;
+import bw.co.sigmaproduce.farm.FarmListVO;
 import bw.co.sigmaproduce.farm.FarmRepository;
 import bw.co.sigmaproduce.farm.cultivation.harvest.HarvestRepository;
 import bw.co.sigmaproduce.farm.cultivation.problem.CultivationProblemRepository;
+
 import org.springframework.stereotype.Repository;
 
 /**
@@ -17,24 +20,17 @@ import org.springframework.stereotype.Repository;
  */
 @Repository("cultivationDao")
 public class CultivationDaoImpl
-    extends CultivationDaoBase
-{
-    
-    public CultivationDaoImpl(
-        FarmRepository farmRepository,
-        CropVarietyRepository cropVarietyRepository,
-        HarvestRepository harvestRepository,
-        CultivationProblemRepository cultivationProblemRepository,
-        CultivationRepository cultivationRepository
-    ) {
+        extends CultivationDaoBase {
 
-        super(
-            farmRepository,
-            cropVarietyRepository,
-            harvestRepository,
-            cultivationProblemRepository,
-            cultivationRepository
-        );
+    public CultivationDaoImpl(
+            FarmRepository farmRepository,
+            CropVarietyRepository cropVarietyRepository,
+            HarvestRepository harvestRepository,
+            CultivationProblemRepository cultivationProblemRepository,
+            CultivationRepository cultivationRepository) {
+
+        super(farmRepository, cropVarietyRepository, harvestRepository, cultivationProblemRepository,
+                cultivationRepository);
     }
 
     /**
@@ -42,56 +38,67 @@ public class CultivationDaoImpl
      */
     @Override
     public void toCultivationVO(
-        Cultivation source,
-        CultivationVO target)
-    {
+            Cultivation source,
+            CultivationVO target) {
         // TODO verify behavior of toCultivationVO
         super.toCultivationVO(source, target);
-        // WARNING! No conversion for target.createdDate (can't convert source.getCreatedDate():java.util.Date to java.util.Date
-        // WARNING! No conversion for target.updatedDate (can't convert source.getUpdatedDate():java.util.Date to java.util.Date
-        // WARNING! No conversion for target.farm (can't convert source.getFarm():bw.co.sigmaproduce.farm.Farm to bw.co.sigmaproduce.farm.FarmListVO
-        // WARNING! No conversion for target.cropVariety (can't convert source.getCropVariety():bw.co.sigmaproduce.crop.variety.CropVariety to bw.co.sigmaproduce.crop.variety.CropVarietyList
-        // WARNING! No conversion for target.cultivationDate (can't convert source.getCultivationDate():java.util.Date to java.util.Date
-        // WARNING! No conversion for target.exptectedHarvestDate (can't convert source.getExptectedHarvestDate():java.util.Date to java.util.Date
+        // WARNING! No conversion for target.farm (can't convert
+        // source.getFarm():bw.co.sigmaproduce.farm.Farm to
+        // bw.co.sigmaproduce.farm.FarmListVO
+        if (source.getFarm() != null) {
+            FarmListVO farm = new FarmListVO();
+            farm.setId(source.getFarm().getId());
+            farm.setName(source.getFarm().getName());
+            // farm.setOwner(source.getFarm().getOwner());
+            // farm.setLatitude(source.getFarm().getLatitude());
+            // farm.setLongitude(source.getFarm().getLongitude());
+
+            target.setFarm(farm);
+        }
+
+        // WARNING! No conversion for target.cropVariety (can't convert
+        // source.getCropVariety():bw.co.sigmaproduce.crop.variety.CropVariety to
+        // bw.co.sigmaproduce.crop.variety.CropVarietyList
+
     }
 
     /**
      * {@inheritDoc}
      */
     @Override
-    public CultivationVO toCultivationVO(final Cultivation entity)
-    {
+    public CultivationVO toCultivationVO(final Cultivation entity) {
         // TODO verify behavior of toCultivationVO
         return super.toCultivationVO(entity);
     }
 
     /**
-     * Retrieves the entity object that is associated with the specified value object
+     * Retrieves the entity object that is associated with the specified value
+     * object
      * from the object store. If no such entity object exists in the object store,
      * a new, blank entity is created
      */
-    private Cultivation loadCultivationFromCultivationVO(CultivationVO cultivationVO)
-    {
+    private Cultivation loadCultivationFromCultivationVO(CultivationVO cultivationVO) {
         // TODO implement loadCultivationFromCultivationVO
-        throw new UnsupportedOperationException("bw.co.sigmaproduce.farm.cultivation.loadCultivationFromCultivationVO(CultivationVO) not yet implemented.");
+        throw new UnsupportedOperationException(
+                "bw.co.sigmaproduce.farm.cultivation.loadCultivationFromCultivationVO(CultivationVO) not yet implemented.");
 
-        /* A typical implementation looks like this:
-        if (cultivationVO.getId() == null)
-        {
-            return  Cultivation.Factory.newInstance();
-        }
-        else
-        {
-            return this.load(cultivationVO.getId());
-        }
-        */
+        /*
+         * A typical implementation looks like this:
+         * if (cultivationVO.getId() == null)
+         * {
+         * return Cultivation.Factory.newInstance();
+         * }
+         * else
+         * {
+         * return this.load(cultivationVO.getId());
+         * }
+         */
     }
 
     /**
      * {@inheritDoc}
      */
-    public Cultivation cultivationVOToEntity(CultivationVO cultivationVO)
-    {
+    public Cultivation cultivationVOToEntity(CultivationVO cultivationVO) {
         // TODO verify behavior of cultivationVOToEntity
         Cultivation entity = this.loadCultivationFromCultivationVO(cultivationVO);
         this.cultivationVOToEntity(cultivationVO, entity, true);
@@ -103,70 +110,66 @@ public class CultivationDaoImpl
      */
     @Override
     public void cultivationVOToEntity(
-        CultivationVO source,
-        Cultivation target,
-        boolean copyIfNull)
-    {
+            CultivationVO source,
+            Cultivation target,
+            boolean copyIfNull) {
         // TODO verify behavior of cultivationVOToEntity
         super.cultivationVOToEntity(source, target, copyIfNull);
-        // No conversion for target.updatedDate (can't convert source.getUpdatedDate():java.util.Date to java.util.Date
-        // No conversion for target.createdDate (can't convert source.getCreatedDate():java.util.Date to java.util.Date
-        // No conversion for target.cultivationDate (can't convert source.getCultivationDate():java.util.Date to java.util.Date
-        // No conversion for target.exptectedHarvestDate (can't convert source.getExptectedHarvestDate():java.util.Date to java.util.Date
     }
+
     /**
      * {@inheritDoc}
      */
     @Override
     public void toCultivationListVO(
-        Cultivation source,
-        CultivationListVO target)
-    {
+            Cultivation source,
+            CultivationListVO target) {
         // TODO verify behavior of toCultivationListVO
         super.toCultivationListVO(source, target);
-        // WARNING! No conversion for target.createdDate (can't convert source.getCreatedDate():java.util.Date to java.util.Date
-        // WARNING! No conversion for target.updatedDate (can't convert source.getUpdatedDate():java.util.Date to java.util.Date
-        // WARNING! No conversion for target.cropVariety (can't convert source.getCropVariety():bw.co.sigmaproduce.crop.variety.CropVariety to java.lang.String
-        // WARNING! No conversion for target.farm (can't convert source.getFarm():bw.co.sigmaproduce.farm.Farm to java.lang.String
+        // WARNING! No conversion for target.cropVariety (can't convert
+        // source.getCropVariety():bw.co.sigmaproduce.crop.variety.CropVariety to
+        // java.lang.String
+        // WARNING! No conversion for target.farm (can't convert
+        // source.getFarm():bw.co.sigmaproduce.farm.Farm to java.lang.String
     }
 
     /**
      * {@inheritDoc}
      */
     @Override
-    public CultivationListVO toCultivationListVO(final Cultivation entity)
-    {
+    public CultivationListVO toCultivationListVO(final Cultivation entity) {
         // TODO verify behavior of toCultivationListVO
         return super.toCultivationListVO(entity);
     }
 
     /**
-     * Retrieves the entity object that is associated with the specified value object
+     * Retrieves the entity object that is associated with the specified value
+     * object
      * from the object store. If no such entity object exists in the object store,
      * a new, blank entity is created
      */
-    private Cultivation loadCultivationFromCultivationListVO(CultivationListVO cultivationListVO)
-    {
+    private Cultivation loadCultivationFromCultivationListVO(CultivationListVO cultivationListVO) {
         // TODO implement loadCultivationFromCultivationListVO
-        throw new UnsupportedOperationException("bw.co.sigmaproduce.farm.cultivation.loadCultivationFromCultivationListVO(CultivationListVO) not yet implemented.");
+        throw new UnsupportedOperationException(
+                "bw.co.sigmaproduce.farm.cultivation.loadCultivationFromCultivationListVO(CultivationListVO) not yet implemented.");
 
-        /* A typical implementation looks like this:
-        if (cultivationListVO.getId() == null)
-        {
-            return  Cultivation.Factory.newInstance();
-        }
-        else
-        {
-            return this.load(cultivationListVO.getId());
-        }
-        */
+        /*
+         * A typical implementation looks like this:
+         * if (cultivationListVO.getId() == null)
+         * {
+         * return Cultivation.Factory.newInstance();
+         * }
+         * else
+         * {
+         * return this.load(cultivationListVO.getId());
+         * }
+         */
     }
 
     /**
      * {@inheritDoc}
      */
-    public Cultivation cultivationListVOToEntity(CultivationListVO cultivationListVO)
-    {
+    public Cultivation cultivationListVOToEntity(CultivationListVO cultivationListVO) {
         // TODO verify behavior of cultivationListVOToEntity
         Cultivation entity = this.loadCultivationFromCultivationListVO(cultivationListVO);
         this.cultivationListVOToEntity(cultivationListVO, entity, true);
@@ -178,13 +181,10 @@ public class CultivationDaoImpl
      */
     @Override
     public void cultivationListVOToEntity(
-        CultivationListVO source,
-        Cultivation target,
-        boolean copyIfNull)
-    {
+            CultivationListVO source,
+            Cultivation target,
+            boolean copyIfNull) {
         // TODO verify behavior of cultivationListVOToEntity
         super.cultivationListVOToEntity(source, target, copyIfNull);
-        // No conversion for target.updatedDate (can't convert source.getUpdatedDate():java.util.Date to java.util.Date
-        // No conversion for target.createdDate (can't convert source.getCreatedDate():java.util.Date to java.util.Date
     }
 }

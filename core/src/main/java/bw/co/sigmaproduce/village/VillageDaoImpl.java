@@ -6,7 +6,10 @@
  */
 package bw.co.sigmaproduce.village;
 
+import bw.co.sigmaproduce.district.District;
 import bw.co.sigmaproduce.district.DistrictRepository;
+import bw.co.sigmaproduce.district.DistrictVO;
+
 import org.springframework.stereotype.Repository;
 
 /**
@@ -39,6 +42,13 @@ public class VillageDaoImpl
         // TODO verify behavior of toVillageVO
         super.toVillageVO(source, target);
         // WARNING! No conversion for target.district (can't convert source.getDistrict():bw.co.sigmaproduce.district.District to bw.co.sigmaproduce.district.DistrictVO
+        if(source.getDistrict() != null) {
+            DistrictVO district = new DistrictVO();
+            district.setId(source.getDistrict().getId());
+            district.setName(source.getDistrict().getName());
+
+            target.setDistrict(district);
+        }
     }
 
     /**
@@ -58,10 +68,6 @@ public class VillageDaoImpl
      */
     private Village loadVillageFromVillageVO(VillageVO villageVO)
     {
-        // TODO implement loadVillageFromVillageVO
-        throw new UnsupportedOperationException("bw.co.sigmaproduce.village.loadVillageFromVillageVO(VillageVO) not yet implemented.");
-
-        /* A typical implementation looks like this:
         if (villageVO.getId() == null)
         {
             return  Village.Factory.newInstance();
@@ -70,7 +76,6 @@ public class VillageDaoImpl
         {
             return this.load(villageVO.getId());
         }
-        */
     }
 
     /**
@@ -95,5 +100,14 @@ public class VillageDaoImpl
     {
         // TODO verify behavior of villageVOToEntity
         super.villageVOToEntity(source, target, copyIfNull);
+
+        if(source.getDistrict() != null) {
+            District district = new District();
+            district.setId(source.getDistrict().getId());
+            district.setName(source.getDistrict().getName());
+
+            target.setDistrict(district);
+
+        }
     }
 }

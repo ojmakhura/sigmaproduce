@@ -2,17 +2,19 @@
 import { Component, Inject } from '@angular/core';
 import { EditCultivationComponent } from '@app/view/farm/edit-cultivation.component';
 import { EditCultivationVarsForm } from '@app/view/farm/edit-cultivation.component';
+import { FarmState } from '@app/store/farm/farm.state';
+import * as FarmSelectors from '@app/store/farm/farm.selectors';
+import * as FarmActions from '@app/store/farm/farm.actions';
 import { MatRadioChange } from '@angular/material/radio';
 import { MatCheckboxChange } from '@angular/material/checkbox';
 import { MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { CommonModule } from '@angular/common';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { TranslateModule } from '@ngx-translate/core';
+import { SharedModule } from '@app/@shared';
 import { MaterialModule } from '@app/material.module';
 import { CsvModule } from '@ctrl/ngx-csv';
-import { TableComponent } from '@app/components/table/table.component';
-import { LoaderComponent } from "@shared/loader/loader.component";
-import { CultivationEditorImplComponent } from '@app/components/farm/cultivation/cultivation-editor-impl.component';
+import { CultivationEditorComponent } from '@app/components/farm/cultivation/cultivation-editor.component';
 
 @Component({
   selector: 'app-edit-cultivation',
@@ -24,11 +26,10 @@ import { CultivationEditorImplComponent } from '@app/components/farm/cultivation
     FormsModule,
     ReactiveFormsModule,
     TranslateModule,
+    SharedModule,
     MaterialModule,
     CsvModule,
-    TableComponent,
-    LoaderComponent,
-    CultivationEditorImplComponent,
+    CultivationEditorComponent,
   ],
 })
 export class EditCultivationImplComponent extends EditCultivationComponent {

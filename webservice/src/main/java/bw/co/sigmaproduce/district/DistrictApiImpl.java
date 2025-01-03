@@ -28,7 +28,7 @@ public class DistrictApiImpl extends DistrictApiBase {
     @Override
     public ResponseEntity<?> handleFindById(Long id) {
         try {
-            Optional<?> data = Optional.empty(); // TODO: Add custom code here;
+            Optional<?> data = Optional.of(districtService.findById(id)); // TODO: Add custom code here;
             ResponseEntity<?> response;
 
             if(data.isPresent()) {
@@ -47,7 +47,7 @@ public class DistrictApiImpl extends DistrictApiBase {
     @Override
     public ResponseEntity<?> handleGetAll() {
         try {
-            Optional<?> data = Optional.empty(); // TODO: Add custom code here;
+            Optional<?> data = Optional.of(districtService.getAll()); // TODO: Add custom code here;
             ResponseEntity<?> response;
 
             if(data.isPresent()) {
@@ -66,7 +66,7 @@ public class DistrictApiImpl extends DistrictApiBase {
     @Override
     public ResponseEntity<?> handleRemove(Long id) {
         try {
-            Optional<?> data = Optional.empty(); // TODO: Add custom code here;
+            Optional<?> data = Optional.of(districtService.remove(id)); // TODO: Add custom code here;
             ResponseEntity<?> response;
 
             if(data.isPresent()) {
@@ -85,7 +85,7 @@ public class DistrictApiImpl extends DistrictApiBase {
     @Override
     public ResponseEntity<?> handleSave(DistrictVO district) {
         try {
-            Optional<?> data = Optional.empty(); // TODO: Add custom code here;
+            Optional<?> data = Optional.of(districtService.save(district)); // TODO: Add custom code here;
             ResponseEntity<?> response;
 
             if(data.isPresent()) {
@@ -104,7 +104,7 @@ public class DistrictApiImpl extends DistrictApiBase {
     @Override
     public ResponseEntity<?> handleSearch(String criteria) {
         try {
-            Optional<?> data = Optional.empty(); // TODO: Add custom code here;
+            Optional<?> data = Optional.of(districtService.search(criteria)); // TODO: Add custom code here;
             ResponseEntity<?> response;
 
             if(data.isPresent()) {

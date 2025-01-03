@@ -57,10 +57,6 @@ public class DistrictDaoImpl
      */
     private District loadDistrictFromDistrictVO(DistrictVO districtVO)
     {
-        // TODO implement loadDistrictFromDistrictVO
-        throw new UnsupportedOperationException("bw.co.sigmaproduce.district.loadDistrictFromDistrictVO(DistrictVO) not yet implemented.");
-
-        /* A typical implementation looks like this:
         if (districtVO.getId() == null)
         {
             return  District.Factory.newInstance();
@@ -69,7 +65,6 @@ public class DistrictDaoImpl
         {
             return this.load(districtVO.getId());
         }
-        */
     }
 
     /**

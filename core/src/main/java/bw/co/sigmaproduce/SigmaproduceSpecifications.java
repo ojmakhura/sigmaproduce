@@ -9,7 +9,7 @@ import jakarta.persistence.criteria.Path;
 
 public class SigmaproduceSpecifications {
 
-    public static <E, T>Specification<E> findByAttributeLikeIgnoreCase(String attributeValue, String... joinAttributes) {
+    public static <E>Specification<E> findByAttributeLikeIgnoreCase(String attributeValue, String... joinAttributes) {
 
         if(joinAttributes.length == 1) {
             return (root, cq, cb) -> {
@@ -37,7 +37,7 @@ public class SigmaproduceSpecifications {
         }
     }
     
-    public static <E, T>Specification<E> findByAttributeContainingIgnoreCase(String attributeValue, String... joinAttributes) {
+    public static <E>Specification<E> findByAttributeContainingIgnoreCase(String attributeValue, String... joinAttributes) {
 
         if(joinAttributes.length == 1) {
             return (root, cq, cb) -> {
@@ -64,7 +64,7 @@ public class SigmaproduceSpecifications {
         }
     }
 
-    public static <E, T>Specification<E> findByAttributeIgnoreCase(String attributeValue, String... joinAttributes) {
+    public static <E>Specification<E> findByAttributeIgnoreCase(String attributeValue, String... joinAttributes) {
 
         if(joinAttributes.length == 1) {
             return (root, cq, cb) -> {
@@ -118,7 +118,7 @@ public class SigmaproduceSpecifications {
         }
     }
 
-    public static <E, T>Specification<E> findByAttributeNull(String... joinAttributes) {
+    public static <E>Specification<E> findByAttributeNull(String... joinAttributes) {
 
         if(joinAttributes.length == 1) {
             return (root, cq, cb) -> {
@@ -146,7 +146,7 @@ public class SigmaproduceSpecifications {
         }
     }
 
-    public static <E, T>Specification<E> findByAttributeNotNull(String... joinAttributes) {
+    public static <E>Specification<E> findByAttributeNotNull(String... joinAttributes) {
 
         if(joinAttributes.length == 1) {
             return (root, cq, cb) -> {
@@ -173,7 +173,7 @@ public class SigmaproduceSpecifications {
         }
     }
 
-    public static <E, T>Specification<E> findByAttributeFalse(String... joinAttributes) {
+    public static <E>Specification<E> findByAttributeFalse(String... joinAttributes) {
 
         if(joinAttributes.length == 1) {
             return (root, cq, cb) -> {
@@ -200,7 +200,7 @@ public class SigmaproduceSpecifications {
         }
     }
 
-    public static <E, T>Specification<E> findByAttributeTrue(String... joinAttributes) {
+    public static <E>Specification<E> findByAttributeTrue(String... joinAttributes) {
 
         if(joinAttributes.length == 1) {
             return (root, cq, cb) -> {

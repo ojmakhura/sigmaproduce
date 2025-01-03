@@ -11,6 +11,9 @@ package bw.co.sigmaproduce.farm.post;
 import java.util.Collection;
 import org.springframework.context.MessageSource;
 import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Sort;
+import org.springframework.data.domain.Sort.Direction;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
@@ -43,8 +46,9 @@ public class PostServiceImpl
     protected Page<PostVO> handleGetAll(Integer pageNumber, Integer pageSize)
         throws Exception
     {
-        // TODO implement protected  Page<PostVO> handleGetAll(Integer pageNumber, Integer pageSize)
-        throw new UnsupportedOperationException("bw.co.sigmaproduce.farm.post.PostService.handleGetAll(Integer pageNumber, Integer pageSize) Not implemented!");
+        Page<Post> posts = this.postRepository.findAll(PageRequest.of(pageNumber, pageSize, Sort.by(Direction.DESC, "createdDate")));
+
+        return posts.map(post -> this.postDao.toPostVO(post));
     }
 
     /**
@@ -54,8 +58,8 @@ public class PostServiceImpl
     protected Collection<PostVO> handleGetAll()
         throws Exception
     {
-        // TODO implement protected  Collection<PostVO> handleGetAll()
-        throw new UnsupportedOperationException("bw.co.sigmaproduce.farm.post.PostService.handleGetAll() Not implemented!");
+
+        return this.postDao.toPostVOCollection(this.postRepository.findAll());
     }
 
     /**
@@ -65,8 +69,10 @@ public class PostServiceImpl
     protected boolean handleRemove(String id)
         throws Exception
     {
-        // TODO implement protected  boolean handleRemove(String id)
-        throw new UnsupportedOperationException("bw.co.sigmaproduce.farm.post.PostService.handleRemove(String id) Not implemented!");
+
+        this.postRepository.deleteById(id);
+
+        return true;
     }
 
     /**
@@ -76,8 +82,8 @@ public class PostServiceImpl
     protected PostVO handleFindById(String id)
         throws Exception
     {
-        // TODO implement protected  PostVO handleFindById(String id)
-        throw new UnsupportedOperationException("bw.co.sigmaproduce.farm.post.PostService.handleFindById(String id) Not implemented!");
+
+        return this.postDao.toPostVO(this.postRepository.getReferenceById(id));
     }
 
     /**
@@ -87,8 +93,12 @@ public class PostServiceImpl
     protected PostVO handleSave(PostVO post)
         throws Exception
     {
-        // TODO implement protected  PostVO handleSave(PostVO post)
-        throw new UnsupportedOperationException("bw.co.sigmaproduce.farm.post.PostService.handleSave(PostVO post) Not implemented!");
+
+        Post entity = this.postDao.postVOToEntity(post);
+
+        entity = this.postRepository.save(entity);
+
+        return this.postDao.toPostVO(entity);
     }
 
     /**

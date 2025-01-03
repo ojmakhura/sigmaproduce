@@ -5,6 +5,7 @@
 //
 package bw.co.sigmaproduce.crop.variety;
 
+import bw.co.sigmaproduce.crop.CropVO;
 import java.util.Optional;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -28,7 +29,7 @@ public class CropVarietyApiImpl extends CropVarietyApiBase {
     @Override
     public ResponseEntity<?> handleFindById(String id) {
         try {
-            Optional<?> data = Optional.empty(); // TODO: Add custom code here;
+            Optional<?> data = Optional.of(this.cropVarietyService.findById(id));
             ResponseEntity<?> response;
 
             if(data.isPresent()) {
@@ -47,7 +48,7 @@ public class CropVarietyApiImpl extends CropVarietyApiBase {
     @Override
     public ResponseEntity<?> handleGetAll() {
         try {
-            Optional<?> data = Optional.empty(); // TODO: Add custom code here;
+            Optional<?> data = Optional.of(this.cropVarietyService.getAll());
             ResponseEntity<?> response;
 
             if(data.isPresent()) {
@@ -66,7 +67,7 @@ public class CropVarietyApiImpl extends CropVarietyApiBase {
     @Override
     public ResponseEntity<?> handleGetAllPaged(Integer pageNumber, Integer pageSize) {
         try {
-            Optional<?> data = Optional.empty(); // TODO: Add custom code here;
+            Optional<?> data = Optional.of(this.cropVarietyService.getAll(pageNumber, pageSize));
             ResponseEntity<?> response;
 
             if(data.isPresent()) {
@@ -85,7 +86,7 @@ public class CropVarietyApiImpl extends CropVarietyApiBase {
     @Override
     public ResponseEntity<?> handlePagedSearch(Integer pageNumber, Integer pageSize, String criteria) {
         try {
-            Optional<?> data = Optional.empty(); // TODO: Add custom code here;
+            Optional<?> data = Optional.of(this.cropVarietyService.search(pageNumber, pageSize, criteria));
             ResponseEntity<?> response;
 
             if(data.isPresent()) {
@@ -104,7 +105,7 @@ public class CropVarietyApiImpl extends CropVarietyApiBase {
     @Override
     public ResponseEntity<?> handleRemove(String id) {
         try {
-            Optional<?> data = Optional.empty(); // TODO: Add custom code here;
+            Optional<?> data = Optional.of(this.cropVarietyService.remove(id));
             ResponseEntity<?> response;
 
             if(data.isPresent()) {
@@ -123,7 +124,7 @@ public class CropVarietyApiImpl extends CropVarietyApiBase {
     @Override
     public ResponseEntity<?> handleSave(CropVarietyVO cropVariety) {
         try {
-            Optional<?> data = Optional.empty(); // TODO: Add custom code here;
+            Optional<?> data = Optional.of(this.cropVarietyService.save(cropVariety));
             ResponseEntity<?> response;
 
             if(data.isPresent()) {
@@ -142,7 +143,7 @@ public class CropVarietyApiImpl extends CropVarietyApiBase {
     @Override
     public ResponseEntity<?> handleSearch(String criteria) {
         try {
-            Optional<?> data = Optional.empty(); // TODO: Add custom code here;
+            Optional<?> data = Optional.of(this.cropVarietyService.search(criteria));
             ResponseEntity<?> response;
 
             if(data.isPresent()) {

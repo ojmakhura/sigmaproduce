@@ -2,16 +2,19 @@
 import { Component } from '@angular/core';
 import { SearchCropTypesComponent } from '@app/view/crop/type/search-crop-types.component';
 import { SearchCropTypesVarsForm } from '@app/view/crop/type/search-crop-types.component';
+import { CropTypeState } from '@app/store/crop/type/crop-type.state';
+import * as CropTypeSelectors from '@app/store/crop/type/crop-type.selectors';
+import * as CropTypeActions from '@app/store/crop/type/crop-type.actions';
 import { MatRadioChange } from '@angular/material/radio';
 import { MatCheckboxChange } from '@angular/material/checkbox';
 import { CommonModule } from '@angular/common';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { TranslateModule } from '@ngx-translate/core';
+import { SharedModule } from '@app/@shared';
 import { MaterialModule } from '@app/material.module';
 import { CsvModule } from '@ctrl/ngx-csv';
-import { TableComponent } from '@app/components/table/table.component';
-import { LoaderComponent } from "@shared/loader/loader.component";
-import { CropTypeEditorImplComponent } from '@app/components/crop/type/crop-type-editor-impl.component';
+import { SearchCropTypesCropTypesImplComponent } from '@app/view/crop/type/search-crop-types-crop-types-impl.component';
+import { CropTypeEditorComponent } from '@app/components/crop/type/crop-type-editor.component';
 
 @Component({
   selector: 'app-search-crop-types',
@@ -23,11 +26,11 @@ import { CropTypeEditorImplComponent } from '@app/components/crop/type/crop-type
     FormsModule,
     ReactiveFormsModule,
     TranslateModule,
+    SharedModule,
     MaterialModule,
     CsvModule,
-    TableComponent,
-    LoaderComponent,
-    CropTypeEditorImplComponent,
+    SearchCropTypesCropTypesImplComponent,
+    CropTypeEditorComponent,
   ],
 })
 export class SearchCropTypesImplComponent extends SearchCropTypesComponent {
@@ -41,5 +44,17 @@ export class SearchCropTypesImplComponent extends SearchCropTypesComponent {
     }
 
     doNgOnDestroy(): void {
+    }
+
+    override doNgAfterViewInit(): void {
+
+      this.store.dispatch(
+        CropTypeActions.search({
+          criteria: this.criteria,
+          loading: true,
+          loaderMessage: 'Searching for crop types...',
+        })
+      );
+
     }
 }

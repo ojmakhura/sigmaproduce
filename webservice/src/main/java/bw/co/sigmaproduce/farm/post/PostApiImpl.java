@@ -28,7 +28,7 @@ public class PostApiImpl extends PostApiBase {
     @Override
     public ResponseEntity<?> handleFindById(String id) {
         try {
-            Optional<?> data = Optional.empty(); // TODO: Add custom code here;
+            Optional<?> data = Optional.of(postService.findById(id));
             ResponseEntity<?> response;
 
             if(data.isPresent()) {
@@ -47,7 +47,7 @@ public class PostApiImpl extends PostApiBase {
     @Override
     public ResponseEntity<?> handleFindFarmPosts(String farmId) {
         try {
-            Optional<?> data = Optional.empty(); // TODO: Add custom code here;
+            Optional<?> data = Optional.of(postService.getFarmPosts(farmId));
             ResponseEntity<?> response;
 
             if(data.isPresent()) {
@@ -66,7 +66,7 @@ public class PostApiImpl extends PostApiBase {
     @Override
     public ResponseEntity<?> handleFindFarmPostsPaged(String farmId, Integer pageSize, Integer pageNumber) {
         try {
-            Optional<?> data = Optional.empty(); // TODO: Add custom code here;
+            Optional<?> data = Optional.of(postService.getFarmPosts(farmId, pageSize, pageNumber)); 
             ResponseEntity<?> response;
 
             if(data.isPresent()) {
@@ -85,7 +85,7 @@ public class PostApiImpl extends PostApiBase {
     @Override
     public ResponseEntity<?> handleGetAll() {
         try {
-            Optional<?> data = Optional.empty(); // TODO: Add custom code here;
+            Optional<?> data = Optional.of(postService.getAll()); // TODO: Add custom code here;
             ResponseEntity<?> response;
 
             if(data.isPresent()) {
@@ -104,7 +104,7 @@ public class PostApiImpl extends PostApiBase {
     @Override
     public ResponseEntity<?> handleRemove(String id) {
         try {
-            Optional<?> data = Optional.empty(); // TODO: Add custom code here;
+            Optional<?> data = Optional.of(postService.remove(id)); // TODO: Add custom code here;
             ResponseEntity<?> response;
 
             if(data.isPresent()) {
@@ -123,7 +123,7 @@ public class PostApiImpl extends PostApiBase {
     @Override
     public ResponseEntity<?> handleSave(PostVO post) {
         try {
-            Optional<?> data = Optional.empty(); // TODO: Add custom code here;
+            Optional<?> data = Optional.of(postService.save(post)); // TODO: Add custom code here;
             ResponseEntity<?> response;
 
             if(data.isPresent()) {
