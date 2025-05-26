@@ -6,6 +6,7 @@
  */
 package bw.co.sigmaproduce.farm.cultivation.harvest;
 
+import bw.co.sigmaproduce.document.DocumentRepository;
 import bw.co.sigmaproduce.farm.cultivation.CultivationRepository;
 import org.springframework.stereotype.Repository;
 
@@ -19,11 +20,13 @@ public class HarvestDaoImpl
     
     public HarvestDaoImpl(
         CultivationRepository cultivationRepository,
+        DocumentRepository documentRepository,
         HarvestRepository harvestRepository
     ) {
 
         super(
             cultivationRepository,
+            documentRepository,
             harvestRepository
         );
     }
@@ -32,23 +35,26 @@ public class HarvestDaoImpl
      * {@inheritDoc}
      */
     @Override
-    public void toHarvestVO(
+    public void toHarvestDTO(
         Harvest source,
-        HarvestVO target)
+        HarvestDTO target)
     {
-        // TODO verify behavior of toHarvestVO
-        super.toHarvestVO(source, target);
-        // WARNING! No conversion for target.cultivation (can't convert source.getCultivation():bw.co.sigmaproduce.farm.cultivation.Cultivation to bw.co.sigmaproduce.farm.cultivation.CultivationVO
+        // TODO verify behavior of toHarvestDTO
+        super.toHarvestDTO(source, target);
+        // WARNING! No conversion for target.harvestDate (can't convert source.getHarvestDate():java.util.Date to java.util.Date
+        // WARNING! No conversion for target.images (can't convert source.getImages():bw.co.sigmaproduce.document.Document to bw.co.sigmaproduce.document.DocumentDTO
+        // WARNING! No conversion for target.cultivation (can't convert source.getCultivation():bw.co.sigmaproduce.farm.cultivation.Cultivation to bw.co.sigmaproduce.farm.cultivation.CultivationDTO
+        // WARNING! No conversion for target.harvestDocuments (can't convert source.getHarvestDocuments():bw.co.sigmaproduce.document.Document to bw.co.sigmaproduce.document.DocumentDTO
     }
 
     /**
      * {@inheritDoc}
      */
     @Override
-    public HarvestVO toHarvestVO(final Harvest entity)
+    public HarvestDTO toHarvestDTO(final Harvest entity)
     {
-        // TODO verify behavior of toHarvestVO
-        return super.toHarvestVO(entity);
+        // TODO verify behavior of toHarvestDTO
+        return super.toHarvestDTO(entity);
     }
 
     /**
@@ -56,19 +62,19 @@ public class HarvestDaoImpl
      * from the object store. If no such entity object exists in the object store,
      * a new, blank entity is created
      */
-    private Harvest loadHarvestFromHarvestVO(HarvestVO harvestVO)
+    private Harvest loadHarvestFromHarvestDTO(HarvestDTO harvestDTO)
     {
-        // TODO implement loadHarvestFromHarvestVO
-        throw new UnsupportedOperationException("bw.co.sigmaproduce.farm.cultivation.harvest.loadHarvestFromHarvestVO(HarvestVO) not yet implemented.");
+        // TODO implement loadHarvestFromHarvestDTO
+        throw new UnsupportedOperationException("bw.co.sigmaproduce.farm.cultivation.harvest.loadHarvestFromHarvestDTO(HarvestDTO) not yet implemented.");
 
         /* A typical implementation looks like this:
-        if (harvestVO.getId() == null)
+        if (harvestDTO.getId() == null)
         {
             return  Harvest.Factory.newInstance();
         }
         else
         {
-            return this.load(harvestVO.getId());
+            return this.load(harvestDTO.getId());
         }
         */
     }
@@ -76,11 +82,11 @@ public class HarvestDaoImpl
     /**
      * {@inheritDoc}
      */
-    public Harvest harvestVOToEntity(HarvestVO harvestVO)
+    public Harvest harvestDTOToEntity(HarvestDTO harvestDTO)
     {
-        // TODO verify behavior of harvestVOToEntity
-        Harvest entity = this.loadHarvestFromHarvestVO(harvestVO);
-        this.harvestVOToEntity(harvestVO, entity, true);
+        // TODO verify behavior of harvestDTOToEntity
+        Harvest entity = this.loadHarvestFromHarvestDTO(harvestDTO);
+        this.harvestDTOToEntity(harvestDTO, entity, true);
         return entity;
     }
 
@@ -88,13 +94,14 @@ public class HarvestDaoImpl
      * {@inheritDoc}
      */
     @Override
-    public void harvestVOToEntity(
-        HarvestVO source,
+    public void harvestDTOToEntity(
+        HarvestDTO source,
         Harvest target,
         boolean copyIfNull)
     {
-        // TODO verify behavior of harvestVOToEntity
-        super.harvestVOToEntity(source, target, copyIfNull);
+        // TODO verify behavior of harvestDTOToEntity
+        super.harvestDTOToEntity(source, target, copyIfNull);
+        // No conversion for target.harvestDate (can't convert source.getHarvestDate():java.util.Date to java.util.Date
     }
     /**
      * {@inheritDoc}
@@ -106,6 +113,7 @@ public class HarvestDaoImpl
     {
         // TODO verify behavior of toHarvestList
         super.toHarvestList(source, target);
+        // WARNING! No conversion for target.harvestDate (can't convert source.getHarvestDate():java.util.Date to java.util.Date
     }
 
     /**
@@ -162,5 +170,6 @@ public class HarvestDaoImpl
     {
         // TODO verify behavior of harvestListToEntity
         super.harvestListToEntity(source, target, copyIfNull);
+        // No conversion for target.harvestDate (can't convert source.getHarvestDate():java.util.Date to java.util.Date
     }
 }

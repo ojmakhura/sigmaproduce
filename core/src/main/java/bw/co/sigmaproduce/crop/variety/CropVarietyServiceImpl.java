@@ -43,7 +43,7 @@ public class CropVarietyServiceImpl
      * @see bw.co.sigmaproduce.crop.variety.CropVarietyService#findById(String)
      */
     @Override
-    protected CropVarietyVO handleFindById(String id)
+    protected CropVarietyDTO handleFindById(String id)
         throws Exception
     {
         CropVariety cropVariety = this.cropVarietyRepository.findById(id).orElse(null);
@@ -51,7 +51,7 @@ public class CropVarietyServiceImpl
             return null;
         }
 
-        return this.getCropVarietyDao().toCropVarietyVO(cropVariety);
+        return this.getCropVarietyDao().toCropVarietyDTO(cropVariety);
     }
 
     /**
@@ -96,17 +96,17 @@ public class CropVarietyServiceImpl
     }
 
     /**
-     * @see bw.co.sigmaproduce.crop.variety.CropVarietyService#save(CropVarietyVO)
+     * @see bw.co.sigmaproduce.crop.variety.CropVarietyService#save(CropVarietyDTO)
      */
     @Override
-    protected CropVarietyVO handleSave(CropVarietyVO cropVariety)
+    protected CropVarietyDTO handleSave(CropVarietyDTO cropVariety)
         throws Exception
     {
 
-        CropVariety entity = this.getCropVarietyDao().cropVarietyVOToEntity(cropVariety);
+        CropVariety entity = this.getCropVarietyDao().cropVarietyDTOToEntity(cropVariety);
         entity = this.cropVarietyRepository.save(entity);
 
-        return this.getCropVarietyDao().toCropVarietyVO(entity);
+        return this.getCropVarietyDao().toCropVarietyDTO(entity);
     }
 
     /**

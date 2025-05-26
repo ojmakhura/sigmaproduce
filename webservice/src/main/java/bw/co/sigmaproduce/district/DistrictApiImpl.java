@@ -83,7 +83,7 @@ public class DistrictApiImpl extends DistrictApiBase {
     }
 
     @Override
-    public ResponseEntity<?> handleSave(DistrictVO district) {
+    public ResponseEntity<?> handleSave(DistrictDTO district) {
         try {
             Optional<?> data = Optional.of(districtService.save(district)); // TODO: Add custom code here;
             ResponseEntity<?> response;

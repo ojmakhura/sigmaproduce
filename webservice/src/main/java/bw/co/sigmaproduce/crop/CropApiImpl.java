@@ -127,7 +127,7 @@ public class CropApiImpl extends CropApiBase {
     }
 
     @Override
-    public ResponseEntity<?> handleSave(CropVO crop) {
+    public ResponseEntity<?> handleSave(CropDTO crop) {
         try {
 
             Optional<?> data = Optional.of(cropService.save(crop));

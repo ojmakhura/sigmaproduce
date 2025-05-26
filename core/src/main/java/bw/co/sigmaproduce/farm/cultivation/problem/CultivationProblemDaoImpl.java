@@ -7,6 +7,7 @@
 package bw.co.sigmaproduce.farm.cultivation.problem;
 
 import bw.co.sigmaproduce.crop.issue.CropIssueRepository;
+import bw.co.sigmaproduce.document.DocumentRepository;
 import bw.co.sigmaproduce.farm.cultivation.CultivationRepository;
 import org.springframework.stereotype.Repository;
 
@@ -18,29 +19,25 @@ public class CultivationProblemDaoImpl
     extends CultivationProblemDaoBase
 {
     
-    public CultivationProblemDaoImpl(
-        CropIssueRepository cropIssueRepository,
-        CultivationRepository cultivationRepository,
-        CultivationProblemRepository cultivationProblemRepository
-    ) {
+    
 
-        super(
-            cropIssueRepository,
-            cultivationRepository,
-            cultivationProblemRepository
-        );
+    public CultivationProblemDaoImpl(CropIssueRepository cropIssueRepository,
+            CultivationRepository cultivationRepository, DocumentRepository documentRepository,
+            CultivationProblemRepository cultivationProblemRepository) {
+        super(cropIssueRepository, cultivationRepository, documentRepository, cultivationProblemRepository);
+        //TODO Auto-generated constructor stub
     }
 
     /**
      * {@inheritDoc}
      */
     @Override
-    public void toCultivationProblemVO(
+    public void toCultivationProblemDTO(
         CultivationProblem source,
-        CultivationProblemVO target)
+        CultivationProblemDTO target)
     {
-        // TODO verify behavior of toCultivationProblemVO
-        super.toCultivationProblemVO(source, target);
+        // TODO verify behavior of toCultivationProblemDTO
+        super.toCultivationProblemDTO(source, target);
         // WARNING! No conversion for target.cropIssue (can't convert source.getCropIssue():bw.co.sigmaproduce.crop.issue.CropIssue to bw.co.sigmaproduce.crop.issue.CropIssueVO
         // WARNING! No conversion for target.cultivation (can't convert source.getCultivation():bw.co.sigmaproduce.farm.cultivation.Cultivation to bw.co.sigmaproduce.farm.cultivation.CultivationListVO
     }
@@ -49,10 +46,10 @@ public class CultivationProblemDaoImpl
      * {@inheritDoc}
      */
     @Override
-    public CultivationProblemVO toCultivationProblemVO(final CultivationProblem entity)
+    public CultivationProblemDTO toCultivationProblemDTO(final CultivationProblem entity)
     {
-        // TODO verify behavior of toCultivationProblemVO
-        return super.toCultivationProblemVO(entity);
+        // TODO verify behavior of toCultivationProblemDTO
+        return super.toCultivationProblemDTO(entity);
     }
 
     /**
@@ -60,19 +57,19 @@ public class CultivationProblemDaoImpl
      * from the object store. If no such entity object exists in the object store,
      * a new, blank entity is created
      */
-    private CultivationProblem loadCultivationProblemFromCultivationProblemVO(CultivationProblemVO cultivationProblemVO)
+    private CultivationProblem loadCultivationProblemFromCultivationProblemDTO(CultivationProblemDTO cultivationProblemDTO)
     {
-        // TODO implement loadCultivationProblemFromCultivationProblemVO
-        throw new UnsupportedOperationException("bw.co.sigmaproduce.farm.cultivation.problem.loadCultivationProblemFromCultivationProblemVO(CultivationProblemVO) not yet implemented.");
+        // TODO implement loadCultivationProblemFromCultivationProblemDTO
+        throw new UnsupportedOperationException("bw.co.sigmaproduce.farm.cultivation.problem.loadCultivationProblemFromCultivationProblemDTO(CultivationProblemDTO) not yet implemented.");
 
         /* A typical implementation looks like this:
-        if (cultivationProblemVO.getId() == null)
+        if (cultivationProblemDTO.getId() == null)
         {
             return  CultivationProblem.Factory.newInstance();
         }
         else
         {
-            return this.load(cultivationProblemVO.getId());
+            return this.load(cultivationProblemDTO.getId());
         }
         */
     }
@@ -80,11 +77,11 @@ public class CultivationProblemDaoImpl
     /**
      * {@inheritDoc}
      */
-    public CultivationProblem cultivationProblemVOToEntity(CultivationProblemVO cultivationProblemVO)
+    public CultivationProblem cultivationProblemDTOToEntity(CultivationProblemDTO cultivationProblemDTO)
     {
-        // TODO verify behavior of cultivationProblemVOToEntity
-        CultivationProblem entity = this.loadCultivationProblemFromCultivationProblemVO(cultivationProblemVO);
-        this.cultivationProblemVOToEntity(cultivationProblemVO, entity, true);
+        // TODO verify behavior of cultivationProblemDTOToEntity
+        CultivationProblem entity = this.loadCultivationProblemFromCultivationProblemDTO(cultivationProblemDTO);
+        this.cultivationProblemDTOToEntity(cultivationProblemDTO, entity, true);
         return entity;
     }
 
@@ -92,34 +89,34 @@ public class CultivationProblemDaoImpl
      * {@inheritDoc}
      */
     @Override
-    public void cultivationProblemVOToEntity(
-        CultivationProblemVO source,
+    public void cultivationProblemDTOToEntity(
+        CultivationProblemDTO source,
         CultivationProblem target,
         boolean copyIfNull)
     {
-        // TODO verify behavior of cultivationProblemVOToEntity
-        super.cultivationProblemVOToEntity(source, target, copyIfNull);
+        // TODO verify behavior of cultivationProblemDTOToEntity
+        super.cultivationProblemDTOToEntity(source, target, copyIfNull);
     }
     /**
      * {@inheritDoc}
      */
     @Override
-    public void toCultivationProblemListVO(
+    public void toCultivationProblemListDTO(
         CultivationProblem source,
-        CultivationProblemListVO target)
+        CultivationProblemListDTO target)
     {
-        // TODO verify behavior of toCultivationProblemListVO
-        super.toCultivationProblemListVO(source, target);
+        // TODO verify behavior of toCultivationProblemListDTO
+        super.toCultivationProblemListDTO(source, target);
     }
 
     /**
      * {@inheritDoc}
      */
     @Override
-    public CultivationProblemListVO toCultivationProblemListVO(final CultivationProblem entity)
+    public CultivationProblemListDTO toCultivationProblemListDTO(final CultivationProblem entity)
     {
-        // TODO verify behavior of toCultivationProblemListVO
-        return super.toCultivationProblemListVO(entity);
+        // TODO verify behavior of toCultivationProblemListDTO
+        return super.toCultivationProblemListDTO(entity);
     }
 
     /**
@@ -127,19 +124,19 @@ public class CultivationProblemDaoImpl
      * from the object store. If no such entity object exists in the object store,
      * a new, blank entity is created
      */
-    private CultivationProblem loadCultivationProblemFromCultivationProblemListVO(CultivationProblemListVO cultivationProblemListVO)
+    private CultivationProblem loadCultivationProblemFromCultivationProblemListDTO(CultivationProblemListDTO cultivationProblemListDTO)
     {
-        // TODO implement loadCultivationProblemFromCultivationProblemListVO
-        throw new UnsupportedOperationException("bw.co.sigmaproduce.farm.cultivation.problem.loadCultivationProblemFromCultivationProblemListVO(CultivationProblemListVO) not yet implemented.");
+        // TODO implement loadCultivationProblemFromCultivationProblemListDTO
+        throw new UnsupportedOperationException("bw.co.sigmaproduce.farm.cultivation.problem.loadCultivationProblemFromCultivationProblemListDTO(CultivationProblemListDTO) not yet implemented.");
 
         /* A typical implementation looks like this:
-        if (cultivationProblemListVO.getId() == null)
+        if (cultivationProblemListDTO.getId() == null)
         {
             return  CultivationProblem.Factory.newInstance();
         }
         else
         {
-            return this.load(cultivationProblemListVO.getId());
+            return this.load(cultivationProblemListDTO.getId());
         }
         */
     }
@@ -147,11 +144,11 @@ public class CultivationProblemDaoImpl
     /**
      * {@inheritDoc}
      */
-    public CultivationProblem cultivationProblemListVOToEntity(CultivationProblemListVO cultivationProblemListVO)
+    public CultivationProblem cultivationProblemListDTOToEntity(CultivationProblemListDTO cultivationProblemListDTO)
     {
-        // TODO verify behavior of cultivationProblemListVOToEntity
-        CultivationProblem entity = this.loadCultivationProblemFromCultivationProblemListVO(cultivationProblemListVO);
-        this.cultivationProblemListVOToEntity(cultivationProblemListVO, entity, true);
+        // TODO verify behavior of cultivationProblemListDTOToEntity
+        CultivationProblem entity = this.loadCultivationProblemFromCultivationProblemListDTO(cultivationProblemListDTO);
+        this.cultivationProblemListDTOToEntity(cultivationProblemListDTO, entity, true);
         return entity;
     }
 
@@ -159,12 +156,12 @@ public class CultivationProblemDaoImpl
      * {@inheritDoc}
      */
     @Override
-    public void cultivationProblemListVOToEntity(
-        CultivationProblemListVO source,
+    public void cultivationProblemListDTOToEntity(
+        CultivationProblemListDTO source,
         CultivationProblem target,
         boolean copyIfNull)
     {
-        // TODO verify behavior of cultivationProblemListVOToEntity
-        super.cultivationProblemListVOToEntity(source, target, copyIfNull);
+        // TODO verify behavior of cultivationProblemListDTOToEntity
+        super.cultivationProblemListDTOToEntity(source, target, copyIfNull);
     }
 }

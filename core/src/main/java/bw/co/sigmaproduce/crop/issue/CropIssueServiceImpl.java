@@ -45,24 +45,24 @@ public class CropIssueServiceImpl
      * @see bw.co.sigmaproduce.crop.issue.CropIssueService#findById(String)
      */
     @Override
-    protected CropIssueVO handleFindById(String id)
+    protected CropIssueDTO handleFindById(String id)
         throws Exception
     {
 
         CropIssue cropIssue = this.getCropIssueRepository().getReferenceById(id);
 
-        return this.getCropIssueDao().toCropIssueVO(cropIssue);
+        return this.getCropIssueDao().toCropIssueDTO(cropIssue);
     }
 
     /**
      * @see bw.co.sigmaproduce.crop.issue.CropIssueService#getAll()
      */
     @Override
-    protected Collection<CropIssueVO> handleGetAll()
+    protected Collection<CropIssueDTO> handleGetAll()
         throws Exception
     {
 
-        return this.getCropIssueDao().toCropIssueVOCollection(this.getCropIssueRepository().findAll());
+        return this.getCropIssueDao().toCropIssueDTOCollection(this.getCropIssueRepository().findAll());
     }
 
     /**
@@ -78,25 +78,25 @@ public class CropIssueServiceImpl
     }
 
     /**
-     * @see bw.co.sigmaproduce.crop.issue.CropIssueService#save(CropIssueVO)
+     * @see bw.co.sigmaproduce.crop.issue.CropIssueService#save(CropIssueDTO)
      */
     @Override
-    protected CropIssueVO handleSave(CropIssueVO cropIssue)
+    protected CropIssueDTO handleSave(CropIssueDTO cropIssue)
         throws Exception
     {
             
-            CropIssue entity = this.getCropIssueDao().cropIssueVOToEntity(cropIssue);
+            CropIssue entity = this.getCropIssueDao().cropIssueDTOToEntity(cropIssue);
     
             entity = this.getCropIssueRepository().save(entity);
     
-            return this.getCropIssueDao().toCropIssueVO(entity);
+            return this.getCropIssueDao().toCropIssueDTO(entity);
     }
 
     /**
      * @see bw.co.sigmaproduce.crop.issue.CropIssueService#search(String)
      */
     @Override
-    protected Collection<CropIssueVO> handleSearch(String criteria)
+    protected Collection<CropIssueDTO> handleSearch(String criteria)
         throws Exception
     {
 
@@ -107,14 +107,14 @@ public class CropIssueServiceImpl
                     .or(SigmaproduceSpecifications.findByAttributeContainingIgnoreCase(criteria, "description"));
         }
 
-        return this.getCropIssueDao().toCropIssueVOCollection(this.getCropIssueRepository().findAll(spec));
+        return this.getCropIssueDao().toCropIssueDTOCollection(this.getCropIssueRepository().findAll(spec));
     }
 
     /**
      * @see bw.co.sigmaproduce.crop.issue.CropIssueService#searchByType(CropIssueType)
      */
     @Override
-    protected Collection<CropIssueVO> handleSearchByType(CropIssueType type)
+    protected Collection<CropIssueDTO> handleSearchByType(CropIssueType type)
         throws Exception
     {
 
@@ -124,25 +124,25 @@ public class CropIssueServiceImpl
             spec = SigmaproduceSpecifications.<CropIssue, CropIssueType>findByAttribute(type, "type");
         }
 
-        return this.getCropIssueDao().toCropIssueVOCollection(this.getCropIssueRepository().findAll(spec));
+        return this.getCropIssueDao().toCropIssueDTOCollection(this.getCropIssueRepository().findAll(spec));
     }
 
     /**
      * @see bw.co.sigmaproduce.crop.issue.CropIssueService#getAll(Integer, Integer)
      */
     @Override
-    protected Page<CropIssueVO> handleGetAll(Integer pageNumber, Integer pageSize)
+    protected Page<CropIssueDTO> handleGetAll(Integer pageNumber, Integer pageSize)
         throws Exception
     {
 
-        return this.getCropIssueRepository().findAll(PageRequest.of(pageNumber, pageSize)).map(this.getCropIssueDao()::toCropIssueVO);
+        return this.getCropIssueRepository().findAll(PageRequest.of(pageNumber, pageSize)).map(this.getCropIssueDao()::toCropIssueDTO);
     }
 
     /**
      * @see bw.co.sigmaproduce.crop.issue.CropIssueService#search(String, Integer, Integer)
      */
     @Override
-    protected Page<CropIssueVO> handleSearch(String criteria, Integer pageNumber, Integer pageSize)
+    protected Page<CropIssueDTO> handleSearch(String criteria, Integer pageNumber, Integer pageSize)
         throws Exception
     {
 
@@ -153,14 +153,14 @@ public class CropIssueServiceImpl
                     .or(SigmaproduceSpecifications.findByAttributeContainingIgnoreCase(criteria, "description"));
         }
 
-        return this.getCropIssueRepository().findAll(spec, PageRequest.of(pageNumber, pageSize)).map(this.getCropIssueDao()::toCropIssueVO);
+        return this.getCropIssueRepository().findAll(spec, PageRequest.of(pageNumber, pageSize)).map(this.getCropIssueDao()::toCropIssueDTO);
     }
 
     /**
      * @see bw.co.sigmaproduce.crop.issue.CropIssueService#searchByTypeAndCrop(CropIssueType, String, Integer, Integer)
      */
     @Override
-    protected Page<CropIssueVO> handleSearchByTypeAndCrop(CropIssueType type, String cropId, Integer pageNumber, Integer pageSize)
+    protected Page<CropIssueDTO> handleSearchByTypeAndCrop(CropIssueType type, String cropId, Integer pageNumber, Integer pageSize)
         throws Exception
     {
 
@@ -174,14 +174,14 @@ public class CropIssueServiceImpl
             spec = spec.and(SigmaproduceSpecifications.<CropIssue, String>findByAttribute(cropId, "crop", "id"));
         }
 
-        return this.getCropIssueRepository().findAll(spec, PageRequest.of(pageNumber, pageSize)).map(this.getCropIssueDao()::toCropIssueVO);
+        return this.getCropIssueRepository().findAll(spec, PageRequest.of(pageNumber, pageSize)).map(this.getCropIssueDao()::toCropIssueDTO);
     }
 
     /**
      * @see bw.co.sigmaproduce.crop.issue.CropIssueService#searchByTypeAndCrop(CropIssueType, String)
      */
     @Override
-    protected Collection<CropIssueVO> handleSearchByTypeAndCrop(CropIssueType type, String cropId)
+    protected Collection<CropIssueDTO> handleSearchByTypeAndCrop(CropIssueType type, String cropId)
         throws Exception
     {
 
@@ -195,7 +195,7 @@ public class CropIssueServiceImpl
             spec = spec.and(SigmaproduceSpecifications.<CropIssue, String>findByAttribute(cropId, "crop", "id"));
         }
 
-        return this.getCropIssueDao().toCropIssueVOCollection(this.getCropIssueRepository().findAll(spec));
+        return this.getCropIssueDao().toCropIssueDTOCollection(this.getCropIssueRepository().findAll(spec));
     }
 
 }

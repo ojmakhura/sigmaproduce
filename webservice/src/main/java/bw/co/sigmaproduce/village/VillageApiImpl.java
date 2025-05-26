@@ -102,7 +102,7 @@ public class VillageApiImpl extends VillageApiBase {
     }
 
     @Override
-    public ResponseEntity<?> handleSave(VillageVO village) {
+    public ResponseEntity<?> handleSave(VillageDTO village) {
         try {
             Optional<?> data = Optional.of(villageService.save(village)); // TODO: Add custom code here;
             ResponseEntity<?> response;

@@ -159,7 +159,7 @@ public class FarmApiImpl extends FarmApiBase {
     }
 
     @Override
-    public ResponseEntity<?> handleSave(FarmVO farm) {
+    public ResponseEntity<?> handleSave(FarmDTO farm) {
         try {
             Optional<?> data = Optional.empty(); // TODO: Add custom code here;
             ResponseEntity<?> response;

@@ -2,18 +2,16 @@
 import { Component } from '@angular/core';
 import { EditFarmComponent } from '@app/view/farm/edit-farm.component';
 import { EditFarmVarsForm } from '@app/view/farm/edit-farm.component';
-import { FarmState } from '@app/store/farm/farm.state';
-import * as FarmSelectors from '@app/store/farm/farm.selectors';
-import * as FarmActions from '@app/store/farm/farm.actions';
 import { MatRadioChange } from '@angular/material/radio';
 import { MatCheckboxChange } from '@angular/material/checkbox';
 import { CommonModule } from '@angular/common';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { TranslateModule } from '@ngx-translate/core';
-import { SharedModule } from '@app/@shared';
 import { MaterialModule } from '@app/material.module';
-import { CsvModule } from '@ctrl/ngx-csv';
-import { FarmEditorComponent } from '@app/components/farm/farm-editor.component';
+
+import { TableComponent } from '@app/components/table/table.component';
+import { LoaderComponent } from "@shared/loader/loader.component";
+import { FarmEditorImplComponent } from '@app/components/farm/farm-editor-impl.component';
 
 @Component({
   selector: 'app-edit-farm',
@@ -25,10 +23,11 @@ import { FarmEditorComponent } from '@app/components/farm/farm-editor.component'
     FormsModule,
     ReactiveFormsModule,
     TranslateModule,
-    SharedModule,
     MaterialModule,
-    CsvModule,
-    FarmEditorComponent,
+
+    TableComponent,
+    LoaderComponent,
+    FarmEditorImplComponent,
   ],
 })
 export class EditFarmImplComponent extends EditFarmComponent {
@@ -37,7 +36,7 @@ export class EditFarmImplComponent extends EditFarmComponent {
         super();
     }
 
-    override beforeOnInit(form: EditFarmVarsForm): EditFarmVarsForm{     
+    override beforeOnInit(form: EditFarmVarsForm): EditFarmVarsForm{
         return form;
     }
 

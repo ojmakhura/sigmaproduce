@@ -7,6 +7,7 @@
 package bw.co.sigmaproduce.crop.variety;
 
 import bw.co.sigmaproduce.crop.CropRepository;
+import bw.co.sigmaproduce.document.DocumentRepository;
 import bw.co.sigmaproduce.farm.cultivation.CultivationRepository;
 import java.util.Collection;
 import org.springframework.data.domain.Page;
@@ -22,17 +23,11 @@ public class CropVarietyDaoImpl
     extends CropVarietyDaoBase
 {
     
-    public CropVarietyDaoImpl(
-        CropRepository cropRepository,
-        CultivationRepository cultivationRepository,
-        CropVarietyRepository cropVarietyRepository
-    ) {
 
-        super(
-            cropRepository,
-            cultivationRepository,
-            cropVarietyRepository
-        );
+    public CropVarietyDaoImpl(CropRepository cropRepository, CultivationRepository cultivationRepository,
+            DocumentRepository documentRepository, CropVarietyRepository cropVarietyRepository) {
+        super(cropRepository, cultivationRepository, documentRepository, cropVarietyRepository);
+        //TODO Auto-generated constructor stub
     }
 
     private Specification<CropVariety> buildSpecification(final String criteria)
@@ -74,12 +69,12 @@ public class CropVarietyDaoImpl
      * {@inheritDoc}
      */
     @Override
-    public void toCropVarietyVO(
+    public void toCropVarietyDTO(
         CropVariety source,
-        CropVarietyVO target)
+        CropVarietyDTO target)
     {
-        // TODO verify behavior of toCropVarietyVO
-        super.toCropVarietyVO(source, target);
+        // TODO verify behavior of toCropVarietyDTO
+        super.toCropVarietyDTO(source, target);
         // WARNING! No conversion for target.crop (can't convert source.getCrop():bw.co.sigmaproduce.crop.Crop to bw.co.sigmaproduce.crop.CropVO
         if(source.getCrop() != null)
         {
@@ -90,10 +85,10 @@ public class CropVarietyDaoImpl
      * {@inheritDoc}
      */
     @Override
-    public CropVarietyVO toCropVarietyVO(final CropVariety entity)
+    public CropVarietyDTO toCropVarietyDTO(final CropVariety entity)
     {
-        // TODO verify behavior of toCropVarietyVO
-        return super.toCropVarietyVO(entity);
+        // TODO verify behavior of toCropVarietyDTO
+        return super.toCropVarietyDTO(entity);
     }
 
     /**
@@ -101,26 +96,26 @@ public class CropVarietyDaoImpl
      * from the object store. If no such entity object exists in the object store,
      * a new, blank entity is created
      */
-    private CropVariety loadCropVarietyFromCropVarietyVO(CropVarietyVO cropVarietyVO)
+    private CropVariety loadCropVarietyFromCropVarietyDTO(CropVarietyDTO cropVarietyDTO)
     {
-        if (cropVarietyVO.getId() == null)
+        if (cropVarietyDTO.getId() == null)
         {
             return  CropVariety.Factory.newInstance();
         }
         else
         {
-            return this.load(cropVarietyVO.getId());
+            return this.load(cropVarietyDTO.getId());
         }
     }
 
     /**
      * {@inheritDoc}
      */
-    public CropVariety cropVarietyVOToEntity(CropVarietyVO cropVarietyVO)
+    public CropVariety cropVarietyDTOToEntity(CropVarietyDTO cropVarietyDTO)
     {
-        // TODO verify behavior of cropVarietyVOToEntity
-        CropVariety entity = this.loadCropVarietyFromCropVarietyVO(cropVarietyVO);
-        this.cropVarietyVOToEntity(cropVarietyVO, entity, true);
+        // TODO verify behavior of cropVarietyDTOToEntity
+        CropVariety entity = this.loadCropVarietyFromCropVarietyDTO(cropVarietyDTO);
+        this.cropVarietyDTOToEntity(cropVarietyDTO, entity, true);
         return entity;
     }
 
@@ -128,13 +123,13 @@ public class CropVarietyDaoImpl
      * {@inheritDoc}
      */
     @Override
-    public void cropVarietyVOToEntity(
-        CropVarietyVO source,
+    public void cropVarietyDTOToEntity(
+        CropVarietyDTO source,
         CropVariety target,
         boolean copyIfNull)
     {
-        // TODO verify behavior of cropVarietyVOToEntity
-        super.cropVarietyVOToEntity(source, target, copyIfNull);
+        // TODO verify behavior of cropVarietyDTOToEntity
+        super.cropVarietyDTOToEntity(source, target, copyIfNull);
     }
     /**
      * {@inheritDoc}

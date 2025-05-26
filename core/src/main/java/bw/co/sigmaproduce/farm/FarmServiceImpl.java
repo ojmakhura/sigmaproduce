@@ -47,39 +47,39 @@ public class FarmServiceImpl
      * @see bw.co.sigmaproduce.farm.FarmService#findById(String)
      */
     @Override
-    protected FarmListVO handleFindById(String id)
+    protected FarmListDTO handleFindById(String id)
         throws Exception
     {
 
         Farm farm = this.getFarmRepository().getReferenceById(id);
 
-        return this.getFarmDao().toFarmListVO(farm);
+        return this.getFarmDao().toFarmListDTO(farm);
     }
 
     /**
      * @see bw.co.sigmaproduce.farm.FarmService#getAll()
      */
     @Override
-    protected Collection<FarmListVO> handleGetAll()
+    protected Collection<FarmListDTO> handleGetAll()
         throws Exception
     {
 
         Collection<Farm> farms = this.getFarmRepository().findAll();
 
-        return this.getFarmDao().toFarmListVOCollection(farms);
+        return this.getFarmDao().toFarmListDTOCollection(farms);
     }
 
     /**
      * @see bw.co.sigmaproduce.farm.FarmService#getAll(Integer, Integer)
      */
     @Override
-    protected Page<FarmListVO> handleGetAll(Integer pageNumber, Integer pageSize)
+    protected Page<FarmListDTO> handleGetAll(Integer pageNumber, Integer pageSize)
         throws Exception
     {
 
         Page<Farm> farms = this.getFarmRepository().findAll(PageRequest.of(pageNumber, pageSize));
 
-        return farms.map(farm -> this.getFarmDao().toFarmListVO(farm));
+        return farms.map(farm -> this.getFarmDao().toFarmListDTO(farm));
     }
 
     /**
@@ -95,18 +95,18 @@ public class FarmServiceImpl
     }
 
     /**
-     * @see bw.co.sigmaproduce.farm.FarmService#save(FarmVO)
+     * @see bw.co.sigmaproduce.farm.FarmService#save(FarmDTO)
      */
     @Override
-    protected FarmVO handleSave(FarmVO farm)
+    protected FarmDTO handleSave(FarmDTO farm)
         throws Exception
     {
 
-            Farm entity = this.getFarmDao().farmVOToEntity(farm);
+            Farm entity = this.getFarmDao().farmDTOToEntity(farm);
     
             entity = this.getFarmRepository().save(entity);
     
-            return this.getFarmDao().toFarmVO(entity);
+            return this.getFarmDao().toFarmDTO(entity);
     }
 
     private Specification<Farm> getFarmSpecification(FarmCriteria criteria) {
@@ -164,51 +164,51 @@ public class FarmServiceImpl
      * @see bw.co.sigmaproduce.farm.FarmService#search(FarmCriteria)
      */
     @Override
-    protected Collection<FarmListVO> handleSearch(FarmCriteria criteria)
+    protected Collection<FarmListDTO> handleSearch(FarmCriteria criteria)
         throws Exception
     {
 
         Specification<Farm> spec = this.getFarmSpecification(criteria);
 
-        return this.getFarmDao().toFarmListVOCollection(this.getFarmRepository().findAll(spec));        
+        return this.getFarmDao().toFarmListDTOCollection(this.getFarmRepository().findAll(spec));        
     }
 
     /**
      * @see bw.co.sigmaproduce.farm.FarmService#search(Integer, Integer, FarmCriteria)
      */
     @Override
-    protected Page<FarmListVO> handleSearch(Integer pageNumber, Integer pageSize, FarmCriteria criteria)
+    protected Page<FarmListDTO> handleSearch(Integer pageNumber, Integer pageSize, FarmCriteria criteria)
         throws Exception
     {
 
         Specification<Farm> spec = this.getFarmSpecification(criteria);
 
-        return this.getFarmRepository().findAll(spec, PageRequest.of(pageNumber, pageSize)).map(farm -> this.getFarmDao().toFarmListVO(farm));       
+        return this.getFarmRepository().findAll(spec, PageRequest.of(pageNumber, pageSize)).map(farm -> this.getFarmDao().toFarmListDTO(farm));       
     }
 
     /**
      * @see bw.co.sigmaproduce.farm.FarmService#findByVillage(String)
      */
     @Override
-    protected FarmListVO handleFindByVillage(String villageId)
+    protected FarmListDTO handleFindByVillage(String villageId)
         throws Exception
     {
         Specification<Farm> spec = SigmaproduceSpecifications.<Farm>findByAttributeContainingIgnoreCase(villageId, "nearestVillage", "id");
 
-        return this.getFarmDao().toFarmListVO(this.getFarmRepository().findOne(spec).get());
+        return this.getFarmDao().toFarmListDTO(this.getFarmRepository().findOne(spec).get());
     }
 
     /**
      * @see bw.co.sigmaproduce.farm.FarmService#findByDistrict(String)
      */
     @Override
-    protected FarmListVO handleFindByDistrict(String districtId)
+    protected FarmListDTO handleFindByDistrict(String districtId)
         throws Exception
     {
 
         Specification<Farm> spec = SigmaproduceSpecifications.<Farm>findByAttributeContainingIgnoreCase(districtId, "nearestVillage", "district", "id");
 
-        return this.getFarmDao().toFarmListVO(this.getFarmRepository().findOne(spec).get());
+        return this.getFarmDao().toFarmListDTO(this.getFarmRepository().findOne(spec).get());
     }
 
 }

@@ -8,6 +8,8 @@ package bw.co.sigmaproduce.crop.type;
 
 import bw.co.sigmaproduce.crop.CropRepository;
 import bw.co.sigmaproduce.crop.issue.CropIssueRepository;
+import bw.co.sigmaproduce.document.DocumentRepository;
+
 import java.util.Collection;
 
 import org.apache.commons.lang3.StringUtils;
@@ -22,17 +24,11 @@ public class CropTypeDaoImpl
     extends CropTypeDaoBase
 {
     
-    public CropTypeDaoImpl(
-        CropRepository cropRepository,
-        CropIssueRepository cropIssueRepository,
-        CropTypeRepository cropTypeRepository
-    ) {
 
-        super(
-            cropRepository,
-            cropIssueRepository,
-            cropTypeRepository
-        );
+    public CropTypeDaoImpl(CropRepository cropRepository, CropIssueRepository cropIssueRepository,
+            DocumentRepository documentRepository, CropTypeRepository cropTypeRepository) {
+        super(cropRepository, cropIssueRepository, documentRepository, cropTypeRepository);
+        //TODO Auto-generated constructor stub
     }
 
     /**
@@ -56,22 +52,22 @@ public class CropTypeDaoImpl
      * {@inheritDoc}
      */
     @Override
-    public void toCropTypeVO(
+    public void toCropTypeDTO(
         CropType source,
-        CropTypeVO target)
+        CropTypeDTO target)
     {
-        // TODO verify behavior of toCropTypeVO
-        super.toCropTypeVO(source, target);
+        // TODO verify behavior of toCropTypeDTO
+        super.toCropTypeDTO(source, target);
     }
 
     /**
      * {@inheritDoc}
      */
     @Override
-    public CropTypeVO toCropTypeVO(final CropType entity)
+    public CropTypeDTO toCropTypeDTO(final CropType entity)
     {
-        // TODO verify behavior of toCropTypeVO
-        return super.toCropTypeVO(entity);
+        // TODO verify behavior of toCropTypeDTO
+        return super.toCropTypeDTO(entity);
     }
 
     /**
@@ -79,26 +75,26 @@ public class CropTypeDaoImpl
      * from the object store. If no such entity object exists in the object store,
      * a new, blank entity is created
      */
-    private CropType loadCropTypeFromCropTypeVO(CropTypeVO cropTypeVO)
+    private CropType loadCropTypeFromCropTypeDTO(CropTypeDTO cropTypeDTO)
     {
-        if (cropTypeVO.getId() == null)
+        if (cropTypeDTO.getId() == null)
         {
             return  CropType.Factory.newInstance();
         }
         else
         {
-            return this.load(cropTypeVO.getId());
+            return this.load(cropTypeDTO.getId());
         }
     }
 
     /**
      * {@inheritDoc}
      */
-    public CropType cropTypeVOToEntity(CropTypeVO cropTypeVO)
+    public CropType cropTypeDTOToEntity(CropTypeDTO cropTypeDTO)
     {
-        // TODO verify behavior of cropTypeVOToEntity
-        CropType entity = this.loadCropTypeFromCropTypeVO(cropTypeVO);
-        this.cropTypeVOToEntity(cropTypeVO, entity, true);
+        // TODO verify behavior of cropTypeDTOToEntity
+        CropType entity = this.loadCropTypeFromCropTypeDTO(cropTypeDTO);
+        this.cropTypeDTOToEntity(cropTypeDTO, entity, true);
         return entity;
     }
 
@@ -106,34 +102,34 @@ public class CropTypeDaoImpl
      * {@inheritDoc}
      */
     @Override
-    public void cropTypeVOToEntity(
-        CropTypeVO source,
+    public void cropTypeDTOToEntity(
+        CropTypeDTO source,
         CropType target,
         boolean copyIfNull)
     {
-        // TODO verify behavior of cropTypeVOToEntity
-        super.cropTypeVOToEntity(source, target, copyIfNull);
+        // TODO verify behavior of cropTypeDTOToEntity
+        super.cropTypeDTOToEntity(source, target, copyIfNull);
     }
     /**
      * {@inheritDoc}
      */
     @Override
-    public void toCropTypeListVO(
+    public void toCropTypeListDTO(
         CropType source,
-        CropTypeListVO target)
+        CropTypeListDTO target)
     {
-        // TODO verify behavior of toCropTypeListVO
-        super.toCropTypeListVO(source, target);
+        // TODO verify behavior of toCropTypeListDTO
+        super.toCropTypeListDTO(source, target);
     }
 
     /**
      * {@inheritDoc}
      */
     @Override
-    public CropTypeListVO toCropTypeListVO(final CropType entity)
+    public CropTypeListDTO toCropTypeListDTO(final CropType entity)
     {
-        // TODO verify behavior of toCropTypeListVO
-        return super.toCropTypeListVO(entity);
+        // TODO verify behavior of toCropTypeListDTO
+        return super.toCropTypeListDTO(entity);
     }
 
     /**
@@ -141,26 +137,26 @@ public class CropTypeDaoImpl
      * from the object store. If no such entity object exists in the object store,
      * a new, blank entity is created
      */
-    private CropType loadCropTypeFromCropTypeListVO(CropTypeListVO cropTypeListVO)
+    private CropType loadCropTypeFromCropTypeListDTO(CropTypeListDTO cropTypeListDTO)
     {
-        if (cropTypeListVO.getId() == null)
+        if (cropTypeListDTO.getId() == null)
         {
             return  CropType.Factory.newInstance();
         }
         else
         {
-            return this.load(cropTypeListVO.getId());
+            return this.load(cropTypeListDTO.getId());
         }
     }
 
     /**
      * {@inheritDoc}
      */
-    public CropType cropTypeListVOToEntity(CropTypeListVO cropTypeListVO)
+    public CropType cropTypeListDTOToEntity(CropTypeListDTO cropTypeListDTO)
     {
-        // TODO verify behavior of cropTypeListVOToEntity
-        CropType entity = this.loadCropTypeFromCropTypeListVO(cropTypeListVO);
-        this.cropTypeListVOToEntity(cropTypeListVO, entity, true);
+        // TODO verify behavior of cropTypeListDTOToEntity
+        CropType entity = this.loadCropTypeFromCropTypeListDTO(cropTypeListDTO);
+        this.cropTypeListDTOToEntity(cropTypeListDTO, entity, true);
         return entity;
     }
 
@@ -168,12 +164,12 @@ public class CropTypeDaoImpl
      * {@inheritDoc}
      */
     @Override
-    public void cropTypeListVOToEntity(
-        CropTypeListVO source,
+    public void cropTypeListDTOToEntity(
+        CropTypeListDTO source,
         CropType target,
         boolean copyIfNull)
     {
-        // TODO verify behavior of cropTypeListVOToEntity
-        super.cropTypeListVOToEntity(source, target, copyIfNull);
+        // TODO verify behavior of cropTypeListDTOToEntity
+        super.cropTypeListDTOToEntity(source, target, copyIfNull);
     }
 }

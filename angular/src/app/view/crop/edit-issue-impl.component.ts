@@ -2,19 +2,17 @@
 import { Component, Inject } from '@angular/core';
 import { EditIssueComponent } from '@app/view/crop/edit-issue.component';
 import { EditIssueVarsForm } from '@app/view/crop/edit-issue.component';
-import { CropState } from '@app/store/crop/crop.state';
-import * as CropSelectors from '@app/store/crop/crop.selectors';
-import * as CropActions from '@app/store/crop/crop.actions';
 import { MatRadioChange } from '@angular/material/radio';
 import { MatCheckboxChange } from '@angular/material/checkbox';
 import { MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { CommonModule } from '@angular/common';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { TranslateModule } from '@ngx-translate/core';
-import { SharedModule } from '@app/@shared';
 import { MaterialModule } from '@app/material.module';
-import { CsvModule } from '@ctrl/ngx-csv';
-import { CropIssueEditorComponent } from '@app/components/crop/issue/crop-issue-editor.component';
+
+import { TableComponent } from '@app/components/table/table.component';
+import { LoaderComponent } from "@shared/loader/loader.component";
+import { CropIssueEditorImplComponent } from '@app/components/crop/issue/crop-issue-editor-impl.component';
 
 @Component({
   selector: 'app-edit-issue',
@@ -26,10 +24,11 @@ import { CropIssueEditorComponent } from '@app/components/crop/issue/crop-issue-
     FormsModule,
     ReactiveFormsModule,
     TranslateModule,
-    SharedModule,
     MaterialModule,
-    CsvModule,
-    CropIssueEditorComponent,
+
+    TableComponent,
+    LoaderComponent,
+    CropIssueEditorImplComponent,
   ],
 })
 export class EditIssueImplComponent extends EditIssueComponent {
@@ -38,7 +37,7 @@ export class EditIssueImplComponent extends EditIssueComponent {
         super(data);
     }
 
-    override beforeOnInit(form: EditIssueVarsForm): EditIssueVarsForm{     
+    override beforeOnInit(form: EditIssueVarsForm): EditIssueVarsForm{
         return form;
     }
 

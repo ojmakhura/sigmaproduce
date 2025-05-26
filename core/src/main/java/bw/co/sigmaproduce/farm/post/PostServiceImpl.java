@@ -43,23 +43,23 @@ public class PostServiceImpl
      * @see bw.co.sigmaproduce.farm.post.PostService#getAll(Integer, Integer)
      */
     @Override
-    protected Page<PostVO> handleGetAll(Integer pageNumber, Integer pageSize)
+    protected Page<PostDTO> handleGetAll(Integer pageNumber, Integer pageSize)
         throws Exception
     {
         Page<Post> posts = this.postRepository.findAll(PageRequest.of(pageNumber, pageSize, Sort.by(Direction.DESC, "createdDate")));
 
-        return posts.map(post -> this.postDao.toPostVO(post));
+        return posts.map(post -> this.postDao.toPostDTO(post));
     }
 
     /**
      * @see bw.co.sigmaproduce.farm.post.PostService#getAll()
      */
     @Override
-    protected Collection<PostVO> handleGetAll()
+    protected Collection<PostDTO> handleGetAll()
         throws Exception
     {
 
-        return this.postDao.toPostVOCollection(this.postRepository.findAll());
+        return this.postDao.toPostDTOCollection(this.postRepository.findAll());
     }
 
     /**
@@ -79,36 +79,36 @@ public class PostServiceImpl
      * @see bw.co.sigmaproduce.farm.post.PostService#findById(String)
      */
     @Override
-    protected PostVO handleFindById(String id)
+    protected PostDTO handleFindById(String id)
         throws Exception
     {
 
-        return this.postDao.toPostVO(this.postRepository.getReferenceById(id));
+        return this.postDao.toPostDTO(this.postRepository.getReferenceById(id));
     }
 
     /**
-     * @see bw.co.sigmaproduce.farm.post.PostService#save(PostVO)
+     * @see bw.co.sigmaproduce.farm.post.PostService#save(PostDTO)
      */
     @Override
-    protected PostVO handleSave(PostVO post)
+    protected PostDTO handleSave(PostDTO post)
         throws Exception
     {
 
-        Post entity = this.postDao.postVOToEntity(post);
+        Post entity = this.postDao.postDTOToEntity(post);
 
         entity = this.postRepository.save(entity);
 
-        return this.postDao.toPostVO(entity);
+        return this.postDao.toPostDTO(entity);
     }
 
     /**
      * @see bw.co.sigmaproduce.farm.post.PostService#getFarmPosts(String)
      */
     @Override
-    protected PostVO handleGetFarmPosts(String farmId)
+    protected PostDTO handleGetFarmPosts(String farmId)
         throws Exception
     {
-        // TODO implement protected  PostVO handleGetFarmPosts(String farmId)
+        // TODO implement protected  PostDTO handleGetFarmPosts(String farmId)
         throw new UnsupportedOperationException("bw.co.sigmaproduce.farm.post.PostService.handleGetFarmPosts(String farmId) Not implemented!");
     }
 
@@ -116,10 +116,10 @@ public class PostServiceImpl
      * @see bw.co.sigmaproduce.farm.post.PostService#getFarmPosts(String, Integer, Integer)
      */
     @Override
-    protected Page<PostVO> handleGetFarmPosts(String farmId, Integer pageSize, Integer pageNumber)
+    protected Page<PostDTO> handleGetFarmPosts(String farmId, Integer pageSize, Integer pageNumber)
         throws Exception
     {
-        // TODO implement protected  Page<PostVO> handleGetFarmPosts(String farmId, Integer pageSize, Integer pageNumber)
+        // TODO implement protected  Page<PostDTO> handleGetFarmPosts(String farmId, Integer pageSize, Integer pageNumber)
         throw new UnsupportedOperationException("bw.co.sigmaproduce.farm.post.PostService.handleGetFarmPosts(String farmId, Integer pageSize, Integer pageNumber) Not implemented!");
     }
 

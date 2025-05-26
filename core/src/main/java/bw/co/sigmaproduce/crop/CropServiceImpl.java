@@ -56,13 +56,13 @@ public class CropServiceImpl
      * @see bw.co.sigmaproduce.crop.CropService#findById(String)
      */
     @Override
-    protected CropVO handleFindById(String id)
+    protected CropDTO handleFindById(String id)
         throws Exception
     {
 
         Crop crop = this.cropRepository.findById(id).orElse(null);
 
-        return crop != null ? cropDao.toCropVO(crop) : null;
+        return crop != null ? cropDao.toCropDTO(crop) : null;
 
     }
 
@@ -70,11 +70,11 @@ public class CropServiceImpl
      * @see bw.co.sigmaproduce.crop.CropService#getAll()
      */
     @Override
-    protected Collection<CropListVO> handleGetAll()
+    protected Collection<CropListDTO> handleGetAll()
         throws Exception
     {
 
-        return cropDao.toCropListVOCollection(this.cropRepository.findAll());
+        return cropDao.toCropListDTOCollection(this.cropRepository.findAll());
         
     }
 
@@ -82,13 +82,13 @@ public class CropServiceImpl
      * @see bw.co.sigmaproduce.crop.CropService#getAll(Integer, Integer)
      */
     @Override
-    protected Page<CropListVO> handleGetAll(Integer pageNumber, Integer pageSize)
+    protected Page<CropListDTO> handleGetAll(Integer pageNumber, Integer pageSize)
         throws Exception
     {
 
         Page<Crop> crops = this.cropRepository.findAll(PageRequest.of(pageNumber, pageSize));
 
-        return crops.map(crop -> cropDao.toCropListVO(crop));
+        return crops.map(crop -> cropDao.toCropListDTO(crop));
     }
 
     /**
@@ -105,10 +105,10 @@ public class CropServiceImpl
     }
 
     /**
-     * @see bw.co.sigmaproduce.crop.CropService#save(CropVO)
+     * @see bw.co.sigmaproduce.crop.CropService#save(CropDTO)
      */
     @Override
-    protected CropVO handleSave(CropVO crop)
+    protected CropDTO handleSave(CropDTO crop)
         throws Exception
     {
         if(StringUtils.isBlank(crop.getId())) {
@@ -116,7 +116,7 @@ public class CropServiceImpl
             crop.setCreatedDate(LocalDateTime.now());
         }
 
-        Crop entity = cropDao.cropVOToEntity(crop);
+        Crop entity = cropDao.cropDTOToEntity(crop);
 
         if(CollectionUtils.isNotEmpty(entity.getCropVarieties())) {
 
@@ -133,7 +133,7 @@ public class CropServiceImpl
         
         entity = this.cropRepository.save(entity);
 
-        return cropDao.toCropVO(entity);
+        return cropDao.toCropDTO(entity);
     }
 
     /**
@@ -141,40 +141,40 @@ public class CropServiceImpl
      */
     @Override
     @Transactional
-    protected Collection<CropListVO> handleSearch(String criteria)
+    protected Collection<CropListDTO> handleSearch(String criteria)
         throws Exception
     {
         Collection<Crop> crop = this.cropDao.findByCriteria(criteria);
-        return cropDao.toCropListVOCollection(crop);
+        return cropDao.toCropListDTOCollection(crop);
     }
 
     /**
      * @see bw.co.sigmaproduce.crop.CropService#search(Integer, Integer, String)
      */
     @Override
-    protected Page<CropListVO> handleSearch(Integer pageNumber, Integer pageSize, String criteria)
+    protected Page<CropListDTO> handleSearch(Integer pageNumber, Integer pageSize, String criteria)
         throws Exception
     {
 
         Page<Crop> crops = this.cropDao.findByCriteriaPaged(criteria, pageSize, pageNumber);
 
-        return crops.map(crop -> cropDao.toCropListVO(crop));
+        return crops.map(crop -> cropDao.toCropListDTO(crop));
     }
 
     @Override
-    protected Collection<CropListVO> handleFindByCropTypes(Set<String> cropTypeIds) throws Exception {
+    protected Collection<CropListDTO> handleFindByCropTypes(Set<String> cropTypeIds) throws Exception {
         // TODO Auto-generated method stub
         throw new UnsupportedOperationException("Unimplemented method 'handleFindByCropTypes'");
     }
 
     @Override
-    protected Collection<CropListVO> handleFindByIssueType(CropIssueType issueType) throws Exception {
+    protected Collection<CropListDTO> handleFindByIssueType(CropIssueType issueType) throws Exception {
         // TODO Auto-generated method stub
         throw new UnsupportedOperationException("Unimplemented method 'handleFindByIssueType'");
     }
 
     @Override
-    protected Collection<Page<CropListVO>> handleFindByCropTypes(Set<String> cropTypeIds, Integer pageNumber,
+    protected Collection<Page<CropListDTO>> handleFindByCropTypes(Set<String> cropTypeIds, Integer pageNumber,
             Integer pageSize) throws Exception {
         // TODO Auto-generated method stub
         throw new UnsupportedOperationException("Unimplemented method 'handleFindByCropTypes'");

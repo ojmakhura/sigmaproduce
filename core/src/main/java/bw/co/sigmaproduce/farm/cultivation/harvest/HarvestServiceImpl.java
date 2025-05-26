@@ -40,10 +40,10 @@ public class HarvestServiceImpl
      * @see bw.co.sigmaproduce.farm.cultivation.harvest.HarvestService#findById(String)
      */
     @Override
-    protected HarvestVO handleFindById(String id)
+    protected HarvestDTO handleFindById(String id)
         throws Exception
     {
-        // TODO implement protected  HarvestVO handleFindById(String id)
+        // TODO implement protected  HarvestDTO handleFindById(String id)
         throw new UnsupportedOperationException("bw.co.sigmaproduce.farm.cultivation.harvest.HarvestService.handleFindById(String id) Not implemented!");
     }
 
@@ -70,14 +70,14 @@ public class HarvestServiceImpl
     }
 
     /**
-     * @see bw.co.sigmaproduce.farm.cultivation.harvest.HarvestService#save(HarvestVO)
+     * @see bw.co.sigmaproduce.farm.cultivation.harvest.HarvestService#save(HarvestDTO)
      */
     @Override
-    protected HarvestVO handleSave(HarvestVO harvest)
+    protected HarvestDTO handleSave(HarvestDTO harvest)
         throws Exception
     {
-        // TODO implement protected  HarvestVO handleSave(HarvestVO harvest)
-        throw new UnsupportedOperationException("bw.co.sigmaproduce.farm.cultivation.harvest.HarvestService.handleSave(HarvestVO harvest) Not implemented!");
+        // TODO implement protected  HarvestDTO handleSave(HarvestDTO harvest)
+        throw new UnsupportedOperationException("bw.co.sigmaproduce.farm.cultivation.harvest.HarvestService.handleSave(HarvestDTO harvest) Not implemented!");
     }
 
     /**

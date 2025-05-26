@@ -34,12 +34,12 @@ public class CropIssueDaoImpl
      * {@inheritDoc}
      */
     @Override
-    public void toCropIssueVO(
+    public void toCropIssueDTO(
         CropIssue source,
-        CropIssueVO target)
+        CropIssueDTO target)
     {
-        // TODO verify behavior of toCropIssueVO
-        super.toCropIssueVO(source, target);
+        // TODO verify behavior of toCropIssueDTO
+        super.toCropIssueDTO(source, target);
         // WARNING! No conversion for target.images (can't convert source.getImages():byte[] to Image
     }
 
@@ -47,10 +47,10 @@ public class CropIssueDaoImpl
      * {@inheritDoc}
      */
     @Override
-    public CropIssueVO toCropIssueVO(final CropIssue entity)
+    public CropIssueDTO toCropIssueDTO(final CropIssue entity)
     {
-        // TODO verify behavior of toCropIssueVO
-        return super.toCropIssueVO(entity);
+        // TODO verify behavior of toCropIssueDTO
+        return super.toCropIssueDTO(entity);
     }
 
     /**
@@ -58,26 +58,26 @@ public class CropIssueDaoImpl
      * from the object store. If no such entity object exists in the object store,
      * a new, blank entity is created
      */
-    private CropIssue loadCropIssueFromCropIssueVO(CropIssueVO cropIssueVO)
+    private CropIssue loadCropIssueFromCropIssueDTO(CropIssueDTO cropIssueDTO)
     {
-        if (cropIssueVO.getId() == null)
+        if (cropIssueDTO.getId() == null)
         {
             return  CropIssue.Factory.newInstance();
         }
         else
         {
-            return this.load(cropIssueVO.getId());
+            return this.load(cropIssueDTO.getId());
         }
     }
 
     /**
      * {@inheritDoc}
      */
-    public CropIssue cropIssueVOToEntity(CropIssueVO cropIssueVO)
+    public CropIssue cropIssueDTOToEntity(CropIssueDTO cropIssueDTO)
     {
-        // TODO verify behavior of cropIssueVOToEntity
-        CropIssue entity = this.loadCropIssueFromCropIssueVO(cropIssueVO);
-        this.cropIssueVOToEntity(cropIssueVO, entity, true);
+        // TODO verify behavior of cropIssueDTOToEntity
+        CropIssue entity = this.loadCropIssueFromCropIssueDTO(cropIssueDTO);
+        this.cropIssueDTOToEntity(cropIssueDTO, entity, true);
         return entity;
     }
 
@@ -85,13 +85,13 @@ public class CropIssueDaoImpl
      * {@inheritDoc}
      */
     @Override
-    public void cropIssueVOToEntity(
-        CropIssueVO source,
+    public void cropIssueDTOToEntity(
+        CropIssueDTO source,
         CropIssue target,
         boolean copyIfNull)
     {
-        // TODO verify behavior of cropIssueVOToEntity
-        super.cropIssueVOToEntity(source, target, copyIfNull);
+        // TODO verify behavior of cropIssueDTOToEntity
+        super.cropIssueDTOToEntity(source, target, copyIfNull);
         // No conversion for target.images (can't convert source.getImages():Image to byte[]
     }
 }

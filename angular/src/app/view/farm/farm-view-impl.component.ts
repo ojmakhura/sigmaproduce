@@ -2,18 +2,16 @@
 import { Component } from '@angular/core';
 import { FarmViewComponent } from '@app/view/farm/farm-view.component';
 import { FarmViewVarsForm } from '@app/view/farm/farm-view.component';
-import { FarmState } from '@app/store/farm/farm.state';
-import * as FarmSelectors from '@app/store/farm/farm.selectors';
-import * as FarmActions from '@app/store/farm/farm.actions';
 import { MatRadioChange } from '@angular/material/radio';
 import { MatCheckboxChange } from '@angular/material/checkbox';
 import { CommonModule } from '@angular/common';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { TranslateModule } from '@ngx-translate/core';
-import { SharedModule } from '@app/@shared';
 import { MaterialModule } from '@app/material.module';
-import { CsvModule } from '@ctrl/ngx-csv';
-import { FarmDetailsComponent } from '@app/components/farm/farm-details.component';
+
+import { TableComponent } from '@app/components/table/table.component';
+import { LoaderComponent } from "@shared/loader/loader.component";
+import { FarmDetailsImplComponent } from '@app/components/farm/farm-details-impl.component';
 
 @Component({
   selector: 'app-farm-view',
@@ -25,10 +23,11 @@ import { FarmDetailsComponent } from '@app/components/farm/farm-details.componen
     FormsModule,
     ReactiveFormsModule,
     TranslateModule,
-    SharedModule,
     MaterialModule,
-    CsvModule,
-    FarmDetailsComponent,
+
+    TableComponent,
+    LoaderComponent,
+    FarmDetailsImplComponent,
   ],
 })
 export class FarmViewImplComponent extends FarmViewComponent {
@@ -37,7 +36,7 @@ export class FarmViewImplComponent extends FarmViewComponent {
         super();
     }
 
-    override beforeOnInit(form: FarmViewVarsForm): FarmViewVarsForm{     
+    override beforeOnInit(form: FarmViewVarsForm): FarmViewVarsForm{
         return form;
     }
 

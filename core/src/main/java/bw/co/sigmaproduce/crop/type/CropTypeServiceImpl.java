@@ -10,7 +10,7 @@ package bw.co.sigmaproduce.crop.type;
 
 import bw.co.sigmaproduce.crop.CropDao;
 import bw.co.sigmaproduce.crop.CropRepository;
-import bw.co.sigmaproduce.crop.issue.CropIssueVO;
+import bw.co.sigmaproduce.crop.issue.CropIssueDTO;
 import java.util.Collection;
 import org.springframework.context.MessageSource;
 import org.springframework.stereotype.Service;
@@ -47,24 +47,24 @@ public class CropTypeServiceImpl
      */
     @Override
     @Transactional
-    protected CropTypeVO handleFindById(String id)
+    protected CropTypeDTO handleFindById(String id)
         throws Exception
     {
         
         CropType cropType = this.cropTypeRepository.findById(id).orElse(null);
         
-        return this.getCropTypeDao().toCropTypeVO(cropType);
+        return this.getCropTypeDao().toCropTypeDTO(cropType);
     }
 
     /**
      * @see bw.co.sigmaproduce.crop.type.CropTypeService#getAll()
      */
     @Override
-    protected Collection<CropTypeVO> handleGetAll()
+    protected Collection<CropTypeDTO> handleGetAll()
         throws Exception
     {
 
-        return this.getCropTypeDao().toCropTypeVOCollection(this.getCropTypeRepository().findAll());
+        return this.getCropTypeDao().toCropTypeDTOCollection(this.getCropTypeRepository().findAll());
     }
 
     /**
@@ -81,28 +81,28 @@ public class CropTypeServiceImpl
     }
 
     /**
-     * @see bw.co.sigmaproduce.crop.type.CropTypeService#save(CropIssueVO)
+     * @see bw.co.sigmaproduce.crop.type.CropTypeService#save(CropIssueDTO)
      */
     @Override
-    protected CropTypeVO handleSave(CropTypeVO cropType)
+    protected CropTypeDTO handleSave(CropTypeDTO cropType)
         throws Exception
     {
 
-        CropType entity = this.getCropTypeDao().cropTypeVOToEntity(cropType);
+        CropType entity = this.getCropTypeDao().cropTypeDTOToEntity(cropType);
         entity = this.getCropTypeRepository().save(entity);
         
-        return this.getCropTypeDao().toCropTypeVO(entity);
+        return this.getCropTypeDao().toCropTypeDTO(entity);
     }
 
     /**
      * @see bw.co.sigmaproduce.crop.type.CropTypeService#search(String)
      */
     @Override
-    protected Collection<CropTypeVO> handleSearch(String criteria)
+    protected Collection<CropTypeDTO> handleSearch(String criteria)
         throws Exception
     {
 
-        return this.getCropTypeDao().toCropTypeVOCollection(this.getCropTypeDao().findByCriteria(criteria));
+        return this.getCropTypeDao().toCropTypeDTOCollection(this.getCropTypeDao().findByCriteria(criteria));
     }
 
 }

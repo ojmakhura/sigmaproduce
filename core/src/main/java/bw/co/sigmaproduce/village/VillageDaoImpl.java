@@ -8,7 +8,7 @@ package bw.co.sigmaproduce.village;
 
 import bw.co.sigmaproduce.district.District;
 import bw.co.sigmaproduce.district.DistrictRepository;
-import bw.co.sigmaproduce.district.DistrictVO;
+import bw.co.sigmaproduce.district.DistrictDTO;
 
 import org.springframework.stereotype.Repository;
 
@@ -35,15 +35,15 @@ public class VillageDaoImpl
      * {@inheritDoc}
      */
     @Override
-    public void toVillageVO(
+    public void toVillageDTO(
         Village source,
-        VillageVO target)
+        VillageDTO target)
     {
-        // TODO verify behavior of toVillageVO
-        super.toVillageVO(source, target);
-        // WARNING! No conversion for target.district (can't convert source.getDistrict():bw.co.sigmaproduce.district.District to bw.co.sigmaproduce.district.DistrictVO
+        // TODO verify behavior of toVillageDTO
+        super.toVillageDTO(source, target);
+        // WARNING! No conversion for target.district (can't convert source.getDistrict():bw.co.sigmaproduce.district.District to bw.co.sigmaproduce.district.DistrictDTO
         if(source.getDistrict() != null) {
-            DistrictVO district = new DistrictVO();
+            DistrictDTO district = new DistrictDTO();
             district.setId(source.getDistrict().getId());
             district.setName(source.getDistrict().getName());
 
@@ -55,10 +55,10 @@ public class VillageDaoImpl
      * {@inheritDoc}
      */
     @Override
-    public VillageVO toVillageVO(final Village entity)
+    public VillageDTO toVillageDTO(final Village entity)
     {
-        // TODO verify behavior of toVillageVO
-        return super.toVillageVO(entity);
+        // TODO verify behavior of toVillageDTO
+        return super.toVillageDTO(entity);
     }
 
     /**
@@ -66,26 +66,26 @@ public class VillageDaoImpl
      * from the object store. If no such entity object exists in the object store,
      * a new, blank entity is created
      */
-    private Village loadVillageFromVillageVO(VillageVO villageVO)
+    private Village loadVillageFromVillageDTO(VillageDTO villageDTO)
     {
-        if (villageVO.getId() == null)
+        if (villageDTO.getId() == null)
         {
             return  Village.Factory.newInstance();
         }
         else
         {
-            return this.load(villageVO.getId());
+            return this.load(villageDTO.getId());
         }
     }
 
     /**
      * {@inheritDoc}
      */
-    public Village villageVOToEntity(VillageVO villageVO)
+    public Village villageDTOToEntity(VillageDTO villageDTO)
     {
-        // TODO verify behavior of villageVOToEntity
-        Village entity = this.loadVillageFromVillageVO(villageVO);
-        this.villageVOToEntity(villageVO, entity, true);
+        // TODO verify behavior of villageDTOToEntity
+        Village entity = this.loadVillageFromVillageDTO(villageDTO);
+        this.villageDTOToEntity(villageDTO, entity, true);
         return entity;
     }
 
@@ -93,13 +93,13 @@ public class VillageDaoImpl
      * {@inheritDoc}
      */
     @Override
-    public void villageVOToEntity(
-        VillageVO source,
+    public void villageDTOToEntity(
+        VillageDTO source,
         Village target,
         boolean copyIfNull)
     {
-        // TODO verify behavior of villageVOToEntity
-        super.villageVOToEntity(source, target, copyIfNull);
+        // TODO verify behavior of villageDTOToEntity
+        super.villageDTOToEntity(source, target, copyIfNull);
 
         if(source.getDistrict() != null) {
             District district = new District();

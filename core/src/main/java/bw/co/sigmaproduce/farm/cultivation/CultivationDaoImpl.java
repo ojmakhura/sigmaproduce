@@ -8,7 +8,7 @@ package bw.co.sigmaproduce.farm.cultivation;
 
 import bw.co.sigmaproduce.crop.variety.CropVarietyRepository;
 import bw.co.sigmaproduce.farm.Farm;
-import bw.co.sigmaproduce.farm.FarmListVO;
+import bw.co.sigmaproduce.farm.FarmListDTO;
 import bw.co.sigmaproduce.farm.FarmRepository;
 import bw.co.sigmaproduce.farm.cultivation.harvest.HarvestRepository;
 import bw.co.sigmaproduce.farm.cultivation.problem.CultivationProblemRepository;
@@ -37,16 +37,16 @@ public class CultivationDaoImpl
      * {@inheritDoc}
      */
     @Override
-    public void toCultivationVO(
+    public void toCultivationDTO(
             Cultivation source,
-            CultivationVO target) {
-        // TODO verify behavior of toCultivationVO
-        super.toCultivationVO(source, target);
+            CultivationDTO target) {
+        // TODO verify behavior of toCultivationDTO
+        super.toCultivationDTO(source, target);
         // WARNING! No conversion for target.farm (can't convert
         // source.getFarm():bw.co.sigmaproduce.farm.Farm to
-        // bw.co.sigmaproduce.farm.FarmListVO
+        // bw.co.sigmaproduce.farm.FarmListDTO
         if (source.getFarm() != null) {
-            FarmListVO farm = new FarmListVO();
+            FarmListDTO farm = new FarmListDTO();
             farm.setId(source.getFarm().getId());
             farm.setName(source.getFarm().getName());
             // farm.setOwner(source.getFarm().getOwner());
@@ -66,9 +66,9 @@ public class CultivationDaoImpl
      * {@inheritDoc}
      */
     @Override
-    public CultivationVO toCultivationVO(final Cultivation entity) {
-        // TODO verify behavior of toCultivationVO
-        return super.toCultivationVO(entity);
+    public CultivationDTO toCultivationDTO(final Cultivation entity) {
+        // TODO verify behavior of toCultivationDTO
+        return super.toCultivationDTO(entity);
     }
 
     /**
@@ -77,20 +77,20 @@ public class CultivationDaoImpl
      * from the object store. If no such entity object exists in the object store,
      * a new, blank entity is created
      */
-    private Cultivation loadCultivationFromCultivationVO(CultivationVO cultivationVO) {
-        // TODO implement loadCultivationFromCultivationVO
+    private Cultivation loadCultivationFromCultivationDTO(CultivationDTO cultivationDTO) {
+        // TODO implement loadCultivationFromCultivationDTO
         throw new UnsupportedOperationException(
-                "bw.co.sigmaproduce.farm.cultivation.loadCultivationFromCultivationVO(CultivationVO) not yet implemented.");
+                "bw.co.sigmaproduce.farm.cultivation.loadCultivationFromCultivationDTO(CultivationDTO) not yet implemented.");
 
         /*
          * A typical implementation looks like this:
-         * if (cultivationVO.getId() == null)
+         * if (cultivationDTO.getId() == null)
          * {
          * return Cultivation.Factory.newInstance();
          * }
          * else
          * {
-         * return this.load(cultivationVO.getId());
+         * return this.load(cultivationDTO.getId());
          * }
          */
     }
@@ -98,10 +98,10 @@ public class CultivationDaoImpl
     /**
      * {@inheritDoc}
      */
-    public Cultivation cultivationVOToEntity(CultivationVO cultivationVO) {
-        // TODO verify behavior of cultivationVOToEntity
-        Cultivation entity = this.loadCultivationFromCultivationVO(cultivationVO);
-        this.cultivationVOToEntity(cultivationVO, entity, true);
+    public Cultivation cultivationDTOToEntity(CultivationDTO cultivationDTO) {
+        // TODO verify behavior of cultivationDTOToEntity
+        Cultivation entity = this.loadCultivationFromCultivationDTO(cultivationDTO);
+        this.cultivationDTOToEntity(cultivationDTO, entity, true);
         return entity;
     }
 
@@ -109,23 +109,23 @@ public class CultivationDaoImpl
      * {@inheritDoc}
      */
     @Override
-    public void cultivationVOToEntity(
-            CultivationVO source,
+    public void cultivationDTOToEntity(
+            CultivationDTO source,
             Cultivation target,
             boolean copyIfNull) {
-        // TODO verify behavior of cultivationVOToEntity
-        super.cultivationVOToEntity(source, target, copyIfNull);
+        // TODO verify behavior of cultivationDTOToEntity
+        super.cultivationDTOToEntity(source, target, copyIfNull);
     }
 
     /**
      * {@inheritDoc}
      */
     @Override
-    public void toCultivationListVO(
+    public void toCultivationListDTO(
             Cultivation source,
-            CultivationListVO target) {
-        // TODO verify behavior of toCultivationListVO
-        super.toCultivationListVO(source, target);
+            CultivationListDTO target) {
+        // TODO verify behavior of toCultivationListDTO
+        super.toCultivationListDTO(source, target);
         // WARNING! No conversion for target.cropVariety (can't convert
         // source.getCropVariety():bw.co.sigmaproduce.crop.variety.CropVariety to
         // java.lang.String
@@ -137,9 +137,9 @@ public class CultivationDaoImpl
      * {@inheritDoc}
      */
     @Override
-    public CultivationListVO toCultivationListVO(final Cultivation entity) {
-        // TODO verify behavior of toCultivationListVO
-        return super.toCultivationListVO(entity);
+    public CultivationListDTO toCultivationListDTO(final Cultivation entity) {
+        // TODO verify behavior of toCultivationListDTO
+        return super.toCultivationListDTO(entity);
     }
 
     /**
@@ -148,20 +148,20 @@ public class CultivationDaoImpl
      * from the object store. If no such entity object exists in the object store,
      * a new, blank entity is created
      */
-    private Cultivation loadCultivationFromCultivationListVO(CultivationListVO cultivationListVO) {
-        // TODO implement loadCultivationFromCultivationListVO
+    private Cultivation loadCultivationFromCultivationListDTO(CultivationListDTO cultivationListDTO) {
+        // TODO implement loadCultivationFromCultivationListDTO
         throw new UnsupportedOperationException(
-                "bw.co.sigmaproduce.farm.cultivation.loadCultivationFromCultivationListVO(CultivationListVO) not yet implemented.");
+                "bw.co.sigmaproduce.farm.cultivation.loadCultivationFromCultivationListDTO(CultivationListDTO) not yet implemented.");
 
         /*
          * A typical implementation looks like this:
-         * if (cultivationListVO.getId() == null)
+         * if (cultivationListDTO.getId() == null)
          * {
          * return Cultivation.Factory.newInstance();
          * }
          * else
          * {
-         * return this.load(cultivationListVO.getId());
+         * return this.load(cultivationListDTO.getId());
          * }
          */
     }
@@ -169,10 +169,10 @@ public class CultivationDaoImpl
     /**
      * {@inheritDoc}
      */
-    public Cultivation cultivationListVOToEntity(CultivationListVO cultivationListVO) {
-        // TODO verify behavior of cultivationListVOToEntity
-        Cultivation entity = this.loadCultivationFromCultivationListVO(cultivationListVO);
-        this.cultivationListVOToEntity(cultivationListVO, entity, true);
+    public Cultivation cultivationListDTOToEntity(CultivationListDTO cultivationListDTO) {
+        // TODO verify behavior of cultivationListDTOToEntity
+        Cultivation entity = this.loadCultivationFromCultivationListDTO(cultivationListDTO);
+        this.cultivationListDTOToEntity(cultivationListDTO, entity, true);
         return entity;
     }
 
@@ -180,11 +180,11 @@ public class CultivationDaoImpl
      * {@inheritDoc}
      */
     @Override
-    public void cultivationListVOToEntity(
-            CultivationListVO source,
+    public void cultivationListDTOToEntity(
+            CultivationListDTO source,
             Cultivation target,
             boolean copyIfNull) {
-        // TODO verify behavior of cultivationListVOToEntity
-        super.cultivationListVOToEntity(source, target, copyIfNull);
+        // TODO verify behavior of cultivationListDTOToEntity
+        super.cultivationListDTOToEntity(source, target, copyIfNull);
     }
 }

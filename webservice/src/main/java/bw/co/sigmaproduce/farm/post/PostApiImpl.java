@@ -121,7 +121,7 @@ public class PostApiImpl extends PostApiBase {
     }
 
     @Override
-    public ResponseEntity<?> handleSave(PostVO post) {
+    public ResponseEntity<?> handleSave(PostDTO post) {
         try {
             Optional<?> data = Optional.of(postService.save(post)); // TODO: Add custom code here;
             ResponseEntity<?> response;

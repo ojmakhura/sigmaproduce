@@ -13,9 +13,20 @@ import { env } from './.env';
 export const environment = {
   production: false,
   version: env['npm_package_version'] + '-dev',
-  serverUrl: '/api',
   defaultLanguage: 'en-US',
-  supportedLanguages: ['en-US']
+  supportedLanguages: ['en-US'],
+  keycloak: {
+    redirectUri: window.location.origin,
+    clientId: 'sigmaproduce-web',
+    scope: 'openid profile email offline_access',
+    responseType: 'code',
+    realm: 'sigmaproduce',
+    // at_hash is not present in JWT token
+    disableAtHashCheck: true,
+    showDebugInformation: true,
+    requireHttps: false,
+    checkLoginIframe: false,
+  },
 };
 
 /*

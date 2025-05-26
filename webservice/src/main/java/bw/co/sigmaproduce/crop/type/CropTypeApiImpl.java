@@ -88,7 +88,7 @@ public class CropTypeApiImpl extends CropTypeApiBase {
     }
 
     @Override
-    public ResponseEntity<?> handleSave(CropTypeVO cropType) {
+    public ResponseEntity<?> handleSave(CropTypeDTO cropType) {
         try {
 
             if(StringUtils.isBlank(cropType.getId())) {

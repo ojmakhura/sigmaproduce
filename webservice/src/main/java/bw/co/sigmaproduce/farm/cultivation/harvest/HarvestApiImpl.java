@@ -121,7 +121,7 @@ public class HarvestApiImpl extends HarvestApiBase {
     }
 
     @Override
-    public ResponseEntity<?> handleSave(HarvestVO harvest) {
+    public ResponseEntity<?> handleSave(HarvestDTO harvest) {
         try {
             Optional<?> data = Optional.empty(); // TODO: Add custom code here;
             ResponseEntity<?> response;

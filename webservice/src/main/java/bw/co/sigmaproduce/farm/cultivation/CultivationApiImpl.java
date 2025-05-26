@@ -121,7 +121,7 @@ public class CultivationApiImpl extends CultivationApiBase {
     }
 
     @Override
-    public ResponseEntity<?> handleSave(CultivationVO cultivation) {
+    public ResponseEntity<?> handleSave(CultivationDTO cultivation) {
         try {
             Optional<?> data = Optional.empty(); // TODO: Add custom code here;
             ResponseEntity<?> response;

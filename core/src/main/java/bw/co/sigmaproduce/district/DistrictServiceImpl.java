@@ -9,7 +9,6 @@
 package bw.co.sigmaproduce.district;
 
 import bw.co.sigmaproduce.SigmaproduceSpecifications;
-import bw.co.sigmaproduce.crop.CropListVO;
 import java.util.Collection;
 
 import org.apache.commons.lang3.StringUtils;
@@ -44,39 +43,39 @@ public class DistrictServiceImpl
      * @see bw.co.sigmaproduce.district.DistrictService#findById(Long)
      */
     @Override
-    protected DistrictVO handleFindById(Long id)
+    protected DistrictDTO handleFindById(Long id)
         throws Exception
     {
 
         District district = this.getDistrictRepository().getReferenceById(id);
 
-        return this.getDistrictDao().toDistrictVO(district);
+        return this.getDistrictDao().toDistrictDTO(district);
     }
 
     /**
      * @see bw.co.sigmaproduce.district.DistrictService#getAll()
      */
     @Override
-    protected Collection<DistrictVO> handleGetAll()
+    protected Collection<DistrictDTO> handleGetAll()
         throws Exception
     {
 
-        return this.getDistrictDao().toDistrictVOCollection(this.getDistrictRepository().findAll());
+        return this.getDistrictDao().toDistrictDTOCollection(this.getDistrictRepository().findAll());
     }
 
     /**
-     * @see bw.co.sigmaproduce.district.DistrictService#save(DistrictVO)
+     * @see bw.co.sigmaproduce.district.DistrictService#save(DistrictDTO)
      */
     @Override
-    protected DistrictVO handleSave(DistrictVO district)
+    protected DistrictDTO handleSave(DistrictDTO district)
         throws Exception
     {
 
-        District entity = this.getDistrictDao().districtVOToEntity(district);
+        District entity = this.getDistrictDao().districtDTOToEntity(district);
 
         entity = this.getDistrictRepository().save(entity);
 
-        return this.getDistrictDao().toDistrictVO(entity);
+        return this.getDistrictDao().toDistrictDTO(entity);
     }
 
     /**
@@ -94,7 +93,7 @@ public class DistrictServiceImpl
      * @see bw.co.sigmaproduce.district.DistrictService#search(String)
      */
     @Override
-    protected Collection<DistrictVO> handleSearch(String criteria)
+    protected Collection<DistrictDTO> handleSearch(String criteria)
         throws Exception
     {
         Specification<District> spec = null;
@@ -103,7 +102,7 @@ public class DistrictServiceImpl
             spec = SigmaproduceSpecifications.findByAttributeLikeIgnoreCase(criteria, "name");
         }
 
-        return this.getDistrictDao().toDistrictVOCollection(this.getDistrictRepository().findAll(spec));
+        return this.getDistrictDao().toDistrictDTOCollection(this.getDistrictRepository().findAll(spec));
     }
 
 }

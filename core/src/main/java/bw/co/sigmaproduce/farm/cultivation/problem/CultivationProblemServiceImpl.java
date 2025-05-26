@@ -40,10 +40,10 @@ public class CultivationProblemServiceImpl
      * @see bw.co.sigmaproduce.farm.cultivation.problem.CultivationProblemService#findById(String)
      */
     @Override
-    protected CultivationProblemVO handleFindById(String id)
+    protected CultivationProblemDTO handleFindById(String id)
         throws Exception
     {
-        // TODO implement protected  CultivationProblemVO handleFindById(String id)
+        // TODO implement protected  CultivationProblemDTO handleFindById(String id)
         throw new UnsupportedOperationException("bw.co.sigmaproduce.farm.cultivation.problem.CultivationProblemService.handleFindById(String id) Not implemented!");
     }
 
@@ -51,10 +51,10 @@ public class CultivationProblemServiceImpl
      * @see bw.co.sigmaproduce.farm.cultivation.problem.CultivationProblemService#getAll()
      */
     @Override
-    protected Collection<CultivationProblemListVO> handleGetAll()
+    protected Collection<CultivationProblemListDTO> handleGetAll()
         throws Exception
     {
-        // TODO implement protected  Collection<CultivationProblemListVO> handleGetAll()
+        // TODO implement protected  Collection<CultivationProblemListDTO> handleGetAll()
         throw new UnsupportedOperationException("bw.co.sigmaproduce.farm.cultivation.problem.CultivationProblemService.handleGetAll() Not implemented!");
     }
 
@@ -70,24 +70,24 @@ public class CultivationProblemServiceImpl
     }
 
     /**
-     * @see bw.co.sigmaproduce.farm.cultivation.problem.CultivationProblemService#save(CultivationProblemVO)
+     * @see bw.co.sigmaproduce.farm.cultivation.problem.CultivationProblemService#save(CultivationProblemDTO)
      */
     @Override
-    protected CultivationProblemVO handleSave(CultivationProblemVO cultivationProblem)
+    protected CultivationProblemDTO handleSave(CultivationProblemDTO cultivationProblem)
         throws Exception
     {
-        // TODO implement protected  CultivationProblemVO handleSave(CultivationProblemVO cultivationProblem)
-        throw new UnsupportedOperationException("bw.co.sigmaproduce.farm.cultivation.problem.CultivationProblemService.handleSave(CultivationProblemVO cultivationProblem) Not implemented!");
+        // TODO implement protected  CultivationProblemDTO handleSave(CultivationProblemDTO cultivationProblem)
+        throw new UnsupportedOperationException("bw.co.sigmaproduce.farm.cultivation.problem.CultivationProblemService.handleSave(CultivationProblemDTO cultivationProblem) Not implemented!");
     }
 
     /**
      * @see bw.co.sigmaproduce.farm.cultivation.problem.CultivationProblemService#search(String)
      */
     @Override
-    protected Collection<CultivationProblemListVO> handleSearch(String criteria)
+    protected Collection<CultivationProblemListDTO> handleSearch(String criteria)
         throws Exception
     {
-        // TODO implement protected  Collection<CultivationProblemListVO> handleSearch(String criteria)
+        // TODO implement protected  Collection<CultivationProblemListDTO> handleSearch(String criteria)
         throw new UnsupportedOperationException("bw.co.sigmaproduce.farm.cultivation.problem.CultivationProblemService.handleSearch(String criteria) Not implemented!");
     }
 
@@ -95,10 +95,10 @@ public class CultivationProblemServiceImpl
      * @see bw.co.sigmaproduce.farm.cultivation.problem.CultivationProblemService#search(Integer, Integer, String)
      */
     @Override
-    protected Page<CultivationProblemListVO> handleSearch(Integer pageNumber, Integer pageSize, String criteria)
+    protected Page<CultivationProblemListDTO> handleSearch(Integer pageNumber, Integer pageSize, String criteria)
         throws Exception
     {
-        // TODO implement protected  Page<CultivationProblemListVO> handleSearch(Integer pageNumber, Integer pageSize, String criteria)
+        // TODO implement protected  Page<CultivationProblemListDTO> handleSearch(Integer pageNumber, Integer pageSize, String criteria)
         throw new UnsupportedOperationException("bw.co.sigmaproduce.farm.cultivation.problem.CultivationProblemService.handleSearch(Integer pageNumber, Integer pageSize, String criteria) Not implemented!");
     }
 
@@ -106,10 +106,10 @@ public class CultivationProblemServiceImpl
      * @see bw.co.sigmaproduce.farm.cultivation.problem.CultivationProblemService#getAll(Integer, Integer)
      */
     @Override
-    protected Page<CultivationProblemListVO> handleGetAll(Integer pageNumber, Integer pageSize)
+    protected Page<CultivationProblemListDTO> handleGetAll(Integer pageNumber, Integer pageSize)
         throws Exception
     {
-        // TODO implement protected  Page<CultivationProblemListVO> handleGetAll(Integer pageNumber, Integer pageSize)
+        // TODO implement protected  Page<CultivationProblemListDTO> handleGetAll(Integer pageNumber, Integer pageSize)
         throw new UnsupportedOperationException("bw.co.sigmaproduce.farm.cultivation.problem.CultivationProblemService.handleGetAll(Integer pageNumber, Integer pageSize) Not implemented!");
     }
 

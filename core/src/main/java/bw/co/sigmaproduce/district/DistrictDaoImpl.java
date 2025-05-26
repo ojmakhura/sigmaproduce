@@ -32,22 +32,22 @@ public class DistrictDaoImpl
      * {@inheritDoc}
      */
     @Override
-    public void toDistrictVO(
+    public void toDistrictDTO(
         District source,
-        DistrictVO target)
+        DistrictDTO target)
     {
-        // TODO verify behavior of toDistrictVO
-        super.toDistrictVO(source, target);
+        // TODO verify behavior of toDistrictDTO
+        super.toDistrictDTO(source, target);
     }
 
     /**
      * {@inheritDoc}
      */
     @Override
-    public DistrictVO toDistrictVO(final District entity)
+    public DistrictDTO toDistrictDTO(final District entity)
     {
-        // TODO verify behavior of toDistrictVO
-        return super.toDistrictVO(entity);
+        // TODO verify behavior of toDistrictDTO
+        return super.toDistrictDTO(entity);
     }
 
     /**
@@ -55,26 +55,26 @@ public class DistrictDaoImpl
      * from the object store. If no such entity object exists in the object store,
      * a new, blank entity is created
      */
-    private District loadDistrictFromDistrictVO(DistrictVO districtVO)
+    private District loadDistrictFromDistrictDTO(DistrictDTO districtDTO)
     {
-        if (districtVO.getId() == null)
+        if (districtDTO.getId() == null)
         {
             return  District.Factory.newInstance();
         }
         else
         {
-            return this.load(districtVO.getId());
+            return this.load(districtDTO.getId());
         }
     }
 
     /**
      * {@inheritDoc}
      */
-    public District districtVOToEntity(DistrictVO districtVO)
+    public District districtDTOToEntity(DistrictDTO districtDTO)
     {
-        // TODO verify behavior of districtVOToEntity
-        District entity = this.loadDistrictFromDistrictVO(districtVO);
-        this.districtVOToEntity(districtVO, entity, true);
+        // TODO verify behavior of districtDTOToEntity
+        District entity = this.loadDistrictFromDistrictDTO(districtDTO);
+        this.districtDTOToEntity(districtDTO, entity, true);
         return entity;
     }
 
@@ -82,12 +82,12 @@ public class DistrictDaoImpl
      * {@inheritDoc}
      */
     @Override
-    public void districtVOToEntity(
-        DistrictVO source,
+    public void districtDTOToEntity(
+        DistrictDTO source,
         District target,
         boolean copyIfNull)
     {
-        // TODO verify behavior of districtVOToEntity
-        super.districtVOToEntity(source, target, copyIfNull);
+        // TODO verify behavior of districtDTOToEntity
+        super.districtDTOToEntity(source, target, copyIfNull);
     }
 }

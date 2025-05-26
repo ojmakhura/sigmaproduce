@@ -1,4 +1,6 @@
-import { Component, inject, OnDestroy, OnInit } from '@angular/core';
+import { AppEnvState, AppEnvStore } from './store/app-env.state';
+import Keycloak from 'keycloak-js';
+import { Component, effect, inject, OnDestroy, OnInit } from '@angular/core';
 import { Title } from '@angular/platform-browser';
 import { ActivatedRoute, NavigationEnd, Router, RouterModule, RouterOutlet } from '@angular/router';
 import { TranslateService } from '@ngx-translate/core';
@@ -11,33 +13,51 @@ import { environment } from '@env/environment';
 import { MaterialModule } from './material.module';
 import { ShellComponent } from './shell/shell.component';
 import { I18nService } from './i18n/i18n.service';
-import { Logger, UntilDestroy, untilDestroyed } from './@shared';
+import { Logger } from './@shared';
+import { KEYCLOAK_EVENT_SIGNAL, KeycloakEventType, ReadyArgs, typeEventArgs } from 'keycloak-angular';
 
 const log = new Logger('App');
 
-@UntilDestroy()
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.scss'],
-  standalone: true,
-  imports: [
-    CommonModule,
-    RouterOutlet,
-    RouterModule,
-    FormsModule,
-    MaterialModule,
-    ShellComponent,
-  ],
+  imports: [CommonModule, RouterOutlet, RouterModule, FormsModule, MaterialModule, ShellComponent],
 })
 export class AppComponent implements OnInit, OnDestroy {
-
   router = inject(Router);
   activatedRoute = inject(ActivatedRoute);
   private titleService = inject(Title);
   private translateService = inject(TranslateService);
-  private i18nService = inject(I18nService)
+  private i18nService = inject(I18nService);
+  private appEnvState = inject(AppEnvStore);
+  private keycloak = inject(Keycloak);
+  private keycloakSignal = inject(KEYCLOAK_EVENT_SIGNAL);
 
+  constructor() {
+
+    effect(() => {
+      const keycloakEvent = this.keycloakSignal();
+
+      console.log('Keycloak event:', keycloakEvent);
+      // this.keycloakStatus = keycloakEvent.type;
+
+      if (keycloakEvent.type === KeycloakEventType.Ready) {
+        this.appEnvState.setIsLoggedIn(typeEventArgs<ReadyArgs>(keycloakEvent.args));
+        this.keycloak.loadUserProfile().then((profile) => {
+          console.log('User profile:', profile);
+          this.appEnvState.setUsername(profile.username || '');
+
+        });
+      }
+
+      if (keycloakEvent.type === KeycloakEventType.AuthLogout) {
+        this.appEnvState.setIsLoggedIn(false);
+        this.appEnvState.setUsername(null);
+        this.appEnvState.setAccountUri(null);
+      }
+    })
+  }
 
   ngOnInit() {
     // Setup logger
@@ -64,7 +84,6 @@ export class AppComponent implements OnInit, OnDestroy {
         }),
         filter((route) => route.outlet === 'primary'),
         switchMap((route) => route.data),
-        untilDestroyed(this),
       )
       .subscribe((event) => {
         const title = event['title'];

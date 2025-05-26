@@ -5,7 +5,6 @@
 //
 package bw.co.sigmaproduce.crop.variety;
 
-import bw.co.sigmaproduce.crop.CropVO;
 import java.util.Optional;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -122,7 +121,7 @@ public class CropVarietyApiImpl extends CropVarietyApiBase {
     }
 
     @Override
-    public ResponseEntity<?> handleSave(CropVarietyVO cropVariety) {
+    public ResponseEntity<?> handleSave(CropVarietyDTO cropVariety) {
         try {
             Optional<?> data = Optional.of(this.cropVarietyService.save(cropVariety));
             ResponseEntity<?> response;

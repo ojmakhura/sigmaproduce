@@ -6,10 +6,11 @@
  */
 package bw.co.sigmaproduce.farm;
 
+import bw.co.sigmaproduce.document.DocumentRepository;
 import bw.co.sigmaproduce.farm.cultivation.CultivationRepository;
 import bw.co.sigmaproduce.farm.post.PostRepository;
 import bw.co.sigmaproduce.village.VillageRepository;
-import bw.co.sigmaproduce.village.VillageVO;
+import bw.co.sigmaproduce.village.VillageDTO;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -24,52 +25,44 @@ public class FarmDaoImpl
     extends FarmDaoBase
 {
     
-    public FarmDaoImpl(
-        VillageRepository villageRepository,
-        CultivationRepository cultivationRepository,
-        PostRepository postRepository,
-        FarmRepository farmRepository
-    ) {
 
-        super(
-            villageRepository,
-            cultivationRepository,
-            postRepository,
-            farmRepository
-        );
+    public FarmDaoImpl(VillageRepository villageRepository, CultivationRepository cultivationRepository,
+            PostRepository postRepository, DocumentRepository documentRepository, FarmRepository farmRepository) {
+        super(villageRepository, cultivationRepository, postRepository, documentRepository, farmRepository);
+        //TODO Auto-generated constructor stub
     }
 
     /**
      * {@inheritDoc}
      */
     @Override
-    public void toFarmVO(
+    public void toFarmDTO(
         Farm source,
-        FarmVO target)
+        FarmDTO target)
     {
-        // TODO verify behavior of toFarmVO
-        super.toFarmVO(source, target);
-        // WARNING! No conversion for target.nearestVillage (can't convert source.getNearestVillage():bw.co.sigmaproduce.village.Village to bw.co.sigmaproduce.village.VillageVO
+        // TODO verify behavior of toFarmDTO
+        super.toFarmDTO(source, target);
+        // WARNING! No conversion for target.nearestVillage (can't convert source.getNearestVillage():bw.co.sigmaproduce.village.Village to bw.co.sigmaproduce.village.VillageDTO
 
         if(source.getNearestVillage() != null)
         {
-            VillageVO nearestVillage = new VillageVO();
-            this.getVillageDao().toVillageVO(source.getNearestVillage(), nearestVillage);
+            VillageDTO nearestVillage = new VillageDTO();
+            this.getVillageDao().toVillageDTO(source.getNearestVillage(), nearestVillage);
 
             target.setNearestVillage(nearestVillage);
         }
-        // WARNING! No conversion for target.alliedFarms (can't convert source.getAlliedFarms():Farm to FarmListVO
+        // WARNING! No conversion for target.alliedFarms (can't convert source.getAlliedFarms():Farm to FarmListDTO
 
         if(source.getAlliedFarms() != null)
         {
-            List<FarmListVO> alliedFarms = new ArrayList<>();
+            List<FarmListDTO> alliedFarms = new ArrayList<>();
 
             for(Farm alliedFarm : source.getAlliedFarms())
             {
-                FarmListVO farmListVO = new FarmListVO();
-                farmListVO.setId(alliedFarm.getId());
-                farmListVO.setName(alliedFarm.getName());
-                alliedFarms.add(farmListVO);
+                FarmListDTO farmListDTO = new FarmListDTO();
+                farmListDTO.setId(alliedFarm.getId());
+                farmListDTO.setName(alliedFarm.getName());
+                alliedFarms.add(farmListDTO);
             }
 
             target.setAlliedFarms(alliedFarms);
@@ -80,10 +73,10 @@ public class FarmDaoImpl
      * {@inheritDoc}
      */
     @Override
-    public FarmVO toFarmVO(final Farm entity)
+    public FarmDTO toFarmDTO(final Farm entity)
     {
-        // TODO verify behavior of toFarmVO
-        return super.toFarmVO(entity);
+        // TODO verify behavior of toFarmDTO
+        return super.toFarmDTO(entity);
     }
 
     /**
@@ -91,26 +84,26 @@ public class FarmDaoImpl
      * from the object store. If no such entity object exists in the object store,
      * a new, blank entity is created
      */
-    private Farm loadFarmFromFarmVO(FarmVO farmVO)
+    private Farm loadFarmFromFarmDTO(FarmDTO farmDTO)
     {
-        if (farmVO.getId() == null)
+        if (farmDTO.getId() == null)
         {
             return  Farm.Factory.newInstance();
         }
         else
         {
-            return this.load(farmVO.getId());
+            return this.load(farmDTO.getId());
         }
     }
 
     /**
      * {@inheritDoc}
      */
-    public Farm farmVOToEntity(FarmVO farmVO)
+    public Farm farmDTOToEntity(FarmDTO farmDTO)
     {
-        // TODO verify behavior of farmVOToEntity
-        Farm entity = this.loadFarmFromFarmVO(farmVO);
-        this.farmVOToEntity(farmVO, entity, true);
+        // TODO verify behavior of farmDTOToEntity
+        Farm entity = this.loadFarmFromFarmDTO(farmDTO);
+        this.farmDTOToEntity(farmDTO, entity, true);
         return entity;
     }
 
@@ -118,24 +111,24 @@ public class FarmDaoImpl
      * {@inheritDoc}
      */
     @Override
-    public void farmVOToEntity(
-        FarmVO source,
+    public void farmDTOToEntity(
+        FarmDTO source,
         Farm target,
         boolean copyIfNull)
     {
-        // TODO verify behavior of farmVOToEntity
-        super.farmVOToEntity(source, target, copyIfNull);
+        // TODO verify behavior of farmDTOToEntity
+        super.farmDTOToEntity(source, target, copyIfNull);
     }
     /**
      * {@inheritDoc}
      */
     @Override
-    public void toFarmListVO(
+    public void toFarmListDTO(
         Farm source,
-        FarmListVO target)
+        FarmListDTO target)
     {
-        // TODO verify behavior of toFarmListVO
-        super.toFarmListVO(source, target);
+        // TODO verify behavior of toFarmListDTO
+        super.toFarmListDTO(source, target);
         // WARNING! No conversion for target.nearestVillage (can't convert source.getNearestVillage():bw.co.sigmaproduce.village.Village to java.lang.String
 
         if(source.getNearestVillage() != null)
@@ -148,10 +141,10 @@ public class FarmDaoImpl
      * {@inheritDoc}
      */
     @Override
-    public FarmListVO toFarmListVO(final Farm entity)
+    public FarmListDTO toFarmListDTO(final Farm entity)
     {
-        // TODO verify behavior of toFarmListVO
-        return super.toFarmListVO(entity);
+        // TODO verify behavior of toFarmListDTO
+        return super.toFarmListDTO(entity);
     }
 
     /**
@@ -159,26 +152,26 @@ public class FarmDaoImpl
      * from the object store. If no such entity object exists in the object store,
      * a new, blank entity is created
      */
-    private Farm loadFarmFromFarmListVO(FarmListVO farmListVO)
+    private Farm loadFarmFromFarmListDTO(FarmListDTO farmListDTO)
     {
-        if (farmListVO.getId() == null)
+        if (farmListDTO.getId() == null)
         {
             return  Farm.Factory.newInstance();
         }
         else
         {
-            return this.load(farmListVO.getId());
+            return this.load(farmListDTO.getId());
         }
     }
 
     /**
      * {@inheritDoc}
      */
-    public Farm farmListVOToEntity(FarmListVO farmListVO)
+    public Farm farmListDTOToEntity(FarmListDTO farmListDTO)
     {
-        // TODO verify behavior of farmListVOToEntity
-        Farm entity = this.loadFarmFromFarmListVO(farmListVO);
-        this.farmListVOToEntity(farmListVO, entity, true);
+        // TODO verify behavior of farmListDTOToEntity
+        Farm entity = this.loadFarmFromFarmListDTO(farmListDTO);
+        this.farmListDTOToEntity(farmListDTO, entity, true);
         return entity;
     }
 
@@ -186,12 +179,12 @@ public class FarmDaoImpl
      * {@inheritDoc}
      */
     @Override
-    public void farmListVOToEntity(
-        FarmListVO source,
+    public void farmListDTOToEntity(
+        FarmListDTO source,
         Farm target,
         boolean copyIfNull)
     {
-        // TODO verify behavior of farmListVOToEntity
-        super.farmListVOToEntity(source, target, copyIfNull);
+        // TODO verify behavior of farmListDTOToEntity
+        super.farmListDTOToEntity(source, target, copyIfNull);
     }
 }

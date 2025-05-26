@@ -102,7 +102,7 @@ public class CropIssueApiImpl extends CropIssueApiBase {
     }
 
     @Override
-    public ResponseEntity<?> handleSave(CropIssueVO cropIssue) {
+    public ResponseEntity<?> handleSave(CropIssueDTO cropIssue) {
         try {
             Optional<?> data = Optional.empty(); // TODO: Add custom code here;
             ResponseEntity<?> response;

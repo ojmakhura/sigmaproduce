@@ -7,6 +7,7 @@
 package bw.co.sigmaproduce.farm.post;
 
 import bw.co.sigmaproduce.SigmaproduceSpecifications;
+import bw.co.sigmaproduce.document.DocumentRepository;
 import bw.co.sigmaproduce.farm.FarmRepository;
 import java.util.Collection;
 import org.springframework.data.domain.Page;
@@ -24,15 +25,11 @@ public class PostDaoImpl
     extends PostDaoBase
 {
     
-    public PostDaoImpl(
-        FarmRepository farmRepository,
-        PostRepository postRepository
-    ) {
 
-        super(
-            farmRepository,
-            postRepository
-        );
+    public PostDaoImpl(FarmRepository farmRepository, DocumentRepository documentRepository,
+            PostRepository postRepository) {
+        super(farmRepository, documentRepository, postRepository);
+        //TODO Auto-generated constructor stub
     }
 
     /**
@@ -61,22 +58,22 @@ public class PostDaoImpl
      * {@inheritDoc}
      */
     @Override
-    public void toPostVO(
+    public void toPostDTO(
         Post source,
-        PostVO target)
+        PostDTO target)
     {
-        // TODO verify behavior of toPostVO
-        super.toPostVO(source, target);
+        // TODO verify behavior of toPostDTO
+        super.toPostDTO(source, target);
     }
 
     /**
      * {@inheritDoc}
      */
     @Override
-    public PostVO toPostVO(final Post entity)
+    public PostDTO toPostDTO(final Post entity)
     {
-        // TODO verify behavior of toPostVO
-        return super.toPostVO(entity);
+        // TODO verify behavior of toPostDTO
+        return super.toPostDTO(entity);
     }
 
     /**
@@ -84,26 +81,26 @@ public class PostDaoImpl
      * from the object store. If no such entity object exists in the object store,
      * a new, blank entity is created
      */
-    private Post loadPostFromPostVO(PostVO postVO)
+    private Post loadPostFromPostDTO(PostDTO postDTO)
     {
-        if (postVO.getId() == null)
+        if (postDTO.getId() == null)
         {
             return  Post.Factory.newInstance();
         }
         else
         {
-            return this.load(postVO.getId());
+            return this.load(postDTO.getId());
         }
     }
 
     /**
      * {@inheritDoc}
      */
-    public Post postVOToEntity(PostVO postVO)
+    public Post postDTOToEntity(PostDTO postDTO)
     {
-        // TODO verify behavior of postVOToEntity
-        Post entity = this.loadPostFromPostVO(postVO);
-        this.postVOToEntity(postVO, entity, true);
+        // TODO verify behavior of postDTOToEntity
+        Post entity = this.loadPostFromPostDTO(postDTO);
+        this.postDTOToEntity(postDTO, entity, true);
         return entity;
     }
 
@@ -111,12 +108,12 @@ public class PostDaoImpl
      * {@inheritDoc}
      */
     @Override
-    public void postVOToEntity(
-        PostVO source,
+    public void postDTOToEntity(
+        PostDTO source,
         Post target,
         boolean copyIfNull)
     {
-        // TODO verify behavior of postVOToEntity
-        super.postVOToEntity(source, target, copyIfNull);
+        // TODO verify behavior of postDTOToEntity
+        super.postDTOToEntity(source, target, copyIfNull);
     }
 }

@@ -122,7 +122,7 @@ public class CultivationProblemApiImpl extends CultivationProblemApiBase {
     }
 
     @Override
-    public ResponseEntity<?> handleSave(CultivationProblemVO cultivationProblem) {
+    public ResponseEntity<?> handleSave(CultivationProblemDTO cultivationProblem) {
         try {
             Optional<?> data = Optional.empty(); // TODO: Add custom code here;
             ResponseEntity<?> response;

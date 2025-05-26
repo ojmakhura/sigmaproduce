@@ -1,14 +1,56 @@
 server:
-    port: 8085
-    servlet:
-        context-path: /sigmaproduce/api/
+  port: 8085
+  servlet:
+    context-path: /
 spring:
-    thymeleaf:
-        cache: false
-    mvc:
-        format:
-            date: iso
-            date-time: iso
-            time: HH:mm:ss
-        pathmatch:
-            matching-strategy: ANT_PATH_MATCHER
+  thymeleaf:
+    cache: false
+  mvc:
+    format:
+      date: iso
+      date-time: iso
+      time: HH:mm:ss
+    pathmatch:
+      matching-strategy: ANT_PATH_MATCHER
+  liquibase:
+    enabled: false
+  security:
+    oauth2:
+      client:
+        registration:
+          keycloak:
+            client-id: ${CLIENT_ID:sigmaproduce-api}
+            provider: keycloak
+            scope: openid, profile, email
+        provider:
+          keycloak:
+            issuer-uri: ${AUTH_URL:http://localhost:8970}/realms/${REALM:sigmaproduce}
+            user-name-attribute: preferred_username
+      resourceserver:
+        jwt:
+          issuer-uri: ${AUTH_URL:http://localhost:8970}/realms/${REALM:sigmaproduce}
+
+management:
+  endpoint:
+    health:
+      show-details: always
+    metrics:
+      access: READ_ONLY
+    prometheus:
+      access: READ_ONLY
+  endpoints:
+    web:
+      base-path: /actuator
+      exposure:
+        include: health,info,metrics,prometheus
+        exclude: env,shutdown,heapdump
+  metrics:
+    tags:
+      application: ${spring.application.name}
+      version: ${spring.application.version}
+
+minio:
+  url: ${MINIO_URL:http://localhost:9000}
+  access-key: ${MINIO_ACCESS_KEY:minio}
+  secret-key: ${MINIO_SECRET_KEY:minio123}
+  bucket-name: sigmaproduce

@@ -44,40 +44,40 @@ public class VillageServiceImpl
      * @see bw.co.sigmaproduce.village.VillageService#findById(Long)
      */
     @Override
-    protected VillageVO handleFindById(Long id)
+    protected VillageDTO handleFindById(Long id)
         throws Exception
     {
 
         Village village = this.getVillageRepository().getReferenceById(id);
 
-        return this.getVillageDao().toVillageVO(village);
+        return this.getVillageDao().toVillageDTO(village);
     }
 
     /**
      * @see bw.co.sigmaproduce.village.VillageService#getAll()
      */
     @Override
-    protected Collection<VillageVO> handleGetAll()
+    protected Collection<VillageDTO> handleGetAll()
         throws Exception
     {
 
         Collection<Village> all = this.getVillageRepository().findAll();
 
-        return this.getVillageDao().toVillageVOCollection(all);
+        return this.getVillageDao().toVillageDTOCollection(all);
     }
 
     /**
-     * @see bw.co.sigmaproduce.village.VillageService#save(VillageVO)
+     * @see bw.co.sigmaproduce.village.VillageService#save(VillageDTO)
      */
     @Override
-    protected VillageVO handleSave(VillageVO village)
+    protected VillageDTO handleSave(VillageDTO village)
         throws Exception
     {
 
-        Village entity = this.getVillageDao().villageVOToEntity(village);
+        Village entity = this.getVillageDao().villageDTOToEntity(village);
         entity = this.getVillageRepository().save(entity);
 
-        return this.getVillageDao().toVillageVO(entity);
+        return this.getVillageDao().toVillageDTO(entity);
     }
 
     /**
@@ -97,7 +97,7 @@ public class VillageServiceImpl
      * @see bw.co.sigmaproduce.village.VillageService#search(String)
      */
     @Override
-    protected Collection<VillageVO> handleSearch(String criteria)
+    protected Collection<VillageDTO> handleSearch(String criteria)
         throws Exception
     {
         Specification<Village> spec = null;
@@ -109,11 +109,11 @@ public class VillageServiceImpl
 
         Collection<Village> all = this.getVillageRepository().findAll(spec);
 
-        return this.getVillageDao().toVillageVOCollection(all);
+        return this.getVillageDao().toVillageDTOCollection(all);
     }
 
     @Override
-    protected VillageVO handleGetDistrictVillages(String districtId) throws Exception {
+    protected VillageDTO handleGetDistrictVillages(String districtId) throws Exception {
         // TODO Auto-generated method stub
         throw new UnsupportedOperationException("Unimplemented method 'handleGetDistrictVillages'");
     }

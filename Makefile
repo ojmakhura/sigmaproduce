@@ -38,6 +38,12 @@ build_web_dist: build_web local_web_deps
 build_app: 
 	mvn install -DskipTests=true -o
 
+local_web_deps: build_web
+	cd angular/target/sigmaproduce && npm i && npm install file-saver --save && npm install @types/file-saver --save-dev
+
+run_web_local: build_web
+	cd angular/target/sigmaproduce && npm start
+
 clean_build: clean_all build_app
 
 clean_all:
@@ -105,14 +111,15 @@ rm_env:
 	rm -f .env
 
 gen_env:
-ifdef env
 	if [ -f .env ]; then \
 		rm -f .env; \
 	fi
-	@$(${env}_ENV)
+	@$(ENV)
 	chmod 755 .env
-else
-	@echo 'no env defined. Please run again with `make env=<LOCAL_ENV, DEV_ENV, TEST_ENV, LIVE_ENV> target`'
-	exit 1
-endif
 
+
+version_update:
+	mvn versions:set -DnewVersion=${version} -DgenerateBackupPoms=false
+
+show_version:
+	mvn help:evaluate -Dexpression=project.version -q -DforceStdout 
