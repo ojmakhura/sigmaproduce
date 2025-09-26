@@ -137,7 +137,7 @@ public class CropDaoImpl
         }
         else
         {
-            return this.load(cropDTO.getId());
+            return cropRepository.getReferenceById(cropDTO.getId());
         }
     }
 
@@ -220,7 +220,7 @@ public class CropDaoImpl
         }
         else
         {
-            return this.load(cropListDTO.getId());
+            return cropRepository.getReferenceById(cropListDTO.getId());
         }
     }
 

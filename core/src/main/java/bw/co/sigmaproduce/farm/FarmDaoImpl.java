@@ -92,7 +92,7 @@ public class FarmDaoImpl
         }
         else
         {
-            return this.load(farmDTO.getId());
+            return farmRepository.getReferenceById(farmDTO.getId());
         }
     }
 
@@ -160,7 +160,7 @@ public class FarmDaoImpl
         }
         else
         {
-            return this.load(farmListDTO.getId());
+            return this.farmRepository.getReferenceById(farmListDTO.getId());
         }
     }
 

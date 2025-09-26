@@ -104,7 +104,7 @@ public class CropVarietyDaoImpl
         }
         else
         {
-            return this.load(cropVarietyDTO.getId());
+            return cropVarietyRepository.getReferenceById(cropVarietyDTO.getId());
         }
     }
 
@@ -167,7 +167,7 @@ public class CropVarietyDaoImpl
         }
         else
         {
-            return this.load(cropVarietyList.getId());
+            return this.cropVarietyRepository.getReferenceById(cropVarietyList.getId());
         }
     }
 

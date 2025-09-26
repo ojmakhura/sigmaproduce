@@ -63,7 +63,7 @@ public class DistrictDaoImpl
         }
         else
         {
-            return this.load(districtDTO.getId());
+            return districtRepository.getReferenceById(districtDTO.getId());
         }
     }
 

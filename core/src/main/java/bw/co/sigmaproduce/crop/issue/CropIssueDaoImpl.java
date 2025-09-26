@@ -66,7 +66,7 @@ public class CropIssueDaoImpl
         }
         else
         {
-            return this.load(cropIssueDTO.getId());
+            return cropIssueRepository.getReferenceById(cropIssueDTO.getId());
         }
     }
 

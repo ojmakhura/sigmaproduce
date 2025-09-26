@@ -1,4 +1,4 @@
-import { ApplicationConfig, isDevMode, importProvidersFrom } from '@angular/core';
+import { ApplicationConfig, isDevMode, importProvidersFrom, inject, provideAppInitializer } from '@angular/core';
 import { RouteReuseStrategy, provideRouter, withHashLocation } from '@angular/router';
 
 import { routes } from './app.routes';
@@ -13,8 +13,24 @@ import { RouteReusableStrategy } from './@shared';
 import { MAT_FORM_FIELD_DEFAULT_OPTIONS } from '@angular/material/form-field';
 import { apiPrefixInterceptor } from './@core/http/api-prefix.interceptor';
 import { errorHandlerInterceptor } from './@core/http/error-handler.interceptor';
-import { AutoRefreshTokenService, createInterceptorCondition, INCLUDE_BEARER_TOKEN_INTERCEPTOR_CONFIG, IncludeBearerTokenCondition, includeBearerTokenInterceptor, provideKeycloak, UserActivityService, withAutoRefreshToken } from 'keycloak-angular';
+import {
+  AutoRefreshTokenService,
+  createInterceptorCondition,
+  INCLUDE_BEARER_TOKEN_INTERCEPTOR_CONFIG,
+  IncludeBearerTokenCondition,
+  includeBearerTokenInterceptor,
+  provideKeycloak,
+  UserActivityService,
+  withAutoRefreshToken,
+} from 'keycloak-angular';
 import { provideToastr } from 'ngx-toastr';
+import { AppEnvStore } from './store/app-env.state';
+
+export function initFactory() {
+  const envStore = inject(AppEnvStore);
+
+  return async () => {};
+}
 
 export const provideKeycloakAndInterceptor = (env: any) => {
   const urlConditions = [
@@ -51,19 +67,14 @@ export const provideKeycloakAndInterceptor = (env: any) => {
           onInactivityTimeout: 'logout',
         }),
       ],
-      providers: [
-        AutoRefreshTokenService,
-        UserActivityService,
-      ],
+      providers: [AutoRefreshTokenService, UserActivityService],
     }),
     { provide: INCLUDE_BEARER_TOKEN_INTERCEPTOR_CONFIG, useValue: urlConditions },
   ];
 };
 
 export const appConfig = (env: any) => {
-
   return {
-
     providers: [
       UseCaseScope,
       provideRouter(routes, withHashLocation()),
@@ -71,11 +82,7 @@ export const appConfig = (env: any) => {
       provideKeycloakAndInterceptor(env),
       provideHttpClient(
         withInterceptorsFromDi(),
-        withInterceptors([
-          apiPrefixInterceptor,
-          errorHandlerInterceptor,
-          includeBearerTokenInterceptor
-        ])
+        withInterceptors([apiPrefixInterceptor, errorHandlerInterceptor, includeBearerTokenInterceptor]),
       ),
       provideStoreDevtools({ maxAge: 25, logOnly: !isDevMode() }),
       provideToastr(),
@@ -89,6 +96,7 @@ export const appConfig = (env: any) => {
         provide: RouteReuseStrategy,
         useClass: RouteReusableStrategy,
       },
+      provideAppInitializer(() => initFactory()()),
     ],
   } as ApplicationConfig;
 };

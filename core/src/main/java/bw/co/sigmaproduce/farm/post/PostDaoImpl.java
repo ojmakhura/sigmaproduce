@@ -89,7 +89,7 @@ public class PostDaoImpl
         }
         else
         {
-            return this.load(postDTO.getId());
+            return postRepository.getReferenceById(postDTO.getId());
         }
     }
 

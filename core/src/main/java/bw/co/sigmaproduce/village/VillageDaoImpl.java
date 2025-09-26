@@ -74,7 +74,7 @@ public class VillageDaoImpl
         }
         else
         {
-            return this.load(villageDTO.getId());
+            return villageRepository.getReferenceById(villageDTO.getId());
         }
     }
 

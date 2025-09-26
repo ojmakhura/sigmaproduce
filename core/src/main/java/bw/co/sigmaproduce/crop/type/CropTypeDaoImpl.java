@@ -83,7 +83,7 @@ public class CropTypeDaoImpl
         }
         else
         {
-            return this.load(cropTypeDTO.getId());
+            return cropTypeRepository.getReferenceById(cropTypeDTO.getId());
         }
     }
 
@@ -145,7 +145,7 @@ public class CropTypeDaoImpl
         }
         else
         {
-            return this.load(cropTypeListDTO.getId());
+            return this.cropTypeRepository.getReferenceById(cropTypeListDTO.getId());
         }
     }
 
