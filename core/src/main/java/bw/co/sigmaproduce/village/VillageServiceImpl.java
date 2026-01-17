@@ -44,7 +44,7 @@ public class VillageServiceImpl
      * @see bw.co.sigmaproduce.village.VillageService#findById(Long)
      */
     @Override
-    protected VillageDTO handleFindById(Long id)
+    protected VillageDTO handleFindById(String id)
         throws Exception
     {
 
@@ -84,7 +84,7 @@ public class VillageServiceImpl
      * @see bw.co.sigmaproduce.village.VillageService#remove(Long)
      */
     @Override
-    protected boolean handleRemove(Long id)
+    protected boolean handleRemove(String id)
         throws Exception
     {
             

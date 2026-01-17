@@ -6,8 +6,11 @@
  * MODEL CLASS:  $validationName
  */
 import { Routes } from '@angular/router';
-import { Shell } from '@app/shell/shell.service';
+import { Shell } from './shell';
 // import { LoginComponent } from './auth/login.component';
+import { cropsRoutes } from '@app/views/crop/crop.routes';
+import { cropTypesRoutes } from '@app/views/crop/type/crop-type.routes';
+import { farmRoutes } from '@app/views/farm/farm.routes';
 
 export const routes: Routes = [
   // Uncomment the following lines to enable login route
@@ -19,25 +22,16 @@ export const routes: Routes = [
     {
       path: '',
       data: { title: 'Home' },
-      loadChildren: () => import('./home/home.routes').then((m) => m.routes),
+      loadComponent: () => import('./views/home/home').then((m) => m.Home),
     },
     {
       path: 'about',
       data: { title: 'About' },
-      loadChildren: () => import('./about/about.routes').then((m) => m.routes),
+      loadComponent: () => import('./views/about/about').then((m) => m.About),
     },
-    {
-      path: 'crop', 
-      loadChildren: () => import('@app/view/crop/crop.routes').then((m) => m.routes),
-    },
-    {
-      path: 'crop/type', 
-      loadChildren: () => import('@app/view/crop/type/crop-type.routes').then((m) => m.routes),
-    },
-    {
-      path: 'farm', 
-      loadChildren: () => import('@app/view/farm/farm.routes').then((m) => m.routes),
-    },
+    ...cropsRoutes,
+    ...cropTypesRoutes,
+    ...farmRoutes,
   ]),
   // Fallback when no prior route is matched
   { 

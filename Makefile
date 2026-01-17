@@ -1,125 +1,73 @@
-include ./Makefile.dev
-
-gen_self_certs:
-ifdef domain
-	mkcert -key-file deployment/certs/${domain}.key -cert-file deployment/certs/${domain}.crt ${domain} keycloak.${domain} api.${domain} db.${domain} proxy.${domain} prometheus.${domain} portainer.${domain} unsee.${domain} grafana.${domain} *.${domain}
-else
-	mkcert -key-file deployment/certs/localhost.key -cert-file deployment/certs/localhost.crt localhost keycloak.localhost api.localhost db.localhost proxy.localhost prometheus.localhost portainer.localhost unsee.localhost grafana.localhost *.localhost
-endif
+# include ./Makefile.dev
 
 build_common:
-	mvn -f common install -DskipTests=true -o
+	mvn -rf common install -DskipTests=true
 
 build_core:
-	mvn -f core install -DskipTests=true -o
+	mvn -rf core install -DskipTests=true
 
 test_core: 
-	. ./.env && mvn -f core test -o
-
-build_api:
-	. ./.env && mvn -f webservice install -DskipTests=true -o
+	. ./.env && mvn -pl core test
 
 test_api: 
-	. ./.env && mvn -f webservice test -o
+	. ./.env && mvn -pl webservice test
 	
-build_native: gen_env 
-	. ./.env && mvn -f ${module} clean native:compile -Pnative -DskipTests -o
+build_api:
+	. ./.env && mvn -rf webservice install -DskipTests=true
+	
+build_mda:
+	. ./.env && mvn -rf mda install -DskipTests=true
 
-colon = :
-native_image_tracing: gen_env
-	. ./.env && timeout 40 ${JAVA_HOME}/bin/java -agentlib${colon}native-image-agent=config-output-dir=./${service}/src/main/resources/META-INF/native-image -jar ./${service}/target/sigmaproduce-${service}-${IMAGE_VERSION}.jar
-	
 build_web: 
 	mvn -f angular install -DskipTests=true -o
 
 build_web_dist: build_web local_web_deps
 	. ./.env && cd angular/target/sigmaproduce && npm run build --configuration=production
 
+build_native: 
+	. ./.env && mvn clean && mvn -pl webservice native:compile -Pnative -DskipTests
+
+native_image: 
+	. ./.env && mvn -Pnative -pl webservice/ -am spring-boot:build-image
+
 build_app: 
-	mvn install -DskipTests=true -o
-
-local_web_deps: build_web
-	cd angular/target/sigmaproduce && npm i && npm install file-saver --save && npm install @types/file-saver --save-dev
-
-run_web_local: build_web
-	cd angular/target/sigmaproduce && npm start
+	mvn install -DskipTests=true
 
 clean_build: clean_all build_app
 
 clean_all:
-	mvn clean -o
+	mvn clean
 
 clean_module:
-	mvn -f ${service} clean -o
-
-##
-## Start the docker containers
-##
-up_proxy: gen_env
-	. ./.env && docker compose up -d proxy
-
-up_stack: gen_env
-ifdef stack
-	chmod 755 .env && . ./.env && docker stack deploy -c docker-compose-${stack}.yml ${STACK_NAME}-${stack}
-else
-	@echo 'no stack defined. Please run again with `make env=<LOCAL, DEV, TEST, LIVE> stack=<name> up_stack`'
-	exit 1
-endif
-
-down_stack:
-ifdef stack
-	docker stack rm ${STACK_NAME}-${stack}
-else
-	@echo 'no stack defined. Please run again with `make env=<LOCAL, DEV, TEST, LIVE> stack=<name> down_stack`'
-	exit 1
-endif
-
-run_tests: gen_env test_${module}
-
-run_test: gen_env
-	. ./.env && mvn -f ${module} -Dtest=${test} -Dspring.profiles.active=test test -o
+	mvn -f ${module} clean
 	
-##
-## Build docker images
-##
-build_image: gen_env
-	. ./.env && docker compose -f ${stack_file}.yml build
-
-build_api_image: gen_env build_api
+build_api_image: build_api
 	. ./.env && docker compose build api
 
-build_web_image: gen_env
-	. ./.env && docker compose build web
+###
+## tag and push the images
+###
+push_web_image: 
+	. ./.env && docker push ${REGISTRY_TAG}/${WEB_IMAGE_NAME}:${IMAGE_VERSION}${IMAGE_VERSION_SUFFIX}
 
-build_images: gen_env build_keycloak_image build_web_image build_api_image build_comm_image
+push_api_image: 
+	. ./.env && docker push ${REGISTRY_TAG}/${API_IMAGE_NAME}:${IMAGE_VERSION}${IMAGE_VERSION_SUFFIX}
 
 
 ###
 ## Run the local api and web
 ###    
-run_module_local: gen_env
-	. ./.env && mvn -pl ${module} -am spring-boot:run
-		
-run_api_local: gen_env
+run_module_local:
+	. ./.env && cd ${module} && mvn spring-boot:run
+	
+run_api_local: 
 	. ./.env && mvn -pl webservice/ -am spring-boot:run
 
-# run_local_web: build_local_images up_local_app
-stop_app:
-	docker compose down
+local_web_deps: build_web
+	cd angular/target/sigmaproduce && npm i
 
-rm_env:
-	rm -f .env
+local_web_deps_force:
+	cd angular/target/sigmaproduce && npm i --force
 
-gen_env:
-	if [ -f .env ]; then \
-		rm -f .env; \
-	fi
-	@$(ENV)
-	chmod 755 .env
-
-
-version_update:
-	mvn versions:set -DnewVersion=${version} -DgenerateBackupPoms=false
-
-show_version:
-	mvn help:evaluate -Dexpression=project.version -q -DforceStdout 
+run_web_local: build_web
+	cd angular/target/sigmaproduce && npm start

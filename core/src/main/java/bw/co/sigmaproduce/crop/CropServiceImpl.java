@@ -113,7 +113,7 @@ public class CropServiceImpl
     {
         if(StringUtils.isBlank(crop.getId())) {
             crop.setCreatedBy("SYSTEM");
-            crop.setCreatedDate(LocalDateTime.now());
+            // crop.setCreatedDate(LocalDateTime.now());
         }
 
         Crop entity = cropDao.cropDTOToEntity(crop);
@@ -124,7 +124,7 @@ public class CropServiceImpl
                 if(StringUtils.isBlank(variety.getId())) {
 
                     variety.setCreatedBy("SYSTEM");
-                    variety.setCreatedDate(new Date());
+                    // variety.setCreatedDate(new Date());
 
                     variety.setCrop(entity);
                 }

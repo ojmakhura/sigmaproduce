@@ -9,6 +9,7 @@ package bw.co.sigmaproduce.farm;
 import bw.co.sigmaproduce.document.DocumentRepository;
 import bw.co.sigmaproduce.farm.cultivation.CultivationRepository;
 import bw.co.sigmaproduce.farm.post.PostRepository;
+import bw.co.sigmaproduce.owner.OwnerRepository;
 import bw.co.sigmaproduce.village.VillageRepository;
 import bw.co.sigmaproduce.village.VillageDTO;
 
@@ -27,8 +28,9 @@ public class FarmDaoImpl
     
 
     public FarmDaoImpl(VillageRepository villageRepository, CultivationRepository cultivationRepository,
-            PostRepository postRepository, DocumentRepository documentRepository, FarmRepository farmRepository) {
-        super(villageRepository, cultivationRepository, postRepository, documentRepository, farmRepository);
+            PostRepository postRepository, DocumentRepository documentRepository, OwnerRepository ownerRepository,
+            FarmRepository farmRepository) {
+        super(villageRepository, cultivationRepository, postRepository, documentRepository, ownerRepository, farmRepository);
         //TODO Auto-generated constructor stub
     }
 

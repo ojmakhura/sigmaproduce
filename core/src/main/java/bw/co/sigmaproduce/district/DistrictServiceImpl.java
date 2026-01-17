@@ -43,7 +43,7 @@ public class DistrictServiceImpl
      * @see bw.co.sigmaproduce.district.DistrictService#findById(Long)
      */
     @Override
-    protected DistrictDTO handleFindById(Long id)
+    protected DistrictDTO handleFindById(String id)
         throws Exception
     {
 
@@ -82,7 +82,7 @@ public class DistrictServiceImpl
      * @see bw.co.sigmaproduce.district.DistrictService#remove(Long)
      */
     @Override
-    protected boolean handleRemove(Long id)
+    protected boolean handleRemove(String id)
         throws Exception
     {
         this.getDistrictRepository().deleteById(id);
