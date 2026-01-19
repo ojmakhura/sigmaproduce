@@ -5,156 +5,120 @@
 //
 package bw.co.sigmaproduce.farm.cultivation.harvest;
 
-import java.util.Optional;
-import org.springframework.http.HttpStatus;
+import io.swagger.v3.oas.annotations.Operation;
+import java.util.Collection;
+import org.springframework.data.domain.Page;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-@RequestMapping("/farm/cultivation/harvest")
-@CrossOrigin()
-public class HarvestApiImpl extends HarvestApiBase {
+public class HarvestApiImpl implements HarvestApi {
+        protected final HarvestService harvestService;
     
     public HarvestApiImpl(
         HarvestService harvestService    ) {
         
-        super(
-            harvestService        );
+        this.harvestService = harvestService;
+    }
+
+
+
+    @Override
+    @Operation(summary = "Find Farm by id", description = "Get the farm with the given id")
+    public ResponseEntity<HarvestDTO> findById(String id) throws Exception {
+        try {
+            return ResponseEntity.ok(harvestService.findById(id));
+        } catch (Exception e) {
+
+            e.printStackTrace();
+            throw e;
+        } 
     }
 
 
     @Override
-    public ResponseEntity<?> handleFindById(String id) {
+    @Operation(summary = "Get Harvests", description = "Get all harvests in the data store")
+    public ResponseEntity<Collection<HarvestList>> getAll() throws Exception {
         try {
-            Optional<?> data = Optional.empty(); // TODO: Add custom code here;
-            ResponseEntity<?> response;
-
-            if(data.isPresent()) {
-                response = ResponseEntity.status(HttpStatus.OK).body(data.get());
-            } else {
-                response = ResponseEntity.status(HttpStatus.NOT_FOUND).build();
-            }
-
-            return response;
+            return ResponseEntity.ok(harvestService.getAll());
         } catch (Exception e) {
-            logger.error(e.getMessage());
-            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(e.getMessage());
-        }
+
+            e.printStackTrace();
+            throw e;
+        } 
     }
 
+
     @Override
-    public ResponseEntity<?> handleGetAll() {
+    @Operation(summary = "Get Harvest Page", description = "Get {pageSize} harvests with for a particular {pageNumber}")
+    public ResponseEntity<Page<HarvestList>> getAllPaged(Integer pageNumber, Integer pageSize) throws Exception {
         try {
-            Optional<?> data = Optional.empty(); // TODO: Add custom code here;
-            ResponseEntity<?> response;
-
-            if(data.isPresent()) {
-                response = ResponseEntity.status(HttpStatus.OK).body(data.get());
-            } else {
-                response = ResponseEntity.status(HttpStatus.NOT_FOUND).build();
-            }
-
-            return response;
+            return ResponseEntity.ok(harvestService.getAll(pageNumber, pageSize));
         } catch (Exception e) {
-            logger.error(e.getMessage());
-            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(e.getMessage());
-        }
+
+            e.printStackTrace();
+            throw e;
+        } 
     }
 
+
     @Override
-    public ResponseEntity<?> handleGetAllPaged(Integer pageNumber, Integer pageSize) {
+    @Operation(summary = "Search Harvest Page", description = "Get {pageSize} harves for a particular {pageNumber} given a search criteria")
+    public ResponseEntity<Page<HarvestList>> pagedSearch(HarvestCriteria criteria, Integer pageNumber, Integer pageSize) throws Exception {
         try {
-            Optional<?> data = Optional.empty(); // TODO: Add custom code here;
-            ResponseEntity<?> response;
-
-            if(data.isPresent()) {
-                response = ResponseEntity.status(HttpStatus.OK).body(data.get());
-            } else {
-                response = ResponseEntity.status(HttpStatus.NOT_FOUND).build();
-            }
-
-            return response;
+            return ResponseEntity.ok(harvestService.search(pageNumber, pageSize, criteria));
         } catch (Exception e) {
-            logger.error(e.getMessage());
-            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(e.getMessage());
-        }
+
+            e.printStackTrace();
+            throw e;
+        } 
     }
 
+
     @Override
-    public ResponseEntity<?> handlePagedSearch(HarvestCriteria criteria, Integer pageNumber, Integer pageSize) {
+    @Operation(summary = "Remove Harvest by id", description = "Remove the harvest with the given id")
+    public ResponseEntity<Boolean> remove(String id) throws Exception {
         try {
-            Optional<?> data = Optional.empty(); // TODO: Add custom code here;
-            ResponseEntity<?> response;
-
-            if(data.isPresent()) {
-                response = ResponseEntity.status(HttpStatus.OK).body(data.get());
-            } else {
-                response = ResponseEntity.status(HttpStatus.NOT_FOUND).build();
-            }
-
-            return response;
+            return ResponseEntity.ok(harvestService.remove(id));
         } catch (Exception e) {
-            logger.error(e.getMessage());
-            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(e.getMessage());
-        }
+
+            e.printStackTrace();
+            throw e;
+        } 
     }
 
+
     @Override
-    public ResponseEntity<?> handleRemove(String id) {
+    @Operation(summary = "Save Harvest", description = "Save a harvest to data store")
+    public ResponseEntity<HarvestDTO> save(HarvestDTO harvest) throws Exception {
         try {
-            Optional<?> data = Optional.empty(); // TODO: Add custom code here;
-            ResponseEntity<?> response;
-
-            if(data.isPresent()) {
-                response = ResponseEntity.status(HttpStatus.OK).body(data.get());
-            } else {
-                response = ResponseEntity.status(HttpStatus.NOT_FOUND).build();
-            }
-
-            return response;
+            return ResponseEntity.ok(harvestService.save(harvest));
         } catch (Exception e) {
-            logger.error(e.getMessage());
-            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(e.getMessage());
-        }
+
+            e.printStackTrace();
+            throw e;
+        } 
     }
 
+
     @Override
-    public ResponseEntity<?> handleSave(HarvestDTO harvest) {
+    @Operation(summary = "Search Harvests", description = "Search harvests based on the criteria")
+    public ResponseEntity<Collection<HarvestList>> search(HarvestCriteria criteria) throws Exception {
         try {
-            Optional<?> data = Optional.empty(); // TODO: Add custom code here;
-            ResponseEntity<?> response;
-
-            if(data.isPresent()) {
-                response = ResponseEntity.status(HttpStatus.OK).body(data.get());
-            } else {
-                response = ResponseEntity.status(HttpStatus.NOT_FOUND).build();
-            }
-
-            return response;
+            return ResponseEntity.ok(harvestService.search(criteria));
         } catch (Exception e) {
-            logger.error(e.getMessage());
-            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(e.getMessage());
-        }
+
+            e.printStackTrace();
+            throw e;
+        } 
     }
-
-    @Override
-    public ResponseEntity<?> handleSearch(HarvestCriteria criteria) {
-        try {
-            Optional<?> data = Optional.empty(); // TODO: Add custom code here;
-            ResponseEntity<?> response;
-
-            if(data.isPresent()) {
-                response = ResponseEntity.status(HttpStatus.OK).body(data.get());
-            } else {
-                response = ResponseEntity.status(HttpStatus.NOT_FOUND).build();
-            }
-
-            return response;
-        } catch (Exception e) {
-            logger.error(e.getMessage());
-            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(e.getMessage());
-        }
+    
+    /**
+     * Gets the reference to <code>$serviceRef.daoName</code>.
+     * @return harvestService
+     */
+    protected HarvestService getHarvestService()
+    {
+        return this.harvestService;
     }
 }

@@ -5,156 +5,118 @@
 //
 package bw.co.sigmaproduce.farm.post;
 
-import java.util.Optional;
-import org.springframework.http.HttpStatus;
+import io.swagger.v3.oas.annotations.Operation;
+import java.util.Collection;
+import org.springframework.data.domain.Page;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-@RequestMapping("/farm/post")
-@CrossOrigin()
-public class PostApiImpl extends PostApiBase {
+public class PostApiImpl implements PostApi {
+        protected final PostService postService;
     
     public PostApiImpl(
         PostService postService    ) {
         
-        super(
-            postService        );
+        this.postService = postService;
+    }
+
+
+
+    @Override
+    @Operation(summary = "Find Post by id", description = "Get the post with the given id")
+    public ResponseEntity<PostDTO> findById(String id) throws Exception {
+        try {
+            return ResponseEntity.ok(postService.findById(id));
+        } catch (Exception e) {
+
+            e.printStackTrace();
+            throw e;
+        } 
     }
 
 
     @Override
-    public ResponseEntity<?> handleFindById(String id) {
+    public ResponseEntity<Collection<Post>> findFarmPosts(String farmId) throws Exception {
         try {
-            Optional<?> data = Optional.of(postService.findById(id));
-            ResponseEntity<?> response;
-
-            if(data.isPresent()) {
-                response = ResponseEntity.status(HttpStatus.OK).body(data.get());
-            } else {
-                response = ResponseEntity.status(HttpStatus.NOT_FOUND).build();
-            }
-
-            return response;
+            return ResponseEntity.ok(null);
         } catch (Exception e) {
-            logger.error(e.getMessage());
-            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(e.getMessage());
-        }
+
+            e.printStackTrace();
+            throw e;
+        } 
     }
 
+
     @Override
-    public ResponseEntity<?> handleFindFarmPosts(String farmId) {
+    public ResponseEntity<Page<PostDTO>> findFarmPostsPaged(String farmId, Integer pageSize, Integer pageNumber) throws Exception {
         try {
-            Optional<?> data = Optional.of(postService.getFarmPosts(farmId));
-            ResponseEntity<?> response;
-
-            if(data.isPresent()) {
-                response = ResponseEntity.status(HttpStatus.OK).body(data.get());
-            } else {
-                response = ResponseEntity.status(HttpStatus.NOT_FOUND).build();
-            }
-
-            return response;
+            return ResponseEntity.ok(null);
         } catch (Exception e) {
-            logger.error(e.getMessage());
-            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(e.getMessage());
-        }
+
+            e.printStackTrace();
+            throw e;
+        } 
     }
 
+
     @Override
-    public ResponseEntity<?> handleFindFarmPostsPaged(String farmId, Integer pageSize, Integer pageNumber) {
+    @Operation(summary = "Get Farms", description = "Get all farms in the data store")
+    public ResponseEntity<Collection<PostDTO>> getAll() throws Exception {
         try {
-            Optional<?> data = Optional.of(postService.getFarmPosts(farmId, pageSize, pageNumber)); 
-            ResponseEntity<?> response;
-
-            if(data.isPresent()) {
-                response = ResponseEntity.status(HttpStatus.OK).body(data.get());
-            } else {
-                response = ResponseEntity.status(HttpStatus.NOT_FOUND).build();
-            }
-
-            return response;
+            return ResponseEntity.ok(null);
         } catch (Exception e) {
-            logger.error(e.getMessage());
-            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(e.getMessage());
-        }
+
+            e.printStackTrace();
+            throw e;
+        } 
     }
 
+
     @Override
-    public ResponseEntity<?> handleGetAll() {
+    @Operation(summary = "Remove farm by id", description = "Remove the farm with the given id")
+    public ResponseEntity<Boolean> remove(String id) throws Exception {
         try {
-            Optional<?> data = Optional.of(postService.getAll()); // TODO: Add custom code here;
-            ResponseEntity<?> response;
-
-            if(data.isPresent()) {
-                response = ResponseEntity.status(HttpStatus.OK).body(data.get());
-            } else {
-                response = ResponseEntity.status(HttpStatus.NOT_FOUND).build();
-            }
-
-            return response;
+            return ResponseEntity.ok(null);
         } catch (Exception e) {
-            logger.error(e.getMessage());
-            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(e.getMessage());
-        }
+
+            e.printStackTrace();
+            throw e;
+        } 
     }
 
+
     @Override
-    public ResponseEntity<?> handleRemove(String id) {
+    @Operation(summary = "Save Farm", description = "Save a farm to data store")
+    public ResponseEntity<PostDTO> save(PostDTO post) throws Exception {
         try {
-            Optional<?> data = Optional.of(postService.remove(id)); // TODO: Add custom code here;
-            ResponseEntity<?> response;
-
-            if(data.isPresent()) {
-                response = ResponseEntity.status(HttpStatus.OK).body(data.get());
-            } else {
-                response = ResponseEntity.status(HttpStatus.NOT_FOUND).build();
-            }
-
-            return response;
+            return ResponseEntity.ok(null);
         } catch (Exception e) {
-            logger.error(e.getMessage());
-            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(e.getMessage());
-        }
+
+            e.printStackTrace();
+            throw e;
+        } 
     }
 
+
     @Override
-    public ResponseEntity<?> handleSave(PostDTO post) {
+    @Operation(summary = "Search Farms", description = "Search farms based on the criteria")
+    public ResponseEntity<Collection<PostDTO>> search(String criteria) throws Exception {
         try {
-            Optional<?> data = Optional.of(postService.save(post)); // TODO: Add custom code here;
-            ResponseEntity<?> response;
-
-            if(data.isPresent()) {
-                response = ResponseEntity.status(HttpStatus.OK).body(data.get());
-            } else {
-                response = ResponseEntity.status(HttpStatus.NOT_FOUND).build();
-            }
-
-            return response;
+            return ResponseEntity.ok(null);
         } catch (Exception e) {
-            logger.error(e.getMessage());
-            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(e.getMessage());
-        }
+
+            e.printStackTrace();
+            throw e;
+        } 
     }
-
-    @Override
-    public ResponseEntity<?> handleSearch(String criteria) {
-        try {
-            Optional<?> data = Optional.empty(); // TODO: Add custom code here;
-            ResponseEntity<?> response;
-
-            if(data.isPresent()) {
-                response = ResponseEntity.status(HttpStatus.OK).body(data.get());
-            } else {
-                response = ResponseEntity.status(HttpStatus.NOT_FOUND).build();
-            }
-
-            return response;
-        } catch (Exception e) {
-            logger.error(e.getMessage());
-            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(e.getMessage());
-        }
+    
+    /**
+     * Gets the reference to <code>$serviceRef.daoName</code>.
+     * @return postService
+     */
+    protected PostService getPostService()
+    {
+        return this.postService;
     }
 }

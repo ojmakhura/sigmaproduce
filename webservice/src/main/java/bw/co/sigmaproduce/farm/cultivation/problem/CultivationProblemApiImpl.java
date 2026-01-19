@@ -6,156 +6,119 @@
 package bw.co.sigmaproduce.farm.cultivation.problem;
 
 import bw.co.sigmaproduce.farm.cultivation.CultivationCriteria;
-import java.util.Optional;
-import org.springframework.http.HttpStatus;
+import bw.co.sigmaproduce.farm.cultivation.CultivationListDTO;
+import io.swagger.v3.oas.annotations.Operation;
+import java.util.Collection;
+import org.springframework.data.domain.Page;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-@RequestMapping("/farm/cultivation/problem")
-@CrossOrigin()
-public class CultivationProblemApiImpl extends CultivationProblemApiBase {
+public class CultivationProblemApiImpl implements CultivationProblemApi {
+        protected final CultivationProblemService cultivationProblemService;
     
     public CultivationProblemApiImpl(
         CultivationProblemService cultivationProblemService    ) {
         
-        super(
-            cultivationProblemService        );
+        this.cultivationProblemService = cultivationProblemService;
+    }
+
+    @Override
+    @Operation(summary = "Find Farm by id", description = "Get the farm with the given id")
+    public ResponseEntity<CultivationProblemDTO> findById(String id) throws Exception {
+        try {
+            return ResponseEntity.ok(cultivationProblemService.findById(id));
+        } catch (Exception e) {
+
+            e.printStackTrace();
+            throw e;
+        } 
     }
 
 
     @Override
-    public ResponseEntity<?> handleFindById(String id) {
+    @Operation(summary = "Get Farms", description = "Get all farms in the data store")
+    public ResponseEntity<Collection<CultivationProblemListDTO>> getAll() throws Exception {
         try {
-            Optional<?> data = Optional.empty(); // TODO: Add custom code here;
-            ResponseEntity<?> response;
-
-            if(data.isPresent()) {
-                response = ResponseEntity.status(HttpStatus.OK).body(data.get());
-            } else {
-                response = ResponseEntity.status(HttpStatus.NOT_FOUND).build();
-            }
-
-            return response;
+            return ResponseEntity.ok(cultivationProblemService.getAll());
         } catch (Exception e) {
-            logger.error(e.getMessage());
-            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(e.getMessage());
-        }
+
+            e.printStackTrace();
+            throw e;
+        } 
     }
 
+
     @Override
-    public ResponseEntity<?> handleGetAll() {
+    @Operation(summary = "Get Farms Page", description = "Get {pageSize} farms with for a particular {pageNumber}")
+    public ResponseEntity<Page<CultivationProblemListDTO>> getAllPaged(Integer pageNumber, Integer pageSize) throws Exception {
         try {
-            Optional<?> data = Optional.empty(); // TODO: Add custom code here;
-            ResponseEntity<?> response;
-
-            if(data.isPresent()) {
-                response = ResponseEntity.status(HttpStatus.OK).body(data.get());
-            } else {
-                response = ResponseEntity.status(HttpStatus.NOT_FOUND).build();
-            }
-
-            return response;
+            return ResponseEntity.ok(cultivationProblemService.getAll(pageNumber, pageSize));
         } catch (Exception e) {
-            logger.error(e.getMessage());
-            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(e.getMessage());
-        }
+
+            e.printStackTrace();
+            throw e;
+        } 
     }
 
+
     @Override
-    public ResponseEntity<?> handleGetAllPaged(Integer pageNumber, Integer pageSize) {
+    @Operation(summary = "Search Farms Page", description = "Get {pageSize} farms for a particular {pageNumber} given a search criteria")
+    public ResponseEntity<Page<CultivationListDTO>> pagedSearch(Integer pageNumber, Integer pageSize, CultivationCriteria criteria) throws Exception {
         try {
-            Optional<?> data = Optional.empty(); // TODO: Add custom code here;
-            ResponseEntity<?> response;
-
-            if(data.isPresent()) {
-                response = ResponseEntity.status(HttpStatus.OK).body(data.get());
-            } else {
-                response = ResponseEntity.status(HttpStatus.NOT_FOUND).build();
-            }
-
-            return response;
+            return ResponseEntity.ok(null);
         } catch (Exception e) {
-            logger.error(e.getMessage());
-            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(e.getMessage());
-        }
+
+            e.printStackTrace();
+            throw e;
+        } 
     }
 
+
     @Override
-    public ResponseEntity<?> handlePagedSearch(Integer pageNumber, Integer pageSize, CultivationCriteria criteria) {
+    @Operation(summary = "Remove farm by id", description = "Remove the farm with the given id")
+    public ResponseEntity<Boolean> remove(String id) throws Exception {
         try {
-            Optional<?> data = Optional.empty(); // TODO: Add custom code here;
-            ResponseEntity<?> response;
-
-            if(data.isPresent()) {
-                response = ResponseEntity.status(HttpStatus.OK).body(data.get());
-            } else {
-                response = ResponseEntity.status(HttpStatus.NOT_FOUND).build();
-            }
-
-            return response;
+            return ResponseEntity.ok(cultivationProblemService.remove(id));
         } catch (Exception e) {
-            logger.error(e.getMessage());
-            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(e.getMessage());
-        }
+
+            e.printStackTrace();
+            throw e;
+        } 
     }
 
+
     @Override
-    public ResponseEntity<?> handleRemove(String id) {
+    @Operation(summary = "Save Farm", description = "Save a farm to data store")
+    public ResponseEntity<CultivationProblemDTO> save(CultivationProblemDTO cultivationProblem) throws Exception {
         try {
-            Optional<?> data = Optional.empty(); // TODO: Add custom code here;
-            ResponseEntity<?> response;
-
-            if(data.isPresent()) {
-                response = ResponseEntity.status(HttpStatus.OK).body(data.get());
-            } else {
-                response = ResponseEntity.status(HttpStatus.NOT_FOUND).build();
-            }
-
-            return response;
+            return ResponseEntity.ok(cultivationProblemService.save(cultivationProblem));
         } catch (Exception e) {
-            logger.error(e.getMessage());
-            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(e.getMessage());
-        }
+
+            e.printStackTrace();
+            throw e;
+        } 
     }
 
+
     @Override
-    public ResponseEntity<?> handleSave(CultivationProblemDTO cultivationProblem) {
+    @Operation(summary = "Search Farms", description = "Search farms based on the criteria")
+    public ResponseEntity<Collection<CultivationListDTO>> search(CultivationCriteria criteria) throws Exception {
         try {
-            Optional<?> data = Optional.empty(); // TODO: Add custom code here;
-            ResponseEntity<?> response;
-
-            if(data.isPresent()) {
-                response = ResponseEntity.status(HttpStatus.OK).body(data.get());
-            } else {
-                response = ResponseEntity.status(HttpStatus.NOT_FOUND).build();
-            }
-
-            return response;
+            return ResponseEntity.ok(null);
         } catch (Exception e) {
-            logger.error(e.getMessage());
-            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(e.getMessage());
-        }
+
+            e.printStackTrace();
+            throw e;
+        } 
     }
-
-    @Override
-    public ResponseEntity<?> handleSearch(CultivationCriteria criteria) {
-        try {
-            Optional<?> data = Optional.empty(); // TODO: Add custom code here;
-            ResponseEntity<?> response;
-
-            if(data.isPresent()) {
-                response = ResponseEntity.status(HttpStatus.OK).body(data.get());
-            } else {
-                response = ResponseEntity.status(HttpStatus.NOT_FOUND).build();
-            }
-
-            return response;
-        } catch (Exception e) {
-            logger.error(e.getMessage());
-            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(e.getMessage());
-        }
+    
+    /**
+     * Gets the reference to <code>$serviceRef.daoName</code>.
+     * @return cultivationProblemService
+     */
+    protected CultivationProblemService getCultivationProblemService()
+    {
+        return this.cultivationProblemService;
     }
 }

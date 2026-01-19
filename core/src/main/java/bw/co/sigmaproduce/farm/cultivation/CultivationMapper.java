@@ -76,6 +76,8 @@ public interface CultivationMapper {
     // WARNING! No conversion for target.updatedDate (can't convert source.getUpdatedDate():java.util.Date to java.util.Date
     // WARNING! No conversion for target.cropVariety (can't convert source.getCropVariety():bw.co.sigmaproduce.crop.variety.CropVariety to java.lang.String
     // WARNING! No conversion for target.farm (can't convert source.getFarm():bw.co.sigmaproduce.farm.Farm to java.lang.String
+    @Mapping(source = "farm.name", target = "farm")
+    @Mapping(source = "cropVariety.name", target = "cropVariety")
     CultivationListDTO toCultivationListDTO(Cultivation entity);
 
      /**

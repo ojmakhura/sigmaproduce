@@ -7,6 +7,7 @@ package bw.co.sigmaproduce.crop.issue;
 
 import bw.co.sigmaproduce.crop.CropMapper;
 import bw.co.sigmaproduce.crop.type.CropTypeMapper;
+import bw.co.sigmaproduce.document.DocumentMapper;
 import bw.co.sigmaproduce.farm.cultivation.problem.CultivationProblemMapper;
 import java.util.Collection;
 import java.util.List;
@@ -18,11 +19,13 @@ import org.mapstruct.MappingTarget;
 import org.mapstruct.NullValuePropertyMappingStrategy;
 
 @Mapper(
-    componentModel = "spring"
-    , uses = {
+    componentModel = "spring", 
+    uses = {
         CropTypeMapper.class,
         CropMapper.class,
-        CultivationProblemMapper.class    }
+        CultivationProblemMapper.class,
+        DocumentMapper.class
+    }
 )
 public interface CropIssueMapper {
     

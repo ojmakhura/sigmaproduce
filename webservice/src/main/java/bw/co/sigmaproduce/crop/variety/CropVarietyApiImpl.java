@@ -5,156 +5,120 @@
 //
 package bw.co.sigmaproduce.crop.variety;
 
-import java.util.Optional;
-import org.springframework.http.HttpStatus;
+import io.swagger.v3.oas.annotations.Operation;
+import java.util.Collection;
+import org.springframework.data.domain.Page;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-@RequestMapping("/crop/variety")
-@CrossOrigin()
-public class CropVarietyApiImpl extends CropVarietyApiBase {
+public class CropVarietyApiImpl implements CropVarietyApi {
+        protected final CropVarietyService cropVarietyService;
     
     public CropVarietyApiImpl(
         CropVarietyService cropVarietyService    ) {
         
-        super(
-            cropVarietyService        );
+        this.cropVarietyService = cropVarietyService;
+    }
+
+
+
+    @Override
+    @Operation(summary = "Find Crop Variety by id", description = "Get the crop variety with the given id")
+    public ResponseEntity<CropVarietyDTO> findById(String id) throws Exception {
+        try {
+            return ResponseEntity.ok(cropVarietyService.findById(id));
+        } catch (Exception e) {
+
+            e.printStackTrace();
+            throw e;
+        } 
     }
 
 
     @Override
-    public ResponseEntity<?> handleFindById(String id) {
+    @Operation(summary = "Get Crop Varieties", description = "Get all all crop varieties in the data store")
+    public ResponseEntity<Collection<CropVarietyList>> getAll() throws Exception {
         try {
-            Optional<?> data = Optional.of(this.cropVarietyService.findById(id));
-            ResponseEntity<?> response;
-
-            if(data.isPresent()) {
-                response = ResponseEntity.status(HttpStatus.OK).body(data.get());
-            } else {
-                response = ResponseEntity.status(HttpStatus.NOT_FOUND).build();
-            }
-
-            return response;
+            return ResponseEntity.ok(cropVarietyService.getAll());
         } catch (Exception e) {
-            logger.error(e.getMessage());
-            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(e.getMessage());
-        }
+
+            e.printStackTrace();
+            throw e;
+        } 
     }
 
+
     @Override
-    public ResponseEntity<?> handleGetAll() {
+    @Operation(summary = "Get Crop Varieties Page", description = "Get {pageSize} crop varieties with for a particular {pageNumber}")
+    public ResponseEntity<Page<CropVarietyList>> getAllPaged(Integer pageNumber, Integer pageSize) throws Exception {
         try {
-            Optional<?> data = Optional.of(this.cropVarietyService.getAll());
-            ResponseEntity<?> response;
-
-            if(data.isPresent()) {
-                response = ResponseEntity.status(HttpStatus.OK).body(data.get());
-            } else {
-                response = ResponseEntity.status(HttpStatus.NOT_FOUND).build();
-            }
-
-            return response;
+            return ResponseEntity.ok(cropVarietyService.getAll(pageNumber, pageSize));
         } catch (Exception e) {
-            logger.error(e.getMessage());
-            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(e.getMessage());
-        }
+
+            e.printStackTrace();
+            throw e;
+        } 
     }
 
+
     @Override
-    public ResponseEntity<?> handleGetAllPaged(Integer pageNumber, Integer pageSize) {
+    @Operation(summary = "Search Crop Varieties Page", description = "Get {pageSize} crop varieties for a particular {pageNumber} given a search criteria")
+    public ResponseEntity<Page<CropVarietyList>> pagedSearch(Integer pageNumber, Integer pageSize, String criteria) throws Exception {
         try {
-            Optional<?> data = Optional.of(this.cropVarietyService.getAll(pageNumber, pageSize));
-            ResponseEntity<?> response;
-
-            if(data.isPresent()) {
-                response = ResponseEntity.status(HttpStatus.OK).body(data.get());
-            } else {
-                response = ResponseEntity.status(HttpStatus.NOT_FOUND).build();
-            }
-
-            return response;
+            return ResponseEntity.ok(cropVarietyService.search(pageNumber, pageSize, criteria));
         } catch (Exception e) {
-            logger.error(e.getMessage());
-            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(e.getMessage());
-        }
+
+            e.printStackTrace();
+            throw e;
+        } 
     }
 
+
     @Override
-    public ResponseEntity<?> handlePagedSearch(Integer pageNumber, Integer pageSize, String criteria) {
+    @Operation(summary = "Remove crop variety by id", description = "Remove the crop variety with the given id")
+    public ResponseEntity<Boolean> remove(String id) throws Exception {
         try {
-            Optional<?> data = Optional.of(this.cropVarietyService.search(pageNumber, pageSize, criteria));
-            ResponseEntity<?> response;
-
-            if(data.isPresent()) {
-                response = ResponseEntity.status(HttpStatus.OK).body(data.get());
-            } else {
-                response = ResponseEntity.status(HttpStatus.NOT_FOUND).build();
-            }
-
-            return response;
+            return ResponseEntity.ok(cropVarietyService.remove(id));
         } catch (Exception e) {
-            logger.error(e.getMessage());
-            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(e.getMessage());
-        }
+
+            e.printStackTrace();
+            throw e;
+        } 
     }
 
+
     @Override
-    public ResponseEntity<?> handleRemove(String id) {
+    @Operation(summary = "Save Crop Variety", description = "Save a crop variety to data store")
+    public ResponseEntity<CropVarietyDTO> save(CropVarietyDTO cropVariety) throws Exception {
         try {
-            Optional<?> data = Optional.of(this.cropVarietyService.remove(id));
-            ResponseEntity<?> response;
-
-            if(data.isPresent()) {
-                response = ResponseEntity.status(HttpStatus.OK).body(data.get());
-            } else {
-                response = ResponseEntity.status(HttpStatus.NOT_FOUND).build();
-            }
-
-            return response;
+            return ResponseEntity.ok(cropVarietyService.save(cropVariety));
         } catch (Exception e) {
-            logger.error(e.getMessage());
-            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(e.getMessage());
-        }
+
+            e.printStackTrace();
+            throw e;
+        } 
     }
 
+
     @Override
-    public ResponseEntity<?> handleSave(CropVarietyDTO cropVariety) {
+    @Operation(summary = "Search Crop Varieties", description = "Search crop varieties based on the criteria")
+    public ResponseEntity<Collection<CropVarietyList>> search(String criteria) throws Exception {
         try {
-            Optional<?> data = Optional.of(this.cropVarietyService.save(cropVariety));
-            ResponseEntity<?> response;
-
-            if(data.isPresent()) {
-                response = ResponseEntity.status(HttpStatus.OK).body(data.get());
-            } else {
-                response = ResponseEntity.status(HttpStatus.NOT_FOUND).build();
-            }
-
-            return response;
+            return ResponseEntity.ok(cropVarietyService.search(criteria));
         } catch (Exception e) {
-            logger.error(e.getMessage());
-            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(e.getMessage());
-        }
+
+            e.printStackTrace();
+            throw e;
+        } 
     }
-
-    @Override
-    public ResponseEntity<?> handleSearch(String criteria) {
-        try {
-            Optional<?> data = Optional.of(this.cropVarietyService.search(criteria));
-            ResponseEntity<?> response;
-
-            if(data.isPresent()) {
-                response = ResponseEntity.status(HttpStatus.OK).body(data.get());
-            } else {
-                response = ResponseEntity.status(HttpStatus.NOT_FOUND).build();
-            }
-
-            return response;
-        } catch (Exception e) {
-            logger.error(e.getMessage());
-            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(e.getMessage());
-        }
+    
+    /**
+     * Gets the reference to <code>$serviceRef.daoName</code>.
+     * @return cropVarietyService
+     */
+    protected CropVarietyService getCropVarietyService()
+    {
+        return this.cropVarietyService;
     }
 }

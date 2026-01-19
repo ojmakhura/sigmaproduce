@@ -5,132 +5,93 @@
 //
 package bw.co.sigmaproduce.crop.type;
 
-import java.time.LocalDateTime;
-import java.util.Date;
-import java.util.Optional;
-
-import org.apache.commons.lang3.StringUtils;
-import org.springframework.http.HttpStatus;
+import io.swagger.v3.oas.annotations.Operation;
+import java.util.Collection;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-@RequestMapping("/crop/type")
-@CrossOrigin()
-public class CropTypeApiImpl extends CropTypeApiBase {
+public class CropTypeApiImpl implements CropTypeApi {
+        protected final CropTypeService cropTypeService;
     
     public CropTypeApiImpl(
         CropTypeService cropTypeService    ) {
         
-        super(
-            cropTypeService        );
+        this.cropTypeService = cropTypeService;
     }
 
 
-    @Override
-    public ResponseEntity<?> handleFindById(String id) {
-        try {
-            Optional<?> data = Optional.of(cropTypeService.findById(id)); // TODO: Add custom code here;
-            ResponseEntity<?> response;
-
-            if(data.isPresent()) {
-                response = ResponseEntity.status(HttpStatus.OK).body(data.get());
-            } else {
-                response = ResponseEntity.status(HttpStatus.NOT_FOUND).build();
-            }
-
-            return response;
-        } catch (Exception e) {
-            logger.error(e.getMessage());
-            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(e.getMessage());
-        }
-    }
 
     @Override
-    public ResponseEntity<?> handleGetAll() {
+    @Operation(summary = "Find Crop by id", description = "Get the cropp with the given id")
+    public ResponseEntity<CropTypeDTO> findById(String id) throws Exception {
         try {
-            Optional<?> data = Optional.of(cropTypeService.getAll());
-            ResponseEntity<?> response;
-
-            if(data.isPresent()) {
-                response = ResponseEntity.status(HttpStatus.OK).body(data.get());
-            } else {
-                response = ResponseEntity.status(HttpStatus.NOT_FOUND).build();
-            }
-
-            return response;
+            return ResponseEntity.ok(cropTypeService.findById(id));
         } catch (Exception e) {
+
             e.printStackTrace();
-            logger.error(e.getMessage());
-            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(e.getMessage());
-        }
+            throw e;
+        } 
     }
 
+
     @Override
-    public ResponseEntity<?> handleRemove(String id) {
+    @Operation(summary = "Get Crops", description = "Get all all crops in the data store")
+    public ResponseEntity<Collection<CropTypeDTO>> getAll() throws Exception {
         try {
-            Optional<?> data = Optional.of(cropTypeService.remove(id));
-            ResponseEntity<?> response;
-
-            if(data.isPresent()) {
-                response = ResponseEntity.status(HttpStatus.OK).body(data.get());
-            } else {
-                response = ResponseEntity.status(HttpStatus.NOT_FOUND).build();
-            }
-
-            return response;
+            return ResponseEntity.ok(cropTypeService.getAll());
         } catch (Exception e) {
-            logger.error(e.getMessage());
-            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(e.getMessage());
-        }
+
+            e.printStackTrace();
+            throw e;
+        } 
     }
 
+
     @Override
-    public ResponseEntity<?> handleSave(CropTypeDTO cropType) {
+    @Operation(summary = "Remove crop by id", description = "Remove the crop with the given id")
+    public ResponseEntity<Boolean> remove(String id) throws Exception {
         try {
-
-            if(StringUtils.isBlank(cropType.getId())) {
-                cropType.setCreatedBy("SYSTEM");
-                cropType.setCreatedDate(LocalDateTime.now());
-            } else {
-                cropType.setUpdatedBy("SYSTEM");
-                cropType.setUpdatedDate(LocalDateTime.now());
-            }
-
-            Optional<?> data = Optional.of(cropTypeService.save(cropType));
-            ResponseEntity<?> response;
-
-            if(data.isPresent()) {
-                response = ResponseEntity.status(HttpStatus.OK).body(data.get());
-            } else {
-                response = ResponseEntity.status(HttpStatus.NOT_FOUND).build();
-            }
-
-            return response;
+            return ResponseEntity.ok(cropTypeService.remove(id));
         } catch (Exception e) {
-            logger.error(e.getMessage());
-            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(e.getMessage());
-        }
+
+            e.printStackTrace();
+            throw e;
+        } 
     }
 
+
     @Override
-    public ResponseEntity<?> handleSearch(String criteria) {
+    @Operation(summary = "Save Crop", description = "Save acrops to data store")
+    public ResponseEntity<CropTypeDTO> save(CropTypeDTO cropType) throws Exception {
         try {
-            Optional<?> data = Optional.of(cropTypeService.search(criteria));
-            ResponseEntity<?> response;
-
-            if(data.isPresent()) {
-                response = ResponseEntity.status(HttpStatus.OK).body(data.get());
-            } else {
-                response = ResponseEntity.status(HttpStatus.NOT_FOUND).build();
-            }
-
-            return response;
+            return ResponseEntity.ok(cropTypeService.save(cropType));
         } catch (Exception e) {
-            logger.error(e.getMessage());
-            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(e.getMessage());
-        }
+
+            e.printStackTrace();
+            throw e;
+        } 
+    }
+
+
+    @Override
+    @Operation(summary = "Search Crops", description = "Search crops based on the criteria")
+    public ResponseEntity<Collection<CropTypeDTO>> search(String criteria) throws Exception {
+        try {
+            return ResponseEntity.ok(cropTypeService.search(criteria));
+        } catch (Exception e) {
+
+            e.printStackTrace();
+            throw e;
+        } 
+    }
+    
+    /**
+     * Gets the reference to <code>$serviceRef.daoName</code>.
+     * @return cropTypeService
+     */
+    protected CropTypeService getCropTypeService()
+    {
+        return this.cropTypeService;
     }
 }

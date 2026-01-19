@@ -11,6 +11,7 @@ import java.util.List;
 import org.mapstruct.BeanMapping;
 import org.mapstruct.InheritInverseConfiguration;
 import org.mapstruct.Mapper;
+import org.mapstruct.Mapping;
 import org.mapstruct.MappingTarget;
 import org.mapstruct.NullValuePropertyMappingStrategy;
 
@@ -27,6 +28,8 @@ public interface DocumentMapper {
      * @return DocumentDTO
      */
     // WARNING! No conversion for target.documentType (can't convert source.getDocumentType():bw.co.sigmaproduce.document.type.DocumentType to java.lang.String
+    @Mapping(target = "documentType", source = "documentType.name")
+    @Mapping(target = "documentTypeId", source = "documentType.id")
     DocumentDTO toDocumentDTO(Document entity);
 
      /**

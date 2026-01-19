@@ -6,9 +6,13 @@
 package bw.co.sigmaproduce.crop;
 
 import io.swagger.v3.oas.annotations.tags.Tag;
+import lombok.extern.slf4j.Slf4j;
+
+import java.util.Collection;
 import java.util.Optional;
 import java.util.Set;
 
+import org.springframework.data.domain.Page;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -21,163 +25,117 @@ import bw.co.sigmaproduce.crop.issue.CropIssueType;
 @RequestMapping("/crop")
 @CrossOrigin()
 @Tag(name = "Access Point", description = "Managing the different resources available.")
-public class CropApiImpl extends CropApiBase {
-    
+@Slf4j
+public class CropApiImpl implements CropApi {
+
+    private final CropService cropService;
+
     public CropApiImpl(
-        CropService cropService    ) {
-        
-        super(
-            cropService        );
+            CropService cropService) {
+
+        this.cropService = cropService;
     }
 
-
     @Override
-    public ResponseEntity<?> handleFindById(String id) {
+    public ResponseEntity<CropDTO> findById(String id) {
         try {
-            Optional<?> data = Optional.of(cropService.findById(id)); 
-            ResponseEntity<?> response;
-
-            if(data.isPresent()) {
-                response = ResponseEntity.status(HttpStatus.OK).body(data.get());
-            } else {
-                response = ResponseEntity.status(HttpStatus.NOT_FOUND).build();
-            }
-
-            return response;
+            return ResponseEntity.status(HttpStatus.OK).body(cropService.findById(id));
         } catch (Exception e) {
-            logger.error(e.getMessage());
-            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(e.getMessage());
+            log.error(e.getMessage());
+            throw e;
         }
     }
 
     @Override
-    public ResponseEntity<?> handleGetAll() {
+    public ResponseEntity<Collection<CropListDTO>> getAll() {
         try {
-            Optional<?> data = Optional.of(this.cropService.getAll()); 
-            ResponseEntity<?> response;
-
-            if(data.isPresent()) {
-                response = ResponseEntity.status(HttpStatus.OK).body(data.get());
-            } else {
-                response = ResponseEntity.status(HttpStatus.NOT_FOUND).build();
-            }
-
-            return response;
+            return ResponseEntity.status(HttpStatus.OK).body(this.cropService.getAll());
+                
         } catch (Exception e) {
-            logger.error(e.getMessage());
-            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(e.getMessage());
+            log.error(e.getMessage());
+            throw e;
         }
     }
 
     @Override
-    public ResponseEntity<?> handleGetAllPaged(Integer pageNumber, Integer pageSize) {
+    public ResponseEntity<Page<CropListDTO>> getAllPaged(Integer pageNumber, Integer pageSize) {
         try {
-            Optional<?> data = Optional.of(cropService.getAll(pageNumber, pageSize));
-            ResponseEntity<?> response;
-
-            if(data.isPresent()) {
-                response = ResponseEntity.status(HttpStatus.OK).body(data.get());
-            } else {
-                response = ResponseEntity.status(HttpStatus.NOT_FOUND).build();
-            }
-
-            return response;
-        } catch (Exception e) {
-            logger.error(e.getMessage());
-            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(e.getMessage());
-        }
-    }
-
-    @Override
-    public ResponseEntity<?> handlePagedSearch(Integer pageNumber, Integer pageSize, String criteria) {
-        try {
-            Optional<?> data = Optional.of(cropService.search(pageNumber, pageSize, criteria)); 
-            ResponseEntity<?> response;
-
-            if(data.isPresent()) {
-                response = ResponseEntity.status(HttpStatus.OK).body(data.get());
-            } else {
-                response = ResponseEntity.status(HttpStatus.NOT_FOUND).build();
-            }
-
-            return response;
-        } catch (Exception e) {
-            logger.error(e.getMessage());
-            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(e.getMessage());
-        }
-    }
-
-    @Override
-    public ResponseEntity<?> handleRemove(String id) {
-        try {
-            Optional<?> data = Optional.of(cropService.remove(id)); 
-            ResponseEntity<?> response;
-
-            if(data.isPresent()) {
-                response = ResponseEntity.status(HttpStatus.OK).body(data.get());
-            } else {
-                response = ResponseEntity.status(HttpStatus.NOT_FOUND).build();
-            }
-
-            return response;
-        } catch (Exception e) {
-            logger.error(e.getMessage());
-            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(e.getMessage());
-        }
-    }
-
-    @Override
-    public ResponseEntity<?> handleSave(CropDTO crop) {
-        try {
-
-            Optional<?> data = Optional.of(cropService.save(crop));
             
-            ResponseEntity<?> response;
+            return ResponseEntity.status(HttpStatus.OK).body(cropService.getAll(pageNumber, pageSize));
 
-            if(data.isPresent()) {
-                response = ResponseEntity.status(HttpStatus.OK).body(data.get());
-            } else {
-                response = ResponseEntity.status(HttpStatus.NOT_FOUND).build();
-            }
+        } catch (Exception e) {
+            log.error(e.getMessage());
+            throw e;
+        }
+    }
 
-            return response;
+    @Override
+    public ResponseEntity<Page<CropListDTO>> pagedSearch(Integer pageNumber, Integer pageSize, String criteria) {
+        try {
+            return ResponseEntity.status(HttpStatus.OK).body(cropService.search(pageNumber, pageSize, criteria));
+        } catch (Exception e) {
+            log.error(e.getMessage());
+            throw e;
+        }
+    }
+
+    @Override
+    public ResponseEntity<Boolean> remove(String id) {
+        try {
+            
+            return ResponseEntity.status(HttpStatus.OK).body(cropService.remove(id));
+
+        } catch (Exception e) {
+            log.error(e.getMessage());
+            throw e;
+        }
+    }
+
+    @Override
+    public ResponseEntity<CropDTO> save(CropDTO crop) {
+        try {
+
+            return ResponseEntity.status(HttpStatus.OK).body(cropService.save(crop));
+            
         } catch (Exception e) {
             e.printStackTrace();
-            logger.error(e.getMessage());
-            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(e.getMessage());
+            log.error(e.getMessage());
+            throw e;
         }
     }
 
     @Override
-    public ResponseEntity<?> handleSearch(String criteria) {
+    public ResponseEntity<Collection<CropListDTO>> search(String criteria) {
         try {
-            Optional<?> data = Optional.of(cropService.search(criteria)); // TODO: Add custom code here;
-            ResponseEntity<?> response;
+           
+            return ResponseEntity.status(HttpStatus.OK).body(cropService.search(criteria));
 
-            if(data.isPresent()) {
-                response = ResponseEntity.status(HttpStatus.OK).body(data.get());
-            } else {
-                response = ResponseEntity.status(HttpStatus.NOT_FOUND).build();
-            }
-
-            return response;
         } catch (Exception e) {
-            logger.error(e.getMessage());
-            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(e.getMessage());
+            log.error(e.getMessage());
+            throw e;
         }
     }
 
-
     @Override
-    public ResponseEntity<?> handleFindByCropTypes(Set<String> cropTypeIds) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'handleFindByCropTypes'");
+    public ResponseEntity<Collection<CropListDTO>> findByCropTypes(Set<String> cropTypeIds) {
+        
+        try {
+            return ResponseEntity.status(HttpStatus.OK).body(cropService.findByCropTypes(cropTypeIds));
+        } catch (Exception e) {
+            log.error(e.getMessage());
+            throw e;
+        }
+
     }
 
-
     @Override
-    public ResponseEntity<?> handleFindByIssueType(CropIssueType issueType) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'handleFindByIssueType'");
+    public ResponseEntity<Collection<CropListDTO>> findByIssueType(CropIssueType issueType) {
+        
+        try {
+            return ResponseEntity.status(HttpStatus.OK).body(cropService.findByIssueType(issueType));
+        } catch (Exception e) {
+            log.error(e.getMessage());
+            throw e;
+        }
     }
 }

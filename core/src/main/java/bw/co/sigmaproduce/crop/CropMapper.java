@@ -70,6 +70,7 @@ public interface CropMapper {
      * @return CropListDTO
      */
     // WARNING! No conversion for target.type (can't convert source.getType():bw.co.sigmaproduce.crop.type.CropType to java.lang.String
+    @Mapping(source = "type.name", target = "type")
     CropListDTO toCropListDTO(Crop entity);
 
      /**

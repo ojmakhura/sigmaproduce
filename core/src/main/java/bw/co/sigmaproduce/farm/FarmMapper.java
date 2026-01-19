@@ -19,12 +19,13 @@ import org.mapstruct.MappingTarget;
 import org.mapstruct.NullValuePropertyMappingStrategy;
 
 @Mapper(
-    componentModel = "spring"
-    , uses = {
+    componentModel = "spring", 
+    uses = {
         VillageMapper.class,
         CultivationMapper.class,
         PostMapper.class,
-        DocumentMapper.class    }
+        DocumentMapper.class    
+    }
 )
 public interface FarmMapper {
     
@@ -71,6 +72,9 @@ public interface FarmMapper {
      * @return FarmListDTO
      */
     // WARNING! No conversion for target.nearestVillage (can't convert source.getNearestVillage():bw.co.sigmaproduce.village.Village to java.lang.String
+    @Mapping(target = "nearestVillage", source = "nearestVillage.name")
+    @Mapping(target = "owner", ignore = true)
+    @Mapping(target = "ownerType", source = "owner.ownerType")
     FarmListDTO toFarmListDTO(Farm entity);
 
      /**
@@ -83,6 +87,7 @@ public interface FarmMapper {
      * Converts an instance of type {@link FarmListDTO} to this DAO's entity.
      * @param farmListDTO
      * @return Farm
+     * 
      */
     @InheritInverseConfiguration
     Farm farmListDTOToEntity(FarmListDTO farmListDTO);

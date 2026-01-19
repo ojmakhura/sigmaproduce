@@ -5,213 +5,148 @@
 //
 package bw.co.sigmaproduce.crop.issue;
 
-import java.util.Optional;
-import org.springframework.http.HttpStatus;
+import io.swagger.v3.oas.annotations.Operation;
+import java.util.Collection;
+import org.springframework.data.domain.Page;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-@RequestMapping("/crop/issue")
-@CrossOrigin()
-public class CropIssueApiImpl extends CropIssueApiBase {
-    
+public class CropIssueApiImpl implements CropIssueApi {
+
+    protected final CropIssueService cropIssueService;
+
     public CropIssueApiImpl(
-        CropIssueService cropIssueService    ) {
-        
-        super(
-            cropIssueService        );
+            CropIssueService cropIssueService) {
+
+        this.cropIssueService = cropIssueService;
     }
 
-
     @Override
-    public ResponseEntity<?> handleFindById(String id) {
+    @Operation(summary = "Find Crop by id", description = "Get the cropp with the given id")
+    public ResponseEntity<CropIssueDTO> findById(String id) throws Exception {
         try {
-            Optional<?> data = Optional.empty(); // TODO: Add custom code here;
-            ResponseEntity<?> response;
-
-            if(data.isPresent()) {
-                response = ResponseEntity.status(HttpStatus.OK).body(data.get());
-            } else {
-                response = ResponseEntity.status(HttpStatus.NOT_FOUND).build();
-            }
-
-            return response;
+            return ResponseEntity.ok(cropIssueService.findById(id));
         } catch (Exception e) {
-            logger.error(e.getMessage());
-            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(e.getMessage());
+
+            e.printStackTrace();
+            throw e;
         }
     }
 
     @Override
-    public ResponseEntity<?> handleGetAll() {
+    @Operation(summary = "Get Crops", description = "Get all all crops in the data store")
+    public ResponseEntity<Collection<CropIssueDTO>> getAll() throws Exception {
         try {
-            Optional<?> data = Optional.empty(); // TODO: Add custom code here;
-            ResponseEntity<?> response;
-
-            if(data.isPresent()) {
-                response = ResponseEntity.status(HttpStatus.OK).body(data.get());
-            } else {
-                response = ResponseEntity.status(HttpStatus.NOT_FOUND).build();
-            }
-
-            return response;
+            return ResponseEntity.ok(cropIssueService.getAll());
         } catch (Exception e) {
-            logger.error(e.getMessage());
-            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(e.getMessage());
+
+            e.printStackTrace();
+            throw e;
         }
     }
 
     @Override
-    public ResponseEntity<?> handleGetAllPaged(Integer pageNumber, Integer pageSize) {
+    public ResponseEntity<Collection<Page<CropIssueDTO>>> getAllPaged(Integer pageNumber, Integer pageSize)
+            throws Exception {
         try {
-            Optional<?> data = Optional.empty(); // TODO: Add custom code here;
-            ResponseEntity<?> response;
-
-            if(data.isPresent()) {
-                response = ResponseEntity.status(HttpStatus.OK).body(data.get());
-            } else {
-                response = ResponseEntity.status(HttpStatus.NOT_FOUND).build();
-            }
-
-            return response;
+            return ResponseEntity.ok(cropIssueService.getAll(pageNumber, pageSize));
         } catch (Exception e) {
-            logger.error(e.getMessage());
-            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(e.getMessage());
+
+            e.printStackTrace();
+            throw e;
         }
     }
 
     @Override
-    public ResponseEntity<?> handleRemove(String id) {
+    @Operation(summary = "Remove crop by id", description = "Remove the crop with the given id")
+    public ResponseEntity<Boolean> remove(String id) throws Exception {
         try {
-            Optional<?> data = Optional.empty(); // TODO: Add custom code here;
-            ResponseEntity<?> response;
-
-            if(data.isPresent()) {
-                response = ResponseEntity.status(HttpStatus.OK).body(data.get());
-            } else {
-                response = ResponseEntity.status(HttpStatus.NOT_FOUND).build();
-            }
-
-            return response;
+            return ResponseEntity.ok(null);
         } catch (Exception e) {
-            logger.error(e.getMessage());
-            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(e.getMessage());
+
+            e.printStackTrace();
+            throw e;
         }
     }
 
     @Override
-    public ResponseEntity<?> handleSave(CropIssueDTO cropIssue) {
+    @Operation(summary = "Save Crop", description = "Save acrops to data store")
+    public ResponseEntity<CropIssueDTO> save(CropIssueDTO cropIssue) throws Exception {
         try {
-            Optional<?> data = Optional.empty(); // TODO: Add custom code here;
-            ResponseEntity<?> response;
-
-            if(data.isPresent()) {
-                response = ResponseEntity.status(HttpStatus.OK).body(data.get());
-            } else {
-                response = ResponseEntity.status(HttpStatus.NOT_FOUND).build();
-            }
-
-            return response;
+            return ResponseEntity.ok(null);
         } catch (Exception e) {
-            logger.error(e.getMessage());
-            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(e.getMessage());
+
+            e.printStackTrace();
+            throw e;
         }
     }
 
     @Override
-    public ResponseEntity<?> handleSearch(String criteria) {
+    @Operation(summary = "Search Crops", description = "Search crops based on the criteria")
+    public ResponseEntity<Collection<CropIssueDTO>> search(String criteria) throws Exception {
         try {
-            Optional<?> data = Optional.empty(); // TODO: Add custom code here;
-            ResponseEntity<?> response;
-
-            if(data.isPresent()) {
-                response = ResponseEntity.status(HttpStatus.OK).body(data.get());
-            } else {
-                response = ResponseEntity.status(HttpStatus.NOT_FOUND).build();
-            }
-
-            return response;
+            return ResponseEntity.ok(null);
         } catch (Exception e) {
-            logger.error(e.getMessage());
-            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(e.getMessage());
+
+            e.printStackTrace();
+            throw e;
         }
     }
 
     @Override
-    public ResponseEntity<?> handleSearchByType(CropIssueType type) {
+    public ResponseEntity<Collection<CropIssueDTO>> searchByType(CropIssueType type) throws Exception {
         try {
-            Optional<?> data = Optional.empty(); // TODO: Add custom code here;
-            ResponseEntity<?> response;
-
-            if(data.isPresent()) {
-                response = ResponseEntity.status(HttpStatus.OK).body(data.get());
-            } else {
-                response = ResponseEntity.status(HttpStatus.NOT_FOUND).build();
-            }
-
-            return response;
+            return ResponseEntity.ok(null);
         } catch (Exception e) {
-            logger.error(e.getMessage());
-            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(e.getMessage());
+
+            e.printStackTrace();
+            throw e;
         }
     }
 
     @Override
-    public ResponseEntity<?> handleSearchByTypeAndCrop(CropIssueType type, String cropId) {
+    public ResponseEntity<Collection<CropIssueDTO>> searchByTypeAndCrop(CropIssueType type, String cropId)
+            throws Exception {
         try {
-            Optional<?> data = Optional.empty(); // TODO: Add custom code here;
-            ResponseEntity<?> response;
-
-            if(data.isPresent()) {
-                response = ResponseEntity.status(HttpStatus.OK).body(data.get());
-            } else {
-                response = ResponseEntity.status(HttpStatus.NOT_FOUND).build();
-            }
-
-            return response;
+            return ResponseEntity.ok(null);
         } catch (Exception e) {
-            logger.error(e.getMessage());
-            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(e.getMessage());
+
+            e.printStackTrace();
+            throw e;
         }
     }
 
     @Override
-    public ResponseEntity<?> handleSearchByTypeAndCropPaged(CropIssueType type, String cropId, Integer pageNumber, Integer pageSize) {
+    public ResponseEntity<Collection<Page<CropIssueDTO>>> searchByTypeAndCropPaged(CropIssueType type, String cropId,
+            Integer pageNumber, Integer pageSize) throws Exception {
         try {
-            Optional<?> data = Optional.empty(); // TODO: Add custom code here;
-            ResponseEntity<?> response;
-
-            if(data.isPresent()) {
-                response = ResponseEntity.status(HttpStatus.OK).body(data.get());
-            } else {
-                response = ResponseEntity.status(HttpStatus.NOT_FOUND).build();
-            }
-
-            return response;
+            return ResponseEntity.ok(null);
         } catch (Exception e) {
-            logger.error(e.getMessage());
-            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(e.getMessage());
+
+            e.printStackTrace();
+            throw e;
         }
     }
 
     @Override
-    public ResponseEntity<?> handleSearchPaged(String criteria, Integer pageNumber, Integer pageSize) {
+    public ResponseEntity<Collection<Page<CropIssueDTO>>> searchPaged(String criteria, Integer pageNumber,
+            Integer pageSize) throws Exception {
         try {
-            Optional<?> data = Optional.empty(); // TODO: Add custom code here;
-            ResponseEntity<?> response;
-
-            if(data.isPresent()) {
-                response = ResponseEntity.status(HttpStatus.OK).body(data.get());
-            } else {
-                response = ResponseEntity.status(HttpStatus.NOT_FOUND).build();
-            }
-
-            return response;
+            return ResponseEntity.ok(null);
         } catch (Exception e) {
-            logger.error(e.getMessage());
-            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(e.getMessage());
+
+            e.printStackTrace();
+            throw e;
         }
+    }
+
+    /**
+     * Gets the reference to <code>$serviceRef.daoName</code>.
+     * 
+     * @return cropIssueService
+     */
+    protected CropIssueService getCropIssueService() {
+        return this.cropIssueService;
     }
 }

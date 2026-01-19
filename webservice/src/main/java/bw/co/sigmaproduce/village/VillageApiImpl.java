@@ -5,137 +5,143 @@
 //
 package bw.co.sigmaproduce.village;
 
-import java.util.Optional;
-import org.springframework.http.HttpStatus;
+import io.swagger.v3.oas.annotations.Operation;
+import java.util.Collection;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-@RequestMapping("/village")
-@CrossOrigin()
-public class VillageApiImpl extends VillageApiBase {
+public class VillageApiImpl implements VillageApi {
+        protected final VillageService villageService;
     
     public VillageApiImpl(
         VillageService villageService    ) {
         
-        super(
-            villageService        );
+        this.villageService = villageService;
+    }
+
+
+
+    @Override
+    @Operation(summary = "Find Village by id", description = "Get the village with the given id")
+    public ResponseEntity<VillageDTO> findById(Long id) throws Exception {
+        try {
+            return ResponseEntity.ok(null);
+        } catch (Exception e) {
+
+            e.printStackTrace();
+            throw e;
+        } 
     }
 
 
     @Override
-    public ResponseEntity<?> handleFindById(Long id) {
+    @Operation(summary = "Get All Villages", description = "Get all villages in the data store")
+    public ResponseEntity<Collection<VillageDTO>> getAll() throws Exception {
         try {
-            Optional<?> data = Optional.of(villageService.findById(id)); // TODO: Add custom code here;
-            ResponseEntity<?> response;
-
-            if(data.isPresent()) {
-                response = ResponseEntity.status(HttpStatus.OK).body(data.get());
-            } else {
-                response = ResponseEntity.status(HttpStatus.NOT_FOUND).build();
-            }
-
-            return response;
+            return ResponseEntity.ok(null);
         } catch (Exception e) {
-            logger.error(e.getMessage());
-            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(e.getMessage());
-        }
+
+            e.printStackTrace();
+            throw e;
+        } 
     }
 
+
     @Override
-    public ResponseEntity<?> handleGetAll() {
+    @Operation(summary = "Get All Villages", description = "Get all villages in the data store")
+    public ResponseEntity<Collection<VillageDTO>> getAllPaged() throws Exception {
         try {
-            Optional<?> data = Optional.of(villageService.getAll()); // TODO: Add custom code here;
-            ResponseEntity<?> response;
-
-            if(data.isPresent()) {
-                response = ResponseEntity.status(HttpStatus.OK).body(data.get());
-            } else {
-                response = ResponseEntity.status(HttpStatus.NOT_FOUND).build();
-            }
-
-            return response;
+            return ResponseEntity.ok(null);
         } catch (Exception e) {
-            logger.error(e.getMessage());
-            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(e.getMessage());
-        }
+
+            e.printStackTrace();
+            throw e;
+        } 
     }
 
+
     @Override
-    public ResponseEntity<?> handleGetDistrictVillages(String districtId) {
+    public ResponseEntity<Collection<VillageDTO>> getDistrictVillages(String districtId) throws Exception {
         try {
-            Optional<?> data = Optional.of(villageService.getDistrictVillages(districtId)); // TODO: Add custom code here;
-            ResponseEntity<?> response;
-
-            if(data.isPresent()) {
-                response = ResponseEntity.status(HttpStatus.OK).body(data.get());
-            } else {
-                response = ResponseEntity.status(HttpStatus.NOT_FOUND).build();
-            }
-
-            return response;
+            return ResponseEntity.ok(null);
         } catch (Exception e) {
-            logger.error(e.getMessage());
-            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(e.getMessage());
-        }
+
+            e.printStackTrace();
+            throw e;
+        } 
     }
 
+
     @Override
-    public ResponseEntity<?> handleRemove(Long id) {
+    public ResponseEntity<VillageDTO> getDistrictVillages1(String districtId, Integer pageNumber, Integer pageSize) throws Exception {
         try {
-            Optional<?> data = Optional.of(villageService.remove(id)); // TODO: Add custom code here;
-            ResponseEntity<?> response;
-
-            if(data.isPresent()) {
-                response = ResponseEntity.status(HttpStatus.OK).body(data.get());
-            } else {
-                response = ResponseEntity.status(HttpStatus.NOT_FOUND).build();
-            }
-
-            return response;
+            return ResponseEntity.ok(null);
         } catch (Exception e) {
-            logger.error(e.getMessage());
-            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(e.getMessage());
-        }
+
+            e.printStackTrace();
+            throw e;
+        } 
     }
 
+
     @Override
-    public ResponseEntity<?> handleSave(VillageDTO village) {
+    @Operation(summary = "Remove crop by id", description = "Remove the crop with the given id")
+    public ResponseEntity<Boolean> remove(String id) throws Exception {
         try {
-            Optional<?> data = Optional.of(villageService.save(village)); // TODO: Add custom code here;
-            ResponseEntity<?> response;
-
-            if(data.isPresent()) {
-                response = ResponseEntity.status(HttpStatus.OK).body(data.get());
-            } else {
-                response = ResponseEntity.status(HttpStatus.NOT_FOUND).build();
-            }
-
-            return response;
+            return ResponseEntity.ok(null);
         } catch (Exception e) {
-            logger.error(e.getMessage());
-            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(e.getMessage());
-        }
+
+            e.printStackTrace();
+            throw e;
+        } 
     }
 
+
     @Override
-    public ResponseEntity<?> handleSearch(String criteria) {
+    @Operation(summary = "Save Village", description = "Save village to data store")
+    public ResponseEntity<VillageDTO> save(VillageDTO village) throws Exception {
         try {
-            Optional<?> data = Optional.of(villageService.search(criteria)); // TODO: Add custom code here;
-            ResponseEntity<?> response;
-
-            if(data.isPresent()) {
-                response = ResponseEntity.status(HttpStatus.OK).body(data.get());
-            } else {
-                response = ResponseEntity.status(HttpStatus.NOT_FOUND).build();
-            }
-
-            return response;
+            return ResponseEntity.ok(null);
         } catch (Exception e) {
-            logger.error(e.getMessage());
-            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(e.getMessage());
-        }
+
+            e.printStackTrace();
+            throw e;
+        } 
+    }
+
+
+    @Override
+    @Operation(summary = "Search Villages", description = "Search villages based on the criteria")
+    public ResponseEntity<Collection<VillageDTO>> search(String criteria) throws Exception {
+        try {
+            return ResponseEntity.ok(null);
+        } catch (Exception e) {
+
+            e.printStackTrace();
+            throw e;
+        } 
+    }
+
+
+    @Override
+    @Operation(summary = "Search Villages", description = "Search villages based on the criteria")
+    public ResponseEntity<Collection<VillageDTO>> searchPaged(String criteria, Integer pageSize, Integer pageNumber) throws Exception {
+        try {
+            return ResponseEntity.ok(null);
+        } catch (Exception e) {
+
+            e.printStackTrace();
+            throw e;
+        } 
+    }
+    
+    /**
+     * Gets the reference to <code>$serviceRef.daoName</code>.
+     * @return villageService
+     */
+    protected VillageService getVillageService()
+    {
+        return this.villageService;
     }
 }

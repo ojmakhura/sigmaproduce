@@ -22,7 +22,8 @@ import org.mapstruct.NullValuePropertyMappingStrategy;
     , uses = {
         CropMapper.class,
         CultivationMapper.class,
-        DocumentMapper.class    }
+        DocumentMapper.class    
+    }
 )
 public interface CropVarietyMapper {
     
@@ -65,6 +66,8 @@ public interface CropVarietyMapper {
      * @return CropVarietyList
      */
     // WARNING! No conversion for target.crop (can't convert source.getCrop():bw.co.sigmaproduce.crop.Crop to java.lang.String
+    @Mapping(source = "crop.name", target = "crop")
+    @Mapping(source = "crop.id", target = "cropId")
     CropVarietyList toCropVarietyList(CropVariety entity);
 
      /**

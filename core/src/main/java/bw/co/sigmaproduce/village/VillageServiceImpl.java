@@ -113,7 +113,20 @@ public class VillageServiceImpl
     }
 
     @Override
-    protected VillageDTO handleGetDistrictVillages(String districtId) throws Exception {
+    protected Collection<VillageDTO> handleGetDistrictVillages(String districtId) throws Exception {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'handleGetDistrictVillages'");
+    }
+
+    @Override
+    protected Collection<VillageDTO> handleGetAll(Integer pageNumber, Integer pageSize) throws Exception {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'handleGetAll'");
+    }
+
+    @Override
+    protected Collection<VillageDTO> handleGetDistrictVillages(String districtId, Integer pageNumber, Integer pageSize)
+            throws Exception {
         // TODO Auto-generated method stub
         throw new UnsupportedOperationException("Unimplemented method 'handleGetDistrictVillages'");
     }
