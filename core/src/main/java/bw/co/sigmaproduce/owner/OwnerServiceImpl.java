@@ -50,7 +50,7 @@ public class OwnerServiceImpl
      * @see bw.co.sigmaproduce.owner.OwnerService#getAll()
      */
     @Override
-    protected Collection<OwnerDTO> handleGetAll()
+    protected Collection<OwnerListDTO> handleGetAll()
         throws Exception
     {
         // TODO implement protected  Collection<OwnerDTO> handleGetAll()
@@ -83,7 +83,7 @@ public class OwnerServiceImpl
      * @see bw.co.sigmaproduce.owner.OwnerService#search(String)
      */
     @Override
-    protected Collection<OwnerDTO> handleSearch(String criteria)
+    protected Collection<OwnerListDTO> handleSearch(String criteria)
         throws Exception
     {
         // TODO implement protected  Collection<OwnerDTO> handleSearch(String criteria)

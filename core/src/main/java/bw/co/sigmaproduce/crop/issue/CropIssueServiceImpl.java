@@ -100,7 +100,7 @@ public class CropIssueServiceImpl
         throws Exception
     {
 
-        Specification<CropIssue> spec = null;
+        Specification<CropIssue> spec = (root, query, builder) -> builder.conjunction();
 
         if(StringUtils.isNotBlank(criteria)) {
             spec = SigmaproduceSpecifications.<CropIssue>findByAttributeContainingIgnoreCase(criteria, "name")
@@ -118,7 +118,7 @@ public class CropIssueServiceImpl
         throws Exception
     {
 
-        Specification<CropIssue> spec = null;
+        Specification<CropIssue> spec = (root, query, builder) -> builder.conjunction();
 
         if(type != null) {
             spec = SigmaproduceSpecifications.<CropIssue, CropIssueType>findByAttribute(type, "type");
@@ -146,7 +146,7 @@ public class CropIssueServiceImpl
         throws Exception
     {
 
-        Specification<CropIssue> spec = null;
+        Specification<CropIssue> spec = (root, query, builder) -> builder.conjunction();
 
         if(StringUtils.isNotBlank(criteria)) {
             spec = SigmaproduceSpecifications.<CropIssue>findByAttributeContainingIgnoreCase(criteria, "name")
@@ -164,7 +164,7 @@ public class CropIssueServiceImpl
         throws Exception
     {
 
-        Specification<CropIssue> spec = null;
+        Specification<CropIssue> spec = (root, query, builder) -> builder.conjunction();
 
         if(type != null) {
             spec = SigmaproduceSpecifications.<CropIssue, CropIssueType>findByAttribute(type, "type");
@@ -185,7 +185,7 @@ public class CropIssueServiceImpl
         throws Exception
     {
 
-        Specification<CropIssue> spec = null;
+        Specification<CropIssue> spec = (root, query, builder) -> builder.conjunction();
 
         if(type != null) {
             spec = SigmaproduceSpecifications.<CropIssue, CropIssueType>findByAttribute(type, "type");

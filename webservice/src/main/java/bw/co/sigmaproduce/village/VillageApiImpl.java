@@ -7,6 +7,8 @@ package bw.co.sigmaproduce.village;
 
 import io.swagger.v3.oas.annotations.Operation;
 import java.util.Collection;
+
+import org.springframework.data.domain.Page;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -24,9 +26,9 @@ public class VillageApiImpl implements VillageApi {
 
     @Override
     @Operation(summary = "Find Village by id", description = "Get the village with the given id")
-    public ResponseEntity<VillageDTO> findById(Long id) throws Exception {
+    public ResponseEntity<VillageDTO> findById(String id) throws Exception {
         try {
-            return ResponseEntity.ok(null);
+            return ResponseEntity.ok(villageService.findById(null));
         } catch (Exception e) {
 
             e.printStackTrace();
@@ -39,7 +41,7 @@ public class VillageApiImpl implements VillageApi {
     @Operation(summary = "Get All Villages", description = "Get all villages in the data store")
     public ResponseEntity<Collection<VillageDTO>> getAll() throws Exception {
         try {
-            return ResponseEntity.ok(null);
+            return ResponseEntity.ok(villageService.getAll());
         } catch (Exception e) {
 
             e.printStackTrace();
@@ -50,9 +52,9 @@ public class VillageApiImpl implements VillageApi {
 
     @Override
     @Operation(summary = "Get All Villages", description = "Get all villages in the data store")
-    public ResponseEntity<Collection<VillageDTO>> getAllPaged() throws Exception {
+    public ResponseEntity<Page<VillageDTO>> getAllPaged(Integer pageNumber, Integer pageSize) throws Exception {
         try {
-            return ResponseEntity.ok(null);
+            return ResponseEntity.ok(villageService.getAll(pageNumber, pageSize));
         } catch (Exception e) {
 
             e.printStackTrace();
@@ -64,7 +66,7 @@ public class VillageApiImpl implements VillageApi {
     @Override
     public ResponseEntity<Collection<VillageDTO>> getDistrictVillages(String districtId) throws Exception {
         try {
-            return ResponseEntity.ok(null);
+            return ResponseEntity.ok(villageService.getDistrictVillages(districtId));
         } catch (Exception e) {
 
             e.printStackTrace();
@@ -74,9 +76,9 @@ public class VillageApiImpl implements VillageApi {
 
 
     @Override
-    public ResponseEntity<VillageDTO> getDistrictVillages1(String districtId, Integer pageNumber, Integer pageSize) throws Exception {
+    public ResponseEntity<Page<VillageDTO>> getDistrictVillagesPaged(String districtId, Integer pageNumber, Integer pageSize) throws Exception {
         try {
-            return ResponseEntity.ok(null);
+            return ResponseEntity.ok(villageService.getDistrictVillages(districtId, pageNumber, pageSize));
         } catch (Exception e) {
 
             e.printStackTrace();
@@ -126,7 +128,7 @@ public class VillageApiImpl implements VillageApi {
 
     @Override
     @Operation(summary = "Search Villages", description = "Search villages based on the criteria")
-    public ResponseEntity<Collection<VillageDTO>> searchPaged(String criteria, Integer pageSize, Integer pageNumber) throws Exception {
+    public ResponseEntity<Page<VillageDTO>> searchPaged(String criteria, Integer pageSize, Integer pageNumber) throws Exception {
         try {
             return ResponseEntity.ok(null);
         } catch (Exception e) {

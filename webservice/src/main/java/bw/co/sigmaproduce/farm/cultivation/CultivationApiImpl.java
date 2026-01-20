@@ -9,7 +9,11 @@ import io.swagger.v3.oas.annotations.Operation;
 import java.util.Collection;
 import org.springframework.data.domain.Page;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.RestController;
+
+import bw.co.sigmaproduce.AuditTracker;
 
 @RestController
 public class CultivationApiImpl implements CultivationApi {
@@ -90,6 +94,8 @@ public class CultivationApiImpl implements CultivationApi {
     @Operation(summary = "Save Farm", description = "Save a farm to data store")
     public ResponseEntity<CultivationDTO> save(CultivationDTO cultivation) throws Exception {
         try {
+            Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+            AuditTracker.auditTrail(cultivation, authentication);
             return ResponseEntity.ok(cultivationService.save(cultivation));
         } catch (Exception e) {
 

@@ -37,7 +37,7 @@ public class CropTypeDaoImpl
     @Override
     protected Collection<CropType> handleFindByCriteria(String criteria)
     {
-        Specification<CropType> spec = null;
+        Specification<CropType> spec = (root, query, builder) -> builder.conjunction();
 
         if(StringUtils.isNotBlank(criteria)) {
             spec = (root, query, cb) -> cb.or(

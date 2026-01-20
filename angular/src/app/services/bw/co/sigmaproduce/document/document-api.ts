@@ -10,7 +10,7 @@ import { SearchObject } from '@app/model/search-object';
   providedIn: 'root'
 })
 export class DocumentApi {
-    
+
     protected path = '/document';
 
     private http = inject(HttpClient);
@@ -55,7 +55,7 @@ export class DocumentApi {
         return this.http.get<DocumentDTO[] | any[]>(`${this.path}/search?criteria=${criteria}`);
     }
 
-    public upload(target: TargetEntity | any , targetId: string | any , documentTypeId: string | any , file: MultipartFile | any ): Observable<DocumentDTO | any> {
+    public upload(target: TargetEntity | any , targetId: string | any , documentTypeId: string | any , file: File | any ): Observable<DocumentDTO | any> {
 
         return this.http.post<DocumentDTO | any>(`${this.path}/upload/${target}/${targetId}/type/${documentTypeId}`, {target: target, targetId: targetId, documentTypeId: documentTypeId, file: file});
     }

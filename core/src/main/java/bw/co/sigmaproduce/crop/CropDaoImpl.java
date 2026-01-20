@@ -48,7 +48,7 @@ public class CropDaoImpl
     @Override
     protected Collection<Crop> handleFindByCriteria(String criteria)
     {
-        Specification<Crop> spec = null;
+        Specification<Crop> spec = (root, query, builder) -> builder.conjunction();
 
         if (StringUtils.isNotBlank(criteria)) {
 
@@ -67,7 +67,7 @@ public class CropDaoImpl
     @Override
     protected Page<Crop> handleFindByCriteriaPaged(String criteria, Integer pageSize, Integer pageNumber)
     {
-        Specification<Crop> spec = null;
+        Specification<Crop> spec = (root, query, builder) -> builder.conjunction();
 
         if (StringUtils.isNotBlank(criteria)) {
 

@@ -12,6 +12,7 @@ import java.util.Collection;
 
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.context.MessageSource;
+import org.springframework.data.domain.Page;
 import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Propagation;
@@ -100,7 +101,7 @@ public class VillageServiceImpl
     protected Collection<VillageDTO> handleSearch(String criteria)
         throws Exception
     {
-        Specification<Village> spec = null;
+        Specification<Village> spec = (root, query, builder) -> builder.conjunction();
 
         if(StringUtils.isNotBlank(criteria)) {
             spec = SigmaproduceSpecifications.<Village>findByAttributeLikeIgnoreCase(criteria, "name")
@@ -119,13 +120,13 @@ public class VillageServiceImpl
     }
 
     @Override
-    protected Collection<VillageDTO> handleGetAll(Integer pageNumber, Integer pageSize) throws Exception {
+    protected Page<VillageDTO> handleGetAll(Integer pageNumber, Integer pageSize) throws Exception {
         // TODO Auto-generated method stub
         throw new UnsupportedOperationException("Unimplemented method 'handleGetAll'");
     }
 
     @Override
-    protected Collection<VillageDTO> handleGetDistrictVillages(String districtId, Integer pageNumber, Integer pageSize)
+    protected Page<VillageDTO> handleGetDistrictVillages(String districtId, Integer pageNumber, Integer pageSize)
             throws Exception {
         // TODO Auto-generated method stub
         throw new UnsupportedOperationException("Unimplemented method 'handleGetDistrictVillages'");

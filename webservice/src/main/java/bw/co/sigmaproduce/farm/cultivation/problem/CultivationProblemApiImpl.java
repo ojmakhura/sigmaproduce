@@ -5,12 +5,15 @@
 //
 package bw.co.sigmaproduce.farm.cultivation.problem;
 
+import bw.co.sigmaproduce.AuditTracker;
 import bw.co.sigmaproduce.farm.cultivation.CultivationCriteria;
 import bw.co.sigmaproduce.farm.cultivation.CultivationListDTO;
 import io.swagger.v3.oas.annotations.Operation;
 import java.util.Collection;
 import org.springframework.data.domain.Page;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
@@ -92,6 +95,8 @@ public class CultivationProblemApiImpl implements CultivationProblemApi {
     @Operation(summary = "Save Farm", description = "Save a farm to data store")
     public ResponseEntity<CultivationProblemDTO> save(CultivationProblemDTO cultivationProblem) throws Exception {
         try {
+            Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+            AuditTracker.auditTrail(cultivationProblem, authentication);
             return ResponseEntity.ok(cultivationProblemService.save(cultivationProblem));
         } catch (Exception e) {
 

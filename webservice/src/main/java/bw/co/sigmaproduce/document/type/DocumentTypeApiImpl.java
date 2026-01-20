@@ -10,7 +10,11 @@ import io.swagger.v3.oas.annotations.tags.Tag;
 import java.util.Collection;
 import org.springframework.data.domain.Page;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.RestController;
+
+import bw.co.sigmaproduce.AuditTracker;
 
 @RestController
 @Tag(name = "Document Type", description = "Managing document types.")
@@ -29,7 +33,7 @@ public class DocumentTypeApiImpl implements DocumentTypeApi {
     @Operation(summary = "Find Document Type", description = "Get the document type with the given id")
     public ResponseEntity<DocumentTypeDTO> findById(String id) throws Exception {
         try {
-            return ResponseEntity.ok(null);
+            return ResponseEntity.ok(documentTypeService.findById(id));
         } catch (Exception e) {
 
             e.printStackTrace();
@@ -41,7 +45,7 @@ public class DocumentTypeApiImpl implements DocumentTypeApi {
     @Override
     public ResponseEntity<Collection<DocumentTypeDTO>> getAll() throws Exception {
         try {
-            return ResponseEntity.ok(null);
+            return ResponseEntity.ok(documentTypeService.getAll());
         } catch (Exception e) {
 
             e.printStackTrace();
@@ -51,9 +55,9 @@ public class DocumentTypeApiImpl implements DocumentTypeApi {
 
 
     @Override
-    public ResponseEntity<Collection<Page<DocumentTypeDTO>>> getAllPaged(Integer pageNumber, Integer pageSize) throws Exception {
+    public ResponseEntity<Page<DocumentTypeDTO>> getAllPaged(Integer pageNumber, Integer pageSize) throws Exception {
         try {
-            return ResponseEntity.ok(null);
+            return ResponseEntity.ok(documentTypeService.getAll(pageNumber, pageSize));
         } catch (Exception e) {
 
             e.printStackTrace();
@@ -65,7 +69,7 @@ public class DocumentTypeApiImpl implements DocumentTypeApi {
     @Override
     public ResponseEntity<Page<DocumentTypeDTO>> pagedSearch(String criteria, Integer pageNumber, Integer pageSize) throws Exception {
         try {
-            return ResponseEntity.ok(null);
+            return ResponseEntity.ok(documentTypeService.search(criteria, pageNumber, pageSize));
         } catch (Exception e) {
 
             e.printStackTrace();
@@ -77,7 +81,7 @@ public class DocumentTypeApiImpl implements DocumentTypeApi {
     @Override
     public ResponseEntity<Boolean> remove(String id) throws Exception {
         try {
-            return ResponseEntity.ok(null);
+            return ResponseEntity.ok(documentTypeService.remove(id));
         } catch (Exception e) {
 
             e.printStackTrace();
@@ -89,7 +93,10 @@ public class DocumentTypeApiImpl implements DocumentTypeApi {
     @Override
     public ResponseEntity<DocumentTypeDTO> save(DocumentTypeDTO documentType) throws Exception {
         try {
-            return ResponseEntity.ok(null);
+            Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+            AuditTracker.auditTrail(documentType, authentication);
+
+            return ResponseEntity.ok(documentTypeService.save(documentType));
         } catch (Exception e) {
 
             e.printStackTrace();
@@ -101,7 +108,7 @@ public class DocumentTypeApiImpl implements DocumentTypeApi {
     @Override
     public ResponseEntity<Collection<DocumentTypeDTO>> search(String criteria) throws Exception {
         try {
-            return ResponseEntity.ok(null);
+            return ResponseEntity.ok(documentTypeService.search(criteria));
         } catch (Exception e) {
 
             e.printStackTrace();

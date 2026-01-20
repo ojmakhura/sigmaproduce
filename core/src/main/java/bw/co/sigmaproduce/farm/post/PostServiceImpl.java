@@ -105,7 +105,7 @@ public class PostServiceImpl
      * @see bw.co.sigmaproduce.farm.post.PostService#getFarmPosts(String)
      */
     @Override
-    protected PostDTO handleGetFarmPosts(String farmId)
+    protected Collection<PostDTO> handleGetFarmPosts(String farmId)
         throws Exception
     {
         // TODO implement protected  PostDTO handleGetFarmPosts(String farmId)
@@ -121,6 +121,12 @@ public class PostServiceImpl
     {
         // TODO implement protected  Page<PostDTO> handleGetFarmPosts(String farmId, Integer pageSize, Integer pageNumber)
         throw new UnsupportedOperationException("bw.co.sigmaproduce.farm.post.PostService.handleGetFarmPosts(String farmId, Integer pageSize, Integer pageNumber) Not implemented!");
+    }
+
+    @Override
+    protected Collection<PostDTO> handleSearch(String criteria) throws Exception {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'handleSearch'");
     }
 
 }

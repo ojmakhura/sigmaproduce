@@ -10,8 +10,8 @@ import { TableComponent } from '@components/table/table';
 import { TranslateModule } from '@ngx-translate/core';
 import { Loader } from "@shared/loader/loader";
 import { FormField } from '@angular/forms/signals';
-import { CropEditorImplComponent } from '@components/crop/crop-editor-impl';
 import { CropDetailsImplComponent } from '@components/crop/crop-details-impl';
+import { CropEditorImplComponent } from '@components/crop/crop-editor-impl';
 
 @Component({
   selector: 'app-edit-crop',
@@ -25,8 +25,8 @@ import { CropDetailsImplComponent } from '@components/crop/crop-details-impl';
     TableComponent,
     Loader,
     FormField,
-    CropEditorImplComponent,
     CropDetailsImplComponent,
+    CropEditorImplComponent,
   ],
 })
 export class EditCropImplComponent extends EditCropComponent {

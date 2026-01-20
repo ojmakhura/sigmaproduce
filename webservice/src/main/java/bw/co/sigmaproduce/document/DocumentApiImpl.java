@@ -5,12 +5,15 @@
 //
 package bw.co.sigmaproduce.document;
 
+import bw.co.sigmaproduce.AuditTracker;
 import bw.co.sigmaproduce.TargetEntity;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import java.util.Collection;
 import org.springframework.data.domain.Page;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -30,7 +33,7 @@ public class DocumentApiImpl implements DocumentApi {
     @Override
     public ResponseEntity<Collection<DocumentDTO>> findByDocumentType(String documentTypeId) throws Exception {
         try {
-            return ResponseEntity.ok(null);
+            return ResponseEntity.ok(documentService.findByDocumentType(documentTypeId));
         } catch (Exception e) {
 
             e.printStackTrace();
@@ -43,7 +46,7 @@ public class DocumentApiImpl implements DocumentApi {
     @Operation(summary = "Find Document Type", description = "Get the document type with the given id")
     public ResponseEntity<DocumentDTO> findById(String id) throws Exception {
         try {
-            return ResponseEntity.ok(null);
+            return ResponseEntity.ok(documentService.findById(id));
         } catch (Exception e) {
 
             e.printStackTrace();
@@ -55,7 +58,7 @@ public class DocumentApiImpl implements DocumentApi {
     @Override
     public ResponseEntity<Collection<DocumentDTO>> findByTarget(TargetEntity target, String targetId) throws Exception {
         try {
-            return ResponseEntity.ok(null);
+            return ResponseEntity.ok(documentService.findByTarget(target, targetId));
         } catch (Exception e) {
 
             e.printStackTrace();
@@ -67,7 +70,7 @@ public class DocumentApiImpl implements DocumentApi {
     @Override
     public ResponseEntity<Collection<DocumentDTO>> getAll() throws Exception {
         try {
-            return ResponseEntity.ok(null);
+            return ResponseEntity.ok(documentService.getAll());
         } catch (Exception e) {
 
             e.printStackTrace();
@@ -79,7 +82,7 @@ public class DocumentApiImpl implements DocumentApi {
     @Override
     public ResponseEntity<Page<DocumentDTO>> getAllPaged(Integer pageNumber, Integer pageSize) throws Exception {
         try {
-            return ResponseEntity.ok(null);
+            return ResponseEntity.ok(documentService.getAll(pageNumber, pageSize));
         } catch (Exception e) {
 
             e.printStackTrace();
@@ -91,7 +94,7 @@ public class DocumentApiImpl implements DocumentApi {
     @Override
     public ResponseEntity<Boolean> remove(String id) throws Exception {
         try {
-            return ResponseEntity.ok(null);
+            return ResponseEntity.ok(documentService.remove(id));
         } catch (Exception e) {
 
             e.printStackTrace();
@@ -103,6 +106,9 @@ public class DocumentApiImpl implements DocumentApi {
     @Override
     public ResponseEntity<DocumentDTO> save(DocumentDTO document) throws Exception {
         try {
+            Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+            AuditTracker.auditTrail(document, authentication);
+            
             return ResponseEntity.ok(null);
         } catch (Exception e) {
 

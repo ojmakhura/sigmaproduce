@@ -46,13 +46,13 @@ public class FarmServiceImpl
      * @see bw.co.sigmaproduce.farm.FarmService#findById(String)
      */
     @Override
-    protected FarmListDTO handleFindById(String id)
+    protected FarmDTO handleFindById(String id)
         throws Exception
     {
 
         Farm farm = this.getFarmRepository().getReferenceById(id);
 
-        return this.getFarmDao().toFarmListDTO(farm);
+        return this.getFarmDao().toFarmDTO(farm);
     }
 
     /**
@@ -109,7 +109,7 @@ public class FarmServiceImpl
     }
 
     private Specification<Farm> getFarmSpecification(FarmCriteria criteria) {
-        Specification<Farm> spec = null;
+        Specification<Farm> spec = (root, query, builder) -> builder.conjunction();
 
         if(StringUtils.isNotBlank(criteria.getVillage())) {
 

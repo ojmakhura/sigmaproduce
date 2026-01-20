@@ -47,7 +47,7 @@ public class CropIssueApiImpl implements CropIssueApi {
     }
 
     @Override
-    public ResponseEntity<Collection<Page<CropIssueDTO>>> getAllPaged(Integer pageNumber, Integer pageSize)
+    public ResponseEntity<Page<CropIssueDTO>> getAllPaged(Integer pageNumber, Integer pageSize)
             throws Exception {
         try {
             return ResponseEntity.ok(cropIssueService.getAll(pageNumber, pageSize));
@@ -118,7 +118,7 @@ public class CropIssueApiImpl implements CropIssueApi {
     }
 
     @Override
-    public ResponseEntity<Collection<Page<CropIssueDTO>>> searchByTypeAndCropPaged(CropIssueType type, String cropId,
+    public ResponseEntity<Page<CropIssueDTO>> searchByTypeAndCropPaged(CropIssueType type, String cropId,
             Integer pageNumber, Integer pageSize) throws Exception {
         try {
             return ResponseEntity.ok(null);
@@ -130,7 +130,7 @@ public class CropIssueApiImpl implements CropIssueApi {
     }
 
     @Override
-    public ResponseEntity<Collection<Page<CropIssueDTO>>> searchPaged(String criteria, Integer pageNumber,
+    public ResponseEntity<Page<CropIssueDTO>> searchPaged(String criteria, Integer pageNumber,
             Integer pageSize) throws Exception {
         try {
             return ResponseEntity.ok(null);

@@ -8,7 +8,11 @@ package bw.co.sigmaproduce.owner;
 import io.swagger.v3.oas.annotations.Operation;
 import java.util.Collection;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.RestController;
+
+import bw.co.sigmaproduce.AuditTracker;
 
 @RestController
 public class OwnerApiImpl implements OwnerApi {
@@ -26,7 +30,7 @@ public class OwnerApiImpl implements OwnerApi {
     @Operation(summary = "Find Crop by id", description = "Get the cropp with the given id")
     public ResponseEntity<OwnerDTO> findById(String id) throws Exception {
         try {
-            return ResponseEntity.ok(null);
+            return ResponseEntity.ok(ownerService.findById(id));
         } catch (Exception e) {
 
             e.printStackTrace();
@@ -39,7 +43,7 @@ public class OwnerApiImpl implements OwnerApi {
     @Operation(summary = "Get Crops", description = "Get all all crops in the data store")
     public ResponseEntity<Collection<OwnerListDTO>> getAll() throws Exception {
         try {
-            return ResponseEntity.ok(null);
+            return ResponseEntity.ok(ownerService.getAll());
         } catch (Exception e) {
 
             e.printStackTrace();
@@ -52,7 +56,7 @@ public class OwnerApiImpl implements OwnerApi {
     @Operation(summary = "Remove crop by id", description = "Remove the crop with the given id")
     public ResponseEntity<Boolean> remove(String id) throws Exception {
         try {
-            return ResponseEntity.ok(null);
+            return ResponseEntity.ok(ownerService.remove(id));
         } catch (Exception e) {
 
             e.printStackTrace();
@@ -65,7 +69,10 @@ public class OwnerApiImpl implements OwnerApi {
     @Operation(summary = "Save Crop", description = "Save acrops to data store")
     public ResponseEntity<OwnerDTO> save(OwnerDTO owner) throws Exception {
         try {
-            return ResponseEntity.ok(null);
+            Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+            AuditTracker.auditTrail(owner, authentication);
+
+            return ResponseEntity.ok(ownerService.save(owner));
         } catch (Exception e) {
 
             e.printStackTrace();
@@ -78,7 +85,7 @@ public class OwnerApiImpl implements OwnerApi {
     @Operation(summary = "Search Crops", description = "Search crops based on the criteria")
     public ResponseEntity<Collection<OwnerListDTO>> search(String criteria) throws Exception {
         try {
-            return ResponseEntity.ok(null);
+            return ResponseEntity.ok(ownerService.search(criteria));
         } catch (Exception e) {
 
             e.printStackTrace();

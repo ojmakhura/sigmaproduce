@@ -9,7 +9,11 @@ import io.swagger.v3.oas.annotations.Operation;
 import java.util.Collection;
 import org.springframework.data.domain.Page;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.RestController;
+
+import bw.co.sigmaproduce.AuditTracker;
 
 @RestController
 public class PostApiImpl implements PostApi {
@@ -37,9 +41,9 @@ public class PostApiImpl implements PostApi {
 
 
     @Override
-    public ResponseEntity<Collection<Post>> findFarmPosts(String farmId) throws Exception {
+    public ResponseEntity<Collection<PostDTO>> findFarmPosts(String farmId) throws Exception {
         try {
-            return ResponseEntity.ok(null);
+            return ResponseEntity.ok(postService.getFarmPosts(farmId));
         } catch (Exception e) {
 
             e.printStackTrace();
@@ -51,7 +55,7 @@ public class PostApiImpl implements PostApi {
     @Override
     public ResponseEntity<Page<PostDTO>> findFarmPostsPaged(String farmId, Integer pageSize, Integer pageNumber) throws Exception {
         try {
-            return ResponseEntity.ok(null);
+            return ResponseEntity.ok(postService.getFarmPosts(farmId, pageSize, pageNumber));
         } catch (Exception e) {
 
             e.printStackTrace();
@@ -64,7 +68,7 @@ public class PostApiImpl implements PostApi {
     @Operation(summary = "Get Farms", description = "Get all farms in the data store")
     public ResponseEntity<Collection<PostDTO>> getAll() throws Exception {
         try {
-            return ResponseEntity.ok(null);
+            return ResponseEntity.ok(postService.getAll());
         } catch (Exception e) {
 
             e.printStackTrace();
@@ -77,7 +81,7 @@ public class PostApiImpl implements PostApi {
     @Operation(summary = "Remove farm by id", description = "Remove the farm with the given id")
     public ResponseEntity<Boolean> remove(String id) throws Exception {
         try {
-            return ResponseEntity.ok(null);
+            return ResponseEntity.ok(postService.remove(id));
         } catch (Exception e) {
 
             e.printStackTrace();
@@ -90,7 +94,10 @@ public class PostApiImpl implements PostApi {
     @Operation(summary = "Save Farm", description = "Save a farm to data store")
     public ResponseEntity<PostDTO> save(PostDTO post) throws Exception {
         try {
-            return ResponseEntity.ok(null);
+            Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+            AuditTracker.auditTrail(post, authentication);
+
+            return ResponseEntity.ok(postService.save(post));
         } catch (Exception e) {
 
             e.printStackTrace();

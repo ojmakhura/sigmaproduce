@@ -5,11 +5,14 @@
 //
 package bw.co.sigmaproduce.farm;
 
+import bw.co.sigmaproduce.AuditTracker;
 import bw.co.sigmaproduce.crop.CropListDTO;
 import io.swagger.v3.oas.annotations.Operation;
 import java.util.Collection;
 import org.springframework.data.domain.Page;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
@@ -27,7 +30,7 @@ public class FarmApiImpl implements FarmApi {
     @Override
     public ResponseEntity<FarmListDTO> findByDistrict(String districtId) throws Exception {
         try {
-            return ResponseEntity.ok(null);
+            return ResponseEntity.ok(farmService.findByDistrict(districtId));
         } catch (Exception e) {
 
             e.printStackTrace();
@@ -40,7 +43,7 @@ public class FarmApiImpl implements FarmApi {
     @Operation(summary = "Find Farm by id", description = "Get the farm with the given id")
     public ResponseEntity<FarmDTO> findById(String id) throws Exception {
         try {
-            return ResponseEntity.ok(null);
+            return ResponseEntity.ok(farmService.findById(id));
         } catch (Exception e) {
 
             e.printStackTrace();
@@ -52,7 +55,7 @@ public class FarmApiImpl implements FarmApi {
     @Override
     public ResponseEntity<FarmListDTO> findByVillage(String villageId) throws Exception {
         try {
-            return ResponseEntity.ok(null);
+            return ResponseEntity.ok(farmService.findByVillage(villageId));
         } catch (Exception e) {
 
             e.printStackTrace();
@@ -65,7 +68,7 @@ public class FarmApiImpl implements FarmApi {
     @Operation(summary = "Get Farms", description = "Get all farms in the data store")
     public ResponseEntity<Collection<FarmListDTO>> getAll() throws Exception {
         try {
-            return ResponseEntity.ok(null);
+            return ResponseEntity.ok(farmService.getAll());
         } catch (Exception e) {
 
             e.printStackTrace();
@@ -78,7 +81,7 @@ public class FarmApiImpl implements FarmApi {
     @Operation(summary = "Get Farms Page", description = "Get {pageSize} farms with for a particular {pageNumber}")
     public ResponseEntity<Page<FarmListDTO>> getAllPaged(Integer pageNumber, Integer pageSize) throws Exception {
         try {
-            return ResponseEntity.ok(null);
+            return ResponseEntity.ok(farmService.getAll(pageNumber, pageSize));
         } catch (Exception e) {
 
             e.printStackTrace();
@@ -89,9 +92,9 @@ public class FarmApiImpl implements FarmApi {
 
     @Override
     @Operation(summary = "Search Farms Page", description = "Get {pageSize} farms for a particular {pageNumber} given a search criteria")
-    public ResponseEntity<Page<CropListDTO>> pagedSearch(Integer pageNumber, Integer pageSize, String criteria) throws Exception {
+    public ResponseEntity<Page<FarmListDTO>> pagedSearch(Integer pageNumber, Integer pageSize, String criteria) throws Exception {
         try {
-            return ResponseEntity.ok(null);
+            return ResponseEntity.ok(farmService.search(pageNumber, pageSize, null));
         } catch (Exception e) {
 
             e.printStackTrace();
@@ -104,7 +107,7 @@ public class FarmApiImpl implements FarmApi {
     @Operation(summary = "Remove farm by id", description = "Remove the farm with the given id")
     public ResponseEntity<Boolean> remove(String id) throws Exception {
         try {
-            return ResponseEntity.ok(null);
+            return ResponseEntity.ok(farmService.remove(id));
         } catch (Exception e) {
 
             e.printStackTrace();
@@ -117,7 +120,10 @@ public class FarmApiImpl implements FarmApi {
     @Operation(summary = "Save Farm", description = "Save a farm to data store")
     public ResponseEntity<FarmDTO> save(FarmDTO farm) throws Exception {
         try {
-            return ResponseEntity.ok(null);
+            Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+            AuditTracker.auditTrail(farm, authentication);
+
+            return ResponseEntity.ok(farmService.save(farm));
         } catch (Exception e) {
 
             e.printStackTrace();
@@ -130,7 +136,7 @@ public class FarmApiImpl implements FarmApi {
     @Operation(summary = "Search Farms", description = "Search farms based on the criteria")
     public ResponseEntity<Collection<FarmListDTO>> search(FarmCriteria criteria) throws Exception {
         try {
-            return ResponseEntity.ok(null);
+            return ResponseEntity.ok(farmService.search(criteria));
         } catch (Exception e) {
 
             e.printStackTrace();

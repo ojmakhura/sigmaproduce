@@ -9,7 +9,11 @@ import io.swagger.v3.oas.annotations.Operation;
 import java.util.Collection;
 import org.springframework.data.domain.Page;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.RestController;
+
+import bw.co.sigmaproduce.AuditTracker;
 
 @RestController
 public class HarvestApiImpl implements HarvestApi {
@@ -92,6 +96,8 @@ public class HarvestApiImpl implements HarvestApi {
     @Operation(summary = "Save Harvest", description = "Save a harvest to data store")
     public ResponseEntity<HarvestDTO> save(HarvestDTO harvest) throws Exception {
         try {
+            Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+            AuditTracker.auditTrail(harvest, authentication);
             return ResponseEntity.ok(harvestService.save(harvest));
         } catch (Exception e) {
 

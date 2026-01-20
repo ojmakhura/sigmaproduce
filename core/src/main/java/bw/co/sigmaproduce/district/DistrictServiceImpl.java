@@ -96,7 +96,7 @@ public class DistrictServiceImpl
     protected Collection<DistrictDTO> handleSearch(String criteria)
         throws Exception
     {
-        Specification<District> spec = null;
+        Specification<District> spec = (root, query, builder) -> builder.conjunction();
 
         if(StringUtils.isNotBlank(criteria)) {
             spec = SigmaproduceSpecifications.findByAttributeLikeIgnoreCase(criteria, "name");
